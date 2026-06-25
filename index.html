@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SSC CGL English Exam</title>
+<style>
+body{font-family:Arial;margin:20px;background:#f4f6f9}
+.card{max-width:1000px;margin:auto;background:white;padding:20px;border-radius:10px}
+.hidden{display:none}
+.question{margin:15px 0;padding:10px;border:1px solid #ddd}
+.timer{font-size:24px;color:red;font-weight:bold}
+button{padding:10px 20px}
+</style>
+</head>
+<body>
+<div class="card" id="login">
+<h2>Candidate Login</h2>
+<input id="uid" placeholder="User ID"><br><br>
+<input id="pwd" type="password" placeholder="Password"><br><br>
+<button onclick="login()">Login</button>
+</div>
+
+<div class="card hidden" id="exam">
+<h2>SSC CGL English Examination</h2>
+<div class="timer" id="timer">60:00</div>
+<form id="form"></form>
+<button onclick="submitExam()" type="button">Submit Exam</button>
+</div>
+
+<div class="card hidden" id="result"></div>
+
+<script>
+const questions=[];
+for(let i=1;i<=100;i++){
+ questions.push({
+   q:"SSC CGL English Question "+i,
+   options:["Option A","Option B","Option C","Option D"],
+   answer:0
+ });
+}
+
+function login(){
+ if(uid.value==="7896024881" && pwd.value==="Deepshikha@123"){
+   loginDiv=document.getElementById('login');
+   loginDiv.classList.add('hidden');
+   exam.classList.remove('hidden');
+   render();
+   startTimer();
+ } else alert("Invalid Login");
+}
+
+function render(){
+ let h="";
+ questions.forEach((q,i)=>{
+  h+=`<div class='question'><b>${i+1}. ${q.q}</b><br>
+  <label><input type='radio' name='q${i}' value='0'> ${q.options[0]}</label><br>
+  <label><input type='radio' name='q${i}' value='1'> ${q.options[1]}</label><br>
+  <label><input type='radio' name='q${i}' value='2'> ${q.options[2]}</label><br>
+  <label><input type='radio' name='q${i}' value='3'> ${q.options[3]}</label></div>`;
+ });
+ form.innerHTML=h;
+}
+
+let t=3600;
+function startTimer(){
+ setInterval(()=>{
+  let m=Math.floor(t/60),s=t%60;
+  timer.innerText=String(m).padStart(2,'0')+":"+String(s).padStart(2,'0');
+  t--;
+  if(t<0) submitExam();
+ },1000);
+}
+
+function submitExam(){
+ let attempted=0,correct=0;
+ questions.forEach((q,i)=>{
+  let a=document.querySelector(`input[name=q${i}]:checked`);
+  if(a){attempted++; if(+a.value===q.answer) correct++;}
+ });
+ let wrong=attempted-correct;
+ exam.classList.add('hidden');
+ result.classList.remove('hidden');
+ result.innerHTML=`<h2>Result</h2>
+ Total Questions: ${questions.length}<br>
+ Attempted: ${attempted}<br>
+ Correct: ${correct}<br>
+ Wrong: ${wrong}<br>
+ Score: ${correct}`;
+}
+</script>
+</body>
+</html>
