@@ -41,119 +41,529 @@ body{font-family:Arial;background:#f4f6f9;margin:0}
 <div class="card hidden" id="result"></div>
 
 <script>
-const questions = [
+const mathQuestions = [
 
-/* ================= MATHEMATICS (1-25) ================= */
+{
+q:"What is 25% of 200? | ২০০ৰ ২৫% কিমান? | 200 का 25% कितना है? | ২০০ এর ২৫% কত?",
+options:["25","40","50","75"],
+answer:2
+},
+{
+q:"Square root of 144? | ১৪৪ ৰ বৰ্গমূল কি? | 144 का वर्गमूल क्या है? | ১৪৪ এর বর্গমূল কত?",
+options:["10","11","12","13"],
+answer:2
+},
+{
+q:"18 × 5 = ? | ১৮ × ৫ = ? | 18 × 5 = ? | ১৮ × ৫ = ?",
+options:["80","85","90","95"],
+answer:2
+},
+{
+q:"240 ÷ 12 = ? | ২৪০ ÷ ১২ = ? | 240 ÷ 12 = ? | ২৪০ ÷ ১২ = ?",
+options:["18","20","22","24"],
+answer:1
+},
+{
+q:"15% of 300 = ? | ৩০০ৰ ১৫% = ? | 300 का 15% = ? | ৩০০ এর ১৫% = ?",
+options:["35","40","45","50"],
+answer:2
+},
+{
+q:"LCM of 12 and 18? | ১২ আৰু ১৮ ৰ LCM? | 12 और 18 का LCM? | ১২ ও ১৮ এর LCM?",
+options:["24","36","48","54"],
+answer:1
+},
+{
+q:"HCF of 24 and 36? | ২৪ আৰু ৩৬ ৰ HCF? | 24 और 36 का HCF? | ২৪ ও ৩৬ এর HCF?",
+options:["6","8","12","18"],
+answer:2
+},
+{
+q:"7² = ? | ৭² = ? | 7² = ? | ৭² = ?",
+options:["42","49","56","64"],
+answer:1
+},
+{
+q:"9³ = ? | ৯³ = ? | 9³ = ? | ৯³ = ?",
+options:["729","81","243","512"],
+answer:0
+},
+{
+q:"0.75 as a fraction? | ০.৭৫ ভগ্নাংশত? | 0.75 भिन्न में? | ০.৭৫ ভগ্নাংশে?",
+options:["1/2","3/4","2/3","4/5"],
+answer:1
+},
+{
+q:"35 + 48 = ? | ৩৫ + ৪৮ = ? | 35 + 48 = ? | ৩৫ + ৪৮ = ?",
+options:["73","83","93","103"],
+answer:1
+},
+{
+q:"125 - 78 = ? | ১২৫ - ৭৮ = ? | 125 - 78 = ? | ১২৫ - ৭৮ = ?",
+options:["47","57","67","77"],
+answer:0
+},
+{
+q:"14 × 6 = ? | ১৪ × ৬ = ? | 14 × 6 = ? | ১৪ × ৬ = ?",
+options:["74","84","94","104"],
+answer:1
+},
+{
+q:"144 ÷ 9 = ? | ১৪৪ ÷ ৯ = ? | 144 ÷ 9 = ? | ১৪৪ ÷ ৯ = ?",
+options:["14","15","16","18"],
+answer:2
+},
+{
+q:"50% of 600 = ? | ৬০০ৰ ৫০% = ? | 600 का 50% = ? | ৬০০ এর ৫০% = ?",
+options:["200","250","300","350"],
+answer:2
+},
+{
+q:"Perimeter of square of side 8 cm? | ৮ ছেমি বাহুৰ বৰ্গৰ পৰিসীমা? | 8 सेमी भुजा वाले वर्ग की परिमाप? | ৮ সেমি বাহুর বর্গের পরিসীমা?",
+options:["24","32","40","48"],
+answer:1
+},
+{
+q:"Area of rectangle 10 × 5? | ১০ × ৫ আয়তক্ষেত্ৰৰ ক্ষেত্ৰফল? | 10 × 5 आयत का क्षेत्रफल? | ১০ × ৫ আয়তের ক্ষেত্রফল?",
+options:["25","40","50","60"],
+answer:2
+},
+{
+q:"Simple interest on ₹1000 at 10% for 1 year? | ₹১০০০ টকাৰ ১০% হাৰত ১ বছৰৰ সৰল সূদ? | ₹1000 पर 10% वार्षिक साधारण ब्याज? | ₹১০০০ টাকায় ১০% হারে ১ বছরের সরল সুদ?",
+options:["50","100","150","200"],
+answer:1
+},
+{
+q:"1 kilometre = ? | ১ কিলোমিটাৰ = ? | 1 किलोमीटर = ? | ১ কিলোমিটার = ?",
+options:["100 m","500 m","1000 m","1500 m"],
+answer:2
+},
+{
+q:"Average of 10,20,30? | ১০,২০,৩০ ৰ গড়? | 10,20,30 का औसत? | ১০,২০,৩০ এর গড়?",
+options:["15","20","25","30"],
+answer:1
+},
+{
+q:"2/5 of 100 = ? | ১০০ৰ ২/৫ = ? | 100 का 2/5 = ? | ১০০ এর ২/৫ = ?",
+options:["20","30","40","50"],
+answer:2
+},
+{
+q:"Value of π (approx)? | π ৰ মান? | π का मान? | π এর মান?",
+options:["2.14","3.14","4.13","3.41"],
+answer:1
+},
+{
+q:"81 ÷ 9 = ? | ৮১ ÷ ৯ = ? | 81 ÷ 9 = ? | ৮১ ÷ ৯ = ?",
+options:["7","8","9","10"],
+answer:2
+},
+{
+q:"12% of 500 = ? | ৫০০ৰ ১২% = ? | 500 का 12% = ? | ৫০০ এর ১২% = ?",
+options:["50","60","70","80"],
+answer:1
+},
+{
+q:"If x=5, then 2x+3=? | যদি x=5, তেন্তে 2x+3=? | यदि x=5 तो 2x+3=? | যদি x=5 হয় তবে 2x+3=?",
+options:["10","11","12","13"],
+answer:3
+}
 
-{q:"What is 25% of 200?",options:["25","40","50","75"],answer:2},
-{q:"Square root of 144 is?",options:["10","11","12","13"],answer:2},
-{q:"18 × 5 = ?",options:["80","85","90","95"],answer:2},
-{q:"240 ÷ 12 = ?",options:["18","20","22","24"],answer:1},
-{q:"15% of 300 = ?",options:["35","40","45","50"],answer:2},
-{q:"LCM of 12 and 18?",options:["24","36","48","54"],answer:1},
-{q:"HCF of 24 and 36?",options:["6","8","12","18"],answer:2},
-{q:"7² = ?",options:["42","49","56","64"],answer:1},
-{q:"9³ = ?",options:["729","81","243","512"],answer:0},
-{q:"0.75 as a fraction?",options:["1/2","3/4","2/3","4/5"],answer:1},
-{q:"35 + 48 = ?",options:["73","83","93","103"],answer:1},
-{q:"125 - 78 = ?",options:["47","57","67","77"],answer:0},
-{q:"14 × 6 = ?",options:["74","84","94","104"],answer:1},
-{q:"144 ÷ 9 = ?",options:["14","15","16","18"],answer:2},
-{q:"50% of 600 = ?",options:["200","250","300","350"],answer:2},
-{q:"Perimeter of square of side 8 cm?",options:["24","32","40","48"],answer:1},
-{q:"Area of rectangle 10 × 5?",options:["25","40","50","60"],answer:2},
-{q:"Simple interest on ₹1000 at 10% for 1 year?",options:["50","100","150","200"],answer:1},
-{q:"1 kilometre = ?",options:["100 m","500 m","1000 m","1500 m"],answer:2},
-{q:"Average of 10,20,30?",options:["15","20","25","30"],answer:1},
-{q:"2/5 of 100 = ?",options:["20","30","40","50"],answer:2},
-{q:"Value of π (approx)?",options:["2.14","3.14","4.13","3.41"],answer:1},
-{q:"81 ÷ 9 = ?",options:["7","8","9","10"],answer:2},
-{q:"12% of 500 = ?",options:["50","60","70","80"],answer:1},
-{q:"If x=5, then 2x+3=?",options:["10","11","12","13"],answer:3},
+];
+
 
 /* ================= REASONING (26-50) ================= */
 
-{q:"Find the next number: 2,4,8,16,?",options:["24","30","32","36"],answer:2},
-{q:"Odd one out: Apple, Mango, Carrot, Banana",options:["Apple","Mango","Carrot","Banana"],answer:2},
-{q:"A is taller than B. B is taller than C. Who is shortest?",options:["A","B","C","Cannot say"],answer:2},
-{q:"Mirror image of 3?",options:["Ɛ","3","M","W"],answer:0},
-{q:"If CAT=24, BAT=?",options:["21","22","23","24"],answer:0},
-{q:"Find missing: 5,10,20,40,?",options:["50","60","70","80"],answer:3},
-{q:"Clock shows 3:00. Angle between hands?",options:["60°","90°","120°","180°"],answer:1},
-{q:"If all roses are flowers, all flowers are plants. Roses are?",options:["Plants","Trees","Fruits","Leaves"],answer:0},
-{q:"Complete series: A,C,E,G,?",options:["H","I","J","K"],answer:1},
-{q:"Which differs? Dog, Cat, Cow, Car",options:["Dog","Cat","Cow","Car"],answer:3},
-{q:"If SOUTH = HTUOS, EAST = ?",options:["TSAE","EAST","SAET","ATSE"],answer:0},
-{q:"Find next: 1,4,9,16,?",options:["20","25","30","36"],answer:1},
-{q:"If Monday is 1st day, Wednesday is?",options:["2nd","3rd","4th","5th"],answer:1},
-{q:"PEN : WRITE :: KNIFE : ?",options:["CUT","READ","EAT","RUN"],answer:0},
-{q:"Find missing: 3,6,12,24,?",options:["36","42","48","50"],answer:2},
-{q:"Which is different? Circle, Square, Triangle, Mango",options:["Circle","Square","Triangle","Mango"],answer:3},
-{q:"If 5+3=28 and 6+2=16, then 7+4=?",options:["77","49","121","81"],answer:2},
-{q:"Find next: Z,Y,X,W,?",options:["U","V","T","S"],answer:1},
-{q:"Brother's sister is your?",options:["Mother","Sister","Aunt","Niece"],answer:1},
-{q:"Which number replaces ?: 2,6,12,20,?",options:["24","28","30","32"],answer:2},
-{q:"Book : Read :: Food : ?",options:["Cook","Eat","Drink","Serve"],answer:1},
-{q:"Find next: 11,22,33,44,?",options:["54","55","66","77"],answer:1},
-{q:"If today is Friday, after 10 days it will be?",options:["Sunday","Monday","Tuesday","Wednesday"],answer:0},
-{q:"Which word cannot be formed from INDIA?",options:["AND","AID","DIN","RAIN"],answer:3},
-{q:"Find next: 100,90,80,70,?",options:["50","55","60","65"],answer:2},
+{
+q:"Find the next number: 2,4,8,16,? | পৰৱৰ্তী সংখ্যা বিচাৰক: 2,4,8,16,? | अगली संख्या ज्ञात करें: 2,4,8,16,? | পরবর্তী সংখ্যা নির্ণয় করুন: 2,4,8,16,?",
+options:["24","30","32","36"],
+answer:2
+},
+{
+q:"Odd one out: Apple, Mango, Carrot, Banana | ভিন্নটো বাছক: Apple, Mango, Carrot, Banana | भिन्न चुनें: Apple, Mango, Carrot, Banana | ভিন্নটি নির্বাচন করুন: Apple, Mango, Carrot, Banana",
+options:["Apple","Mango","Carrot","Banana"],
+answer:2
+},
+{
+q:"A is taller than B. B is taller than C. Who is shortest? | A, Bতকৈ ওখ। B, Cতকৈ ওখ। সৰ্বাধিক সৰু কোন? | A, B से लंबा है। B, C से लंबा है। सबसे छोटा कौन? | A, B-এর চেয়ে লম্বা। B, C-এর চেয়ে লম্বা। সবচেয়ে খাটো কে?",
+options:["A","B","C","Cannot say"],
+answer:2
+},
+{
+q:"Mirror image of 3? | 3 ৰ দাপোণ প্ৰতিচ্ছবি? | 3 की दर्पण छवि? | 3-এর দর্পণ প্রতিচ্ছবি?",
+options:["Ɛ","3","M","W"],
+answer:0
+},
+{
+q:"If CAT=24, BAT=? | যদি CAT=24, BAT=? | यदि CAT=24, BAT=? | যদি CAT=24, BAT=?",
+options:["21","22","23","24"],
+answer:0
+},
+{
+q:"Find missing: 5,10,20,40,? | অনুপস্থিত সংখ্যা বিচাৰক: 5,10,20,40,? | लुप्त संख्या ज्ञात करें: 5,10,20,40,? | অনুপস্থিত সংখ্যা নির্ণয় করুন: 5,10,20,40,?",
+options:["50","60","70","80"],
+answer:3
+},
+{
+q:"Clock shows 3:00. Angle between hands? | ঘড়ীত 3:00 বজাৰ সময়ত কোণ কিমান? | घड़ी में 3:00 बजे कोण कितना होगा? | ঘড়িতে 3:00 টায় দুই কাঁটার কোণ কত?",
+options:["60°","90°","120°","180°"],
+answer:1
+},
+{
+q:"If all roses are flowers and all flowers are plants, roses are? | সকলো গোলাপ ফুল আৰু সকলো ফুল উদ্ভিদ, তেন্তে গোলাপ কি? | सभी गुलाब फूल हैं और सभी फूल पौधे हैं, तो गुलाब क्या हैं? | সব গোলাপ ফুল এবং সব ফুল উদ্ভিদ, তাহলে গোলাপ কী?",
+options:["Plants","Trees","Fruits","Leaves"],
+answer:0
+},
+{
+q:"Complete series: A,C,E,G,? | ধাৰা পূৰ্ণ কৰক: A,C,E,G,? | श्रेणी पूर्ण करें: A,C,E,G,? | ধারাটি পূরণ করুন: A,C,E,G,?",
+options:["H","I","J","K"],
+answer:1
+},
+{
+q:"Which differs? Dog, Cat, Cow, Car | কোনটো ভিন্ন? Dog, Cat, Cow, Car | कौन भिन्न है? Dog, Cat, Cow, Car | কোনটি আলাদা? Dog, Cat, Cow, Car",
+options:["Dog","Cat","Cow","Car"],
+answer:3
+},
+{
+q:"If SOUTH = HTUOS, EAST = ? | যদি SOUTH = HTUOS, EAST = ? | यदि SOUTH = HTUOS, EAST = ? | যদি SOUTH = HTUOS, EAST = ?",
+options:["TSAE","EAST","SAET","ATSE"],
+answer:0
+},
+{
+q:"Find next: 1,4,9,16,? | পৰৱৰ্তী সংখ্যা: 1,4,9,16,? | अगली संख्या: 1,4,9,16,? | পরবর্তী সংখ্যা: 1,4,9,16,?",
+options:["20","25","30","36"],
+answer:1
+},
+{
+q:"If Monday is 1st day, Wednesday is? | যদি সোমবাৰ ১ম দিন, বুধবাৰ কিমান নম্বৰ দিন? | यदि सोमवार पहला दिन है तो बुधवार कौन सा दिन? | যদি সোমবার ১ম দিন হয়, তবে বুধবার কততম দিন?",
+options:["2nd","3rd","4th","5th"],
+answer:1
+},
+{
+q:"PEN : WRITE :: KNIFE : ? | PEN : WRITE :: KNIFE : ? | PEN : WRITE :: KNIFE : ? | PEN : WRITE :: KNIFE : ?",
+options:["CUT","READ","EAT","RUN"],
+answer:0
+},
+{
+q:"Find missing: 3,6,12,24,? | অনুপস্থিত সংখ্যা বিচাৰক: 3,6,12,24,? | लुप्त संख्या ज्ञात करें: 3,6,12,24,? | অনুপস্থিত সংখ্যা নির্ণয় করুন: 3,6,12,24,?",
+options:["36","42","48","50"],
+answer:2
+},
+{
+q:"Which is different? Circle, Square, Triangle, Mango | কোনটো ভিন্ন? Circle, Square, Triangle, Mango | कौन अलग है? Circle, Square, Triangle, Mango | কোনটি আলাদা? Circle, Square, Triangle, Mango",
+options:["Circle","Square","Triangle","Mango"],
+answer:3
+},
+{
+q:"If 5+3=28 and 6+2=16, then 7+4=? | যদি 5+3=28 আৰু 6+2=16, তেন্তে 7+4=? | यदि 5+3=28 और 6+2=16, तो 7+4=? | যদি 5+3=28 এবং 6+2=16, তবে 7+4=?",
+options:["77","49","121","81"],
+answer:2
+},
+{
+q:"Find next: Z,Y,X,W,? | পৰৱৰ্তী অক্ষৰ: Z,Y,X,W,? | अगला अक्षर: Z,Y,X,W,? | পরবর্তী অক্ষর: Z,Y,X,W,?",
+options:["U","V","T","S"],
+answer:1
+},
+{
+q:"Brother's sister is your? | ভাইৰ ভনীয়েক আপোনাৰ কি? | भाई की बहन आपकी क्या होगी? | ভাইয়ের বোন আপনার কে?",
+options:["Mother","Sister","Aunt","Niece"],
+answer:1
+},
+{
+q:"Which number replaces ?: 2,6,12,20,? | কোন সংখ্যাটো পৰিবর্তে আহিব? 2,6,12,20,? | कौन सी संख्या आएगी? 2,6,12,20,? | কোন সংখ্যা বসবে? 2,6,12,20,?",
+options:["24","28","30","32"],
+answer:2
+},
+{
+q:"Book : Read :: Food : ? | Book : Read :: Food : ? | Book : Read :: Food : ? | Book : Read :: Food : ?",
+options:["Cook","Eat","Drink","Serve"],
+answer:1
+},
+{
+q:"Find next: 11,22,33,44,? | পৰৱৰ্তী সংখ্যা: 11,22,33,44,? | अगली संख्या: 11,22,33,44,? | পরবর্তী সংখ্যা: 11,22,33,44,?",
+options:["54","55","66","77"],
+answer:1
+},
+{
+q:"If today is Friday, after 10 days it will be? | আজি শুকুৰবাৰ হলে 10 দিন পিছত কি বাৰ? | आज शुक्रवार है तो 10 दिन बाद कौन सा दिन होगा? | আজ শুক্রবার হলে 10 দিন পরে কী বার হবে?",
+options:["Sunday","Monday","Tuesday","Wednesday"],
+answer:0
+},
+{
+q:"Which word cannot be formed from INDIA? | INDIA শব্দৰ পৰা কোনটো গঠন কৰিব নোৱাৰি? | INDIA से कौन सा शब्द नहीं बन सकता? | INDIA থেকে কোন শব্দটি তৈরি করা যায় না?",
+options:["AND","AID","DIN","RAIN"],
+answer:3
+},
+{
+q:"Find next: 100,90,80,70,? | পৰৱৰ্তী সংখ্যা: 100,90,80,70,? | अगली संख्या: 100,90,80,70,? | পরবর্তী সংখ্যা: 100,90,80,70,?",
+options:["50","55","60","65"],
+answer:2
+}
+
+];
+
 
 /* ================= ENGLISH (51-75) ================= */
 
-{q:"Choose correct spelling.",options:["Recieve","Receive","Receeve","Receve"],answer:1},
-{q:"Synonym of Happy?",options:["Sad","Joyful","Angry","Weak"],answer:1},
-{q:"Antonym of Honest?",options:["Truthful","Loyal","Dishonest","Faithful"],answer:2},
-{q:"He ___ going to school.",options:["are","is","am","be"],answer:1},
-{q:"Plural of Child?",options:["Childs","Children","Childes","Childrens"],answer:1},
-{q:"Past tense of Go?",options:["Goed","Gone","Went","Going"],answer:2},
-{q:"Choose correct article: ___ apple",options:["a","an","the","none"],answer:1},
-{q:"Synonym of Quick?",options:["Slow","Fast","Late","Weak"],answer:1},
-{q:"Antonym of Rich?",options:["Poor","Happy","Tall","Strong"],answer:0},
-{q:"She ___ a song.",options:["sing","sings","sangs","singing"],answer:1},
-{q:"Opposite of Success?",options:["Victory","Failure","Achievement","Gain"],answer:1},
-{q:"Correct spelling?",options:["Beautifull","Beautiful","Beautifool","Beautifal"],answer:1},
-{q:"One who teaches?",options:["Doctor","Teacher","Engineer","Farmer"],answer:1},
-{q:"I ___ my homework yesterday.",options:["do","did","done","doing"],answer:1},
-{q:"Synonym of Brave?",options:["Coward","Bold","Weak","Fearful"],answer:1},
-{q:"Antonym of Early?",options:["Soon","Late","Quick","Prompt"],answer:1},
-{q:"Choose correct word: Sun rises ___ east.",options:["in","at","from","on"],answer:2},
-{q:"Plural of Mouse?",options:["Mouses","Mouse","Mice","Mices"],answer:2},
-{q:"Past tense of Eat?",options:["Eated","Ate","Eating","Eaten"],answer:1},
-{q:"Synonym of Begin?",options:["End","Start","Stop","Close"],answer:1},
-{q:"Antonym of Clean?",options:["Dirty","Neat","Pure","Clear"],answer:0},
-{q:"Correct spelling?",options:["Occasion","Ocassion","Occassion","Ocasion"],answer:0},
-{q:"He is good ___ Mathematics.",options:["at","on","for","with"],answer:0},
-{q:"The book is ___ the table.",options:["in","on","at","with"],answer:1},
-{q:"Choose the noun.",options:["Run","Beautiful","School","Quickly"],answer:2},
+{
+q:"Choose correct spelling. | সঠিক বানান বাছক। | सही वर्तनी चुनें। | সঠিক বানান নির্বাচন করুন।",
+options:["Recieve","Receive","Receeve","Receve"],
+answer:1
+},
+{
+q:"Synonym of Happy? | Happy শব্দৰ সমাৰ্থক কি? | Happy का पर्यायवाची क्या है? | Happy-এর সমার্থক শব্দ কী?",
+options:["Sad","Joyful","Angry","Weak"],
+answer:1
+},
+{
+q:"Antonym of Honest? | Honest শব্দৰ বিপৰীত শব্দ কি? | Honest का विलोम शब्द क्या है? | Honest-এর বিপরীত শব্দ কী?",
+options:["Truthful","Loyal","Dishonest","Faithful"],
+answer:2
+},
+{
+q:"He ___ going to school. | He ___ স্কুললৈ গৈ আছে। | He ___ स्कूल जा रहा है। | He ___ স্কুলে যাচ্ছে।",
+options:["are","is","am","be"],
+answer:1
+},
+{
+q:"Plural of Child? | Child ৰ বহুবচন কি? | Child का बहुवचन क्या है? | Child-এর বহুবচন কী?",
+options:["Childs","Children","Childes","Childrens"],
+answer:1
+},
+{
+q:"Past tense of Go? | Go ৰ অতীত কাল কি? | Go का भूतकाल क्या है? | Go-এর অতীত কাল কী?",
+options:["Goed","Gone","Went","Going"],
+answer:2
+},
+{
+q:"Choose correct article: ___ apple | সঠিক article বাছক: ___ apple | सही article चुनें: ___ apple | সঠিক article নির্বাচন করুন: ___ apple",
+options:["a","an","the","none"],
+answer:1
+},
+{
+q:"Synonym of Quick? | Quick শব্দৰ সমাৰ্থক কি? | Quick का पर्यायवाची क्या है? | Quick-এর সমার্থক শব্দ কী?",
+options:["Slow","Fast","Late","Weak"],
+answer:1
+},
+{
+q:"Antonym of Rich? | Rich শব্দৰ বিপৰীত শব্দ কি? | Rich का विलोम शब्द क्या है? | Rich-এর বিপরীত শব্দ কী?",
+options:["Poor","Happy","Tall","Strong"],
+answer:0
+},
+{
+q:"She ___ a song. | She ___ এটা গান গায়। | She ___ एक गीत गाती है। | She ___ একটি গান গায়।",
+options:["sing","sings","sangs","singing"],
+answer:1
+},
+{
+q:"Opposite of Success? | Success ৰ বিপৰীত শব্দ কি? | Success का विलोम शब्द क्या है? | Success-এর বিপরীত শব্দ কী?",
+options:["Victory","Failure","Achievement","Gain"],
+answer:1
+},
+{
+q:"Correct spelling? | সঠিক বানান? | सही वर्तनी? | সঠিক বানান?",
+options:["Beautifull","Beautiful","Beautifool","Beautifal"],
+answer:1
+},
+{
+q:"One who teaches? | যি পঢ়ায় তাক কি কয়? | जो पढ़ाता है उसे क्या कहते हैं? | যে পড়ায় তাকে কী বলে?",
+options:["Doctor","Teacher","Engineer","Farmer"],
+answer:1
+},
+{
+q:"I ___ my homework yesterday. | মই কালি মোৰ homework ___ । | मैंने कल अपना homework ___ । | আমি গতকাল আমার homework ___ ।",
+options:["do","did","done","doing"],
+answer:1
+},
+{
+q:"Synonym of Brave? | Brave শব্দৰ সমাৰ্থক কি? | Brave का पर्यायवाची क्या है? | Brave-এর সমার্থক শব্দ কী?",
+options:["Coward","Bold","Weak","Fearful"],
+answer:1
+},
+{
+q:"Antonym of Early? | Early ৰ বিপৰীত শব্দ কি? | Early का विलोम शब्द क्या है? | Early-এর বিপরীত শব্দ কী?",
+options:["Soon","Late","Quick","Prompt"],
+answer:1
+},
+{
+q:"Choose correct word: Sun rises ___ east. | Sun rises ___ east. | Sun rises ___ east. | Sun rises ___ east.",
+options:["in","at","from","on"],
+answer:2
+},
+{
+q:"Plural of Mouse? | Mouse ৰ বহুবচন কি? | Mouse का बहुवचन क्या है? | Mouse-এর বহুবচন কী?",
+options:["Mouses","Mouse","Mice","Mices"],
+answer:2
+},
+{
+q:"Past tense of Eat? | Eat ৰ অতীত কাল কি? | Eat का भूतकाल क्या है? | Eat-এর অতীত কাল কী?",
+options:["Eated","Ate","Eating","Eaten"],
+answer:1
+},
+{
+q:"Synonym of Begin? | Begin শব্দৰ সমাৰ্থক কি? | Begin का पर्यायवाची क्या है? | Begin-এর সমার্থক শব্দ কী?",
+options:["End","Start","Stop","Close"],
+answer:1
+},
+{
+q:"Antonym of Clean? | Clean ৰ বিপৰীত শব্দ কি? | Clean का विलोम शब्द क्या है? | Clean-এর বিপরীত শব্দ কী?",
+options:["Dirty","Neat","Pure","Clear"],
+answer:0
+},
+{
+q:"Correct spelling? | সঠিক বানান? | सही वर्तनी? | সঠিক বানান?",
+options:["Occasion","Ocassion","Occassion","Ocasion"],
+answer:0
+},
+{
+q:"He is good ___ Mathematics. | He is good ___ Mathematics. | He is good ___ Mathematics. | He is good ___ Mathematics.",
+options:["at","on","for","with"],
+answer:0
+},
+{
+q:"The book is ___ the table. | কিতাপখন ___ টেবুলত আছে। | किताब ___ मेज पर है। | বইটি ___ টেবিলের উপর আছে।",
+options:["in","on","at","with"],
+answer:1
+},
+{
+q:"Choose the noun. | Noun বাছক। | Noun चुनें। | Noun নির্বাচন করুন।",
+options:["Run","Beautiful","School","Quickly"],
+answer:2
+}
+
+];
 
 /* ================= GENERAL KNOWLEDGE (76-100) ================= */
 
-{q:"Capital of India?",options:["Mumbai","New Delhi","Kolkata","Chennai"],answer:1},
-{q:"National animal of India?",options:["Lion","Tiger","Elephant","Leopard"],answer:1},
-{q:"Who wrote the National Anthem of India?",options:["Tagore","Nehru","Gandhi","Premchand"],answer:0},
-{q:"Largest planet in Solar System?",options:["Earth","Mars","Jupiter","Saturn"],answer:2},
-{q:"Red Planet is?",options:["Venus","Mars","Mercury","Jupiter"],answer:1},
-{q:"National bird of India?",options:["Peacock","Parrot","Sparrow","Crow"],answer:0},
-{q:"Who is known as Father of Nation?",options:["Nehru","Patel","Gandhi","Bose"],answer:2},
-{q:"Currency of India?",options:["Dollar","Rupee","Taka","Euro"],answer:1},
-{q:"Largest ocean?",options:["Atlantic","Indian","Pacific","Arctic"],answer:2},
-{q:"Gateway of India is in?",options:["Delhi","Mumbai","Goa","Chennai"],answer:1},
-{q:"Who invented telephone?",options:["Newton","Bell","Edison","Tesla"],answer:1},
-{q:"National flower of India?",options:["Rose","Lotus","Sunflower","Lily"],answer:1},
-{q:"Which gas do plants absorb?",options:["Oxygen","Nitrogen","Carbon Dioxide","Hydrogen"],answer:2},
-{q:"How many continents?",options:["5","6","7","8"],answer:2},
-{q:"Taj Mahal is located in?",options:["Delhi","Agra","Jaipur","Lucknow"],answer:1},
-{q:"Who discovered gravity?",options:["Newton","Einstein","Galileo","Faraday"],answer:0},
-{q:"Which is the largest state of India by area?",options:["Assam","Rajasthan","UP","MP"],answer:1},
-{q:"Who was first Prime Minister of India?",options:["Gandhi","Patel","Nehru","Bose"],answer:2},
-{q:"National sport of Bangladesh?",options:["Football","Cricket","Kabaddi","Hockey"],answer:2},
-{q:"Which river is called Ganga of South India?",options:["Godavari","Krishna","Kaveri","Narmada"],answer:0},
-{q:"Sun rises in the?",options:["West","East","North","South"],answer:1},
-{q:"Who wrote Ramayana?",options:["Valmiki","Kalidas","Tulsidas","Ved Vyas"],answer:0},
-{q:"Which planet is nearest to Sun?",options:["Venus","Mercury","Earth","Mars"],answer:1},
-{q:"India became independent in?",options:["1945","1946","1947","1950"],answer:2},
-{q:"National tree of India?",options:["Neem","Peepal","Banyan","Mango"],answer:2}
+const generalKnowledgeQuestions = [
+
+{
+q:"Capital of India? | ভাৰতৰ ৰাজধানী কি? | भारत की राजधानी क्या है? | ভারতের রাজধানী কী?",
+options:["Mumbai","New Delhi","Kolkata","Chennai"],
+answer:1
+},
+{
+q:"National Animal of India? | ভাৰতৰ জাতীয় পশু কি? | भारत का राष्ट्रीय पशु क्या है? | ভারতের জাতীয় প্রাণী কী?",
+options:["Lion","Tiger","Elephant","Leopard"],
+answer:1
+},
+{
+q:"Who wrote the National Anthem of India? | ভাৰতৰ জাতীয় সংগীত কোনে লিখিছিল? | भारत का राष्ट्रगान किसने लिखा? | ভারতের জাতীয় সঙ্গীত কে রচনা করেছেন?",
+options:["Rabindranath Tagore","Jawaharlal Nehru","Mahatma Gandhi","Premchand"],
+answer:0
+},
+{
+q:"Largest planet in the Solar System? | সৌৰজগতৰ আটাইতকৈ ডাঙৰ গ্ৰহ কোনটো? | सौरमंडल का सबसे बड़ा ग्रह कौन सा है? | সৌরজগতের বৃহত্তম গ্রহ কোনটি?",
+options:["Earth","Mars","Jupiter","Saturn"],
+answer:2
+},
+{
+q:"Which planet is known as the Red Planet? | ৰঙা গ্ৰহ বুলি কোন গ্ৰহক কোৱা হয়? | लाल ग्रह किसे कहा जाता है? | লাল গ্রহ নামে কোন গ্রহ পরিচিত?",
+options:["Venus","Mars","Mercury","Jupiter"],
+answer:1
+},
+{
+q:"National Bird of India? | ভাৰতৰ জাতীয় পক্ষী কি? | भारत का राष्ट्रीय पक्षी क्या है? | ভারতের জাতীয় পাখি কী?",
+options:["Peacock","Parrot","Sparrow","Crow"],
+answer:0
+},
+{
+q:"Who is known as the Father of the Nation in India? | ভাৰতত জাতিৰ পিতা বুলি কাক কোৱা হয়? | भारत में राष्ट्रपिता किसे कहा जाता है? | ভারতে জাতির জনক কাকে বলা হয়?",
+options:["Jawaharlal Nehru","Sardar Patel","Mahatma Gandhi","Subhas Bose"],
+answer:2
+},
+{
+q:"Currency of India? | ভাৰতৰ মুদ্ৰা কি? | भारत की मुद्रा क्या है? | ভারতের মুদ্রা কী?",
+options:["Dollar","Rupee","Taka","Euro"],
+answer:1
+},
+{
+q:"Largest Ocean in the world? | বিশ্বৰ আটাইতকৈ ডাঙৰ মহাসাগৰ কোনটো? | विश्व का सबसे बड़ा महासागर कौन सा है? | বিশ্বের বৃহত্তম মহাসাগর কোনটি?",
+options:["Atlantic","Indian","Pacific","Arctic"],
+answer:2
+},
+{
+q:"Gateway of India is located in? | Gateway of India ক'ত অৱস্থিত? | Gateway of India कहाँ स्थित है? | Gateway of India কোথায় অবস্থিত?",
+options:["Delhi","Mumbai","Goa","Chennai"],
+answer:1
+},
+{
+q:"Who invented the telephone? | টেলিফোন কোনে আৱিষ্কাৰ কৰিছিল? | टेलीफोन का आविष्कार किसने किया? | টেলিফোন কে আবিষ্কার করেন?",
+options:["Newton","Alexander Graham Bell","Edison","Tesla"],
+answer:1
+},
+{
+q:"National Flower of India? | ভাৰতৰ জাতীয় ফুল কি? | भारत का राष्ट्रीय फूल क्या है? | ভারতের জাতীয় ফুল কী?",
+options:["Rose","Lotus","Sunflower","Lily"],
+answer:1
+},
+{
+q:"Which gas do plants absorb from the atmosphere? | উদ্ভিদে বায়ুমণ্ডলৰ পৰা কোন গেছ গ্ৰহণ কৰে? | पौधे वातावरण से कौन सी गैस लेते हैं? | উদ্ভিদ বায়ুমণ্ডল থেকে কোন গ্যাস গ্রহণ করে?",
+options:["Oxygen","Nitrogen","Carbon Dioxide","Hydrogen"],
+answer:2
+},
+{
+q:"How many continents are there in the world? | বিশ্বত কিমানখন মহাদেশ আছে? | विश्व में कितने महाद्वीप हैं? | পৃথিবীতে কয়টি মহাদেশ আছে?",
+options:["5","6","7","8"],
+answer:2
+},
+{
+q:"Taj Mahal is located in which city? | তাজমহল কোন চহৰত অৱস্থিত? | ताजमहल किस शहर में स्थित है? | তাজমহল কোন শহরে অবস্থিত?",
+options:["Delhi","Agra","Jaipur","Lucknow"],
+answer:1
+},
+{
+q:"Who discovered gravity? | মাধ্যাকর্ষণ শক্তি কোনে আৱিষ্কাৰ কৰিছিল? | गुरुत्वाकर्षण की खोज किसने की? | মহাকর্ষ শক্তি কে আবিষ্কার করেন?",
+options:["Isaac Newton","Albert Einstein","Galileo","Faraday"],
+answer:0
+},
+{
+q:"Largest state of India by area? | আয়তনৰ ভিত্তিত ভাৰতৰ আটাইতকৈ ডাঙৰ ৰাজ্য কোনটো? | क्षेत्रफल के आधार पर भारत का सबसे बड़ा राज्य कौन सा है? | আয়তনের ভিত্তিতে ভারতের বৃহত্তম রাজ্য কোনটি?",
+options:["Assam","Rajasthan","Uttar Pradesh","Madhya Pradesh"],
+answer:1
+},
+{
+q:"Who was the first Prime Minister of India? | ভাৰতৰ প্ৰথম প্ৰধানমন্ত্ৰী কোন আছিল? | भारत के प्रथम प्रधानमंत्री कौन थे? | ভারতের প্রথম প্রধানমন্ত্রী কে ছিলেন?",
+options:["Mahatma Gandhi","Sardar Patel","Jawaharlal Nehru","Subhas Bose"],
+answer:2
+},
+{
+q:"National sport of Bangladesh? | বাংলাদেশৰ জাতীয় খেল কি? | बांग्लादेश का राष्ट्रीय खेल क्या है? | বাংলাদেশের জাতীয় খেলা কী?",
+options:["Football","Cricket","Kabaddi","Hockey"],
+answer:2
+},
+{
+q:"Which river is called the Ganga of South India? | দক্ষিণ ভাৰতৰ গংগা বুলি কোন নদীক কোৱা হয়? | दक्षिण भारत की गंगा किस नदी को कहा जाता है? | দক্ষিণ ভারতের গঙ্গা কোন নদীকে বলা হয়?",
+options:["Godavari","Krishna","Kaveri","Narmada"],
+answer:0
+},
+{
+q:"Sun rises in the? | সূৰ্য কোন দিশত উদয় হয়? | सूर्य किस दिशा में उगता है? | সূর্য কোন দিকে উদয় হয়?",
+options:["West","East","North","South"],
+answer:1
+},
+{
+q:"Who wrote Ramayana? | ৰামায়ণ কোনে লিখিছিল? | रामायण किसने लिखी? | রামায়ণ কে রচনা করেছেন?",
+options:["Valmiki","Kalidas","Tulsidas","Ved Vyas"],
+answer:0
+},
+{
+q:"Which planet is nearest to the Sun? | সূৰ্যৰ আটাইতকৈ ওচৰৰ গ্ৰহ কোনটো? | सूर्य के सबसे निकट ग्रह कौन सा है? | সূর্যের সবচেয়ে নিকটবর্তী গ্রহ কোনটি?",
+options:["Venus","Mercury","Earth","Mars"],
+answer:1
+},
+{
+q:"India became independent in which year? | ভাৰত কেতিয়া স্বাধীন হৈছিল? | भारत किस वर्ष स्वतंत्र हुआ? | ভারত কোন সালে স্বাধীন হয়?",
+options:["1945","1946","1947","1950"],
+answer:2
+},
+{
+q:"National Tree of India? | ভাৰতৰ জাতীয় গছ কি? | भारत का राष्ट्रीय वृक्ष क्या है? | ভারতের জাতীয় বৃক্ষ কী?",
+options:["Neem","Peepal","Banyan","Mango"],
+answer:2
+}
+
+];
 
 ];
 // Add remaining questions exactly as your dataset if needed.
