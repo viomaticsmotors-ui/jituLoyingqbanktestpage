@@ -570,17 +570,24 @@ answer:2
 let current=0,answers={};
 
 function login(){
-  const userId = document.getElementById("uid").value;
-  const password = document.getElementById("pwd").value;
+const userId = document.getElementById("uid").value;
+const password = document.getElementById("pwd").value;
 
-  if(userId==="7896024881" && password==="Deepshikha@123"){
-      document.getElementById("login").classList.add("hidden");
-      document.getElementById("exam").classList.remove("hidden");
-      render();
-      startTimer();
-  }else{
-      alert("Invalid Login");
-  }
+if(userId==="7896024881" && password==="Deepshikha@123"){
+
+```
+  document.getElementById("login").classList.add("hidden");
+  document.getElementById("exam").classList.remove("hidden");
+
+  buildPalette();
+  loadQuestion();
+```
+
+}else{
+alert("Invalid Login");
+}
+}
+
 }
 function buildPalette(){
  let h="";
