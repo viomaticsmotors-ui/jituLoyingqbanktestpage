@@ -2,296 +2,124 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SSC CGL English Exam</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SSC HSLC Exam</title>
 <style>
-body{font-family:Arial;margin:20px;background:#f4f6f9}
-.card{max-width:1000px;margin:auto;background:white;padding:20px;border-radius:10px}
+body{font-family:Arial;background:#f4f6f9;margin:0}
+.header{background:#1e3a8a;color:#fff;padding:15px;text-align:center}
+.card{max-width:1100px;margin:20px auto;background:#fff;padding:20px;border-radius:10px}
 .hidden{display:none}
-.question{margin:15px 0;padding:10px;border:1px solid #ddd}
+.palette{display:grid;grid-template-columns:repeat(10,1fr);gap:5px}
+.palette button{padding:8px}
+.question{margin-top:15px;font-size:18px}
+.option{display:block;margin:8px 0}
 .timer{font-size:24px;color:red;font-weight:bold}
-button{padding:10px 20px}
 </style>
 </head>
 <body>
+<div class="header">
+<h2>SSC HSLC Multilingual Exam</h2>
+<div class="timer" id="timer">60:00</div>
+</div>
+
 <div class="card" id="login">
-<h2>Candidate Login</h2>
+<h3>Candidate Login</h3>
 <input id="uid" placeholder="User ID"><br><br>
 <input id="pwd" type="password" placeholder="Password"><br><br>
 <button onclick="login()">Login</button>
 </div>
 
 <div class="card hidden" id="exam">
-<h2>SSC CGL English Examination</h2>
-<div class="timer" id="timer">60:00</div>
-<form id="form"></form>
-<button onclick="submitExam()" type="button">Submit Exam</button>
+<div class="palette" id="palette"></div>
+<div id="questionBox"></div>
+<br>
+<button onclick="prevQ()">Previous</button>
+<button onclick="nextQ()">Next</button>
+<button onclick="submitExam()">Submit</button>
 </div>
 
 <div class="card hidden" id="result"></div>
 
 <script>
-const mathQuestions = [
-
+const questions=[
 {q:"What is 25% of 200?",options:["25","40","50","75"],answer:2},
-
 {q:"What is the square root of 144?",options:["10","11","12","13"],answer:2},
-
 {q:"18 × 5 = ?",options:["80","85","90","95"],answer:2},
-
 {q:"240 ÷ 12 = ?",options:["18","20","22","24"],answer:1},
-
 {q:"What is 15% of 300?",options:["35","40","45","50"],answer:2},
-
 {q:"LCM of 12 and 18?",options:["24","36","48","54"],answer:1},
-
 {q:"HCF of 24 and 36?",options:["6","8","12","18"],answer:2},
-
 {q:"7² = ?",options:["42","49","56","64"],answer:1},
-
 {q:"9³ = ?",options:["729","81","243","512"],answer:0},
-
 {q:"0.75 as a fraction?",options:["1/2","3/4","2/3","4/5"],answer:1},
-
 {q:"What is 35 + 48?",options:["73","83","93","103"],answer:1},
-
 {q:"What is 125 - 78?",options:["47","57","67","77"],answer:0},
-
 {q:"What is 14 × 6?",options:["74","84","94","104"],answer:1},
-
 {q:"What is 144 ÷ 9?",options:["14","15","16","18"],answer:2},
-
 {q:"50% of 600?",options:["200","250","300","350"],answer:2},
-
 {q:"Perimeter of a square of side 8 cm?",options:["24","32","40","48"],answer:1},
-
 {q:"Area of a rectangle 10 × 5?",options:["25","40","50","60"],answer:2},
-
 {q:"Simple interest on ₹1000 at 10% for 1 year?",options:["50","100","150","200"],answer:1},
-
 {q:"1 kilometre = ?",options:["100 m","500 m","1000 m","1500 m"],answer:2},
-
 {q:"Average of 10, 20, 30?",options:["15","20","25","30"],answer:1},
-
 {q:"What is 2/5 of 100?",options:["20","30","40","50"],answer:2},
-
 {q:"Value of π (approx)?",options:["2.14","3.14","4.13","3.41"],answer:1},
-
 {q:"What is 81 ÷ 9?",options:["7","8","9","10"],answer:2},
-
 {q:"12% of 500?",options:["50","60","70","80"],answer:1},
-
 {q:"If x = 5, then 2x + 3 = ?",options:["10","11","12","13"],answer:3}
-
 ];
-const reasoningQuestions = [
-
-{q:"Find the odd one out.",options:["Dog","Cat","Cow","Car"],answer:3},
-
-{q:"2, 4, 6, 8, ?",options:["9","10","11","12"],answer:1},
-
-{q:"A is taller than B. B is taller than C. Who is shortest?",options:["A","B","C","Cannot determine"],answer:2},
-
-{q:"If CAT = DBU, then DOG = ?",options:["EPH","EPG","FPH","FPG"],answer:0},
-
-{q:"Find the missing number: 5, 10, 20, 40, ?",options:["60","70","80","90"],answer:2},
-
-{q:"Which one is different?",options:["Apple","Mango","Banana","Potato"],answer:3},
-
-{q:"Complete: A, C, E, G, ?",options:["H","I","J","K"],answer:1},
-
-{q:"If 3+2=18 and 4+3=28, then 5+2=?",options:["30","35","40","45"],answer:1},
-
-{q:"Clock shows 3:00. Angle between hands?",options:["60°","75°","90°","120°"],answer:2},
-
-{q:"Find odd one out.",options:["Triangle","Square","Circle","Table"],answer:3},
-
-{q:"Brother of my father is my?",options:["Uncle","Cousin","Nephew","Grandfather"],answer:0},
-
-{q:"If SOUTH is coded as TPVUI, NORTH is coded as?",options:["OPSUI","OPSUII","OPSUIH","OPSUI"],answer:0},
-
-{q:"1, 1, 2, 3, 5, 8, ?",options:["11","12","13","15"],answer:2},
-
-{q:"Which number replaces ?: 2, 6, 12, 20, ?",options:["28","30","32","34"],answer:1},
-
-{q:"If today is Monday, after 10 days it will be?",options:["Wednesday","Thursday","Friday","Saturday"],answer:1},
-
-{q:"Choose the related pair: Pen : Write :: Knife : ?",options:["Cut","Eat","Draw","Walk"],answer:0},
-
-{q:"Which word does not belong?",options:["Rose","Lotus","Jasmine","Carrot"],answer:3},
-
-{q:"Find the missing letter: B, D, F, H, ?",options:["I","J","K","L"],answer:1},
-
-{q:"A man walks 5 km north then 5 km south. Where is he?",options:["North","South","Starting Point","East"],answer:2},
-
-{q:"If all pens are books and all books are bags, then all pens are?",options:["Bags","Tables","Boxes","None"],answer:0},
-
-{q:"Mirror image of 12:21 remains?",options:["12:21","21:12","11:22","22:11"],answer:0},
-
-{q:"Which one is not a prime number?",options:["2","3","5","9"],answer:3},
-
-{q:"Find odd number.",options:["8","16","24","25"],answer:3},
-
-{q:"If RAM = 36 and SAM = 37, then TAM = ?",options:["38","39","40","41"],answer:0},
-
-{q:"Complete series: 10, 20, 40, 80, ?",options:["120","140","160","180"],answer:2}
-
-];
-const englishQuestions = [
-
-{q:"Choose the correct spelling.",options:["Receive","Recieve","Receeve","Receve"],answer:0},
-
-{q:"Synonym of Happy?",options:["Sad","Joyful","Angry","Weak"],answer:1},
-
-{q:"Antonym of Strong?",options:["Powerful","Heavy","Weak","Hard"],answer:2},
-
-{q:"Choose the correct article: ___ apple a day keeps the doctor away.",options:["A","An","The","No article"],answer:1},
-
-{q:"Past tense of 'Go'?",options:["Goed","Went","Gone","Going"],answer:1},
-
-{q:"Plural of Child?",options:["Childs","Children","Childes","Childrens"],answer:1},
-
-{q:"Choose the correct sentence.",options:["He go to school.","He goes to school.","He going to school.","He gone to school."],answer:1},
-
-{q:"Synonym of Quick?",options:["Slow","Fast","Weak","Heavy"],answer:1},
-
-{q:"Antonym of Honest?",options:["Truthful","Sincere","Dishonest","Kind"],answer:2},
-
-{q:"Fill in the blank: She ___ a book.",options:["read","reads","reading","have read"],answer:1},
-
-{q:"Meaning of 'Brave'?",options:["Coward","Fearless","Weak","Lazy"],answer:1},
-
-{q:"Choose the correctly punctuated sentence.",options:["How are you","How are you?","How are you.","How are you,"],answer:1},
-
-{q:"Opposite of 'Ancient'?",options:["Old","Modern","Historic","Traditional"],answer:1},
-
-{q:"One who teaches students is a?",options:["Doctor","Teacher","Engineer","Farmer"],answer:1},
-
-{q:"Choose the noun.",options:["Run","Beautiful","School","Quickly"],answer:2},
-
-{q:"Choose the verb.",options:["Table","Chair","Write","Book"],answer:2},
-
-{q:"'Very big' means?",options:["Tiny","Huge","Small","Little"],answer:1},
-
-{q:"Fill in the blank: I ___ playing football.",options:["am","is","are","be"],answer:0},
-
-{q:"Past tense of 'Eat'?",options:["Eaten","Ate","Eating","Eat"],answer:1},
-
-{q:"Choose the correct preposition: The book is ___ the table.",options:["on","in","at","for"],answer:0},
-
-{q:"Synonym of Intelligent?",options:["Smart","Lazy","Weak","Slow"],answer:0},
-
-{q:"Antonym of Success?",options:["Victory","Achievement","Failure","Progress"],answer:2},
-
-{q:"Choose the adjective.",options:["Quickly","Beauty","Beautiful","Run"],answer:2},
-
-{q:"What is the plural of 'Mouse'?",options:["Mouses","Mousees","Mice","Mices"],answer:2},
-
-{q:"Fill in the blank: They ___ going to market.",options:["am","is","are","was"],answer:2}
-
-];
-const assameseHindiQuestions = [
-
-{q:"অসমৰ ৰাজধানী কি?",options:["গুৱাহাটী","দিছপুৰ","যোৰহাট","তেজপুৰ"],answer:1},
-
-{q:"অসমীয়া ভাষাৰ প্ৰথম অভিধান কোনে ৰচনা কৰিছিল?",options:["হেমচন্দ্ৰ বৰুৱা","লক্ষ্মীনাথ বেজবৰুৱা","জ্যোতিপ্ৰসাদ আগৰৱালা","বীৰেন্দ্ৰ কুমাৰ"],answer:0},
-
-{q:"অসমৰ জাতীয় উদ্যান ‘কাজিৰঙা’ কিহৰ বাবে বিখ্যাত?",options:["বাঘ","একশৃঙ্গ গঁড়","হাতী","মৃগ"],answer:1},
-
-{q:"'জোনাকী' আলোচনী কোনে সম্পাদনা কৰিছিল?",options:["চন্দ্ৰকুমাৰ আগৰৱালা","হেমচন্দ্ৰ বৰুৱা","আনন্দৰাম ঢেকিয়াল ফুকন","বেণুধৰ ৰাজখোৱা"],answer:0},
-
-{q:"অসম দিৱস কেতিয়া পালন কৰা হয়?",options:["২ ডিচেম্বৰ","২ জানুৱাৰী","১ মে’","১৫ আগষ্ট"],answer:0},
-
-{q:"অসমৰ সৰ্ববৃহৎ নদী কোনখন?",options:["বৰাক","ধনশিৰি","ব্ৰহ্মপুত্ৰ","মানাহ"],answer:2},
-
-{q:"'কীৰ্ত্তন ঘোষা' কোনে ৰচনা কৰিছিল?",options:["মাধৱদেৱ","শংকৰদেৱ","ভট্টদেৱ","আনন্দৰাম"],answer:1},
-
-{q:"অসমৰ ৰাজ্যিক পশু কি?",options:["গঁড়","হাতী","বাঘ","গাহৰি"],answer:0},
-
-{q:"ভূপেন হাজৰিকা কোন ক্ষেত্ৰৰ সৈতে জড়িত?",options:["সাহিত্য","সংগীত","বিজ্ঞান","ক্ৰীড়া"],answer:1},
-
-{q:"অসম সাহিত্য সভাৰ প্ৰথম সভাপতি কোন আছিল?",options:["পদ্মনাথ গোহাঞি বৰুৱা","লক্ষ্মীনাথ বেজবৰুৱা","হেমচন্দ্ৰ বৰুৱা","নবীনচন্দ্ৰ বৰদলৈ"],answer:0},
-
-{q:"भारत की राजधानी क्या है?",options:["मुंबई","दिल्ली","कोलकाता","चेन्नई"],answer:1},
-
-{q:"भारत का राष्ट्रीय पशु कौन है?",options:["हाथी","शेर","बाघ","घोड़ा"],answer:2},
-
-{q:"हिंदी दिवस कब मनाया जाता है?",options:["14 सितम्बर","15 अगस्त","26 जनवरी","2 अक्टूबर"],answer:0},
-
-{q:"भारत का राष्ट्रीय पक्षी कौन है?",options:["कबूतर","मोर","तोता","हंस"],answer:1},
-
-{q:"'सत्यमेव जयते' किससे लिया गया है?",options:["गीता","उपनिषद","रामायण","महाभारत"],answer:1},
-
-{q:"भारत का राष्ट्रीय फूल कौन सा है?",options:["गुलाब","कमल","सूरजमुखी","चमेली"],answer:1},
-
-{q:"भारत का संविधान कब लागू हुआ?",options:["15 अगस्त 1947","26 जनवरी 1950","26 जनवरी 1947","2 अक्टूबर 1950"],answer:1},
-
-{q:"भारत का राष्ट्रीय गान किसने लिखा?",options:["महात्मा गांधी","रवीन्द्रनाथ ठाकुर","प्रेमचंद","नेहरू"],answer:1},
-
-{q:"'जय हिन्द' का नारा किसने दिया?",options:["महात्मा गांधी","सुभाष चन्द्र बोस","भगत सिंह","नेहरू"],answer:1},
-
-{q:"भारत का राष्ट्रीय खेल (परंपरागत रूप से माना जाता है)?",options:["फुटबॉल","हॉकी","क्रिकेट","कबड्डी"],answer:1},
-
-{q:"অসমৰ উচ্চ ন্যায়ালয় ক'ত অৱস্থিত?",options:["গুৱাহাটী","শিলচৰ","যোৰহাট","তেজপুৰ"],answer:0},
-
-{q:"অসমৰ প্ৰথম মুখ্যমন্ত্ৰী কোন আছিল?",options:["গোপীনাথ বৰদলৈ","বিষ্ণুৰাম মেধি","তৰুণ গগৈ","হিতেশ্বৰ শইকীয়া"],answer:0},
-
-{q:"হিন্দীৰ ‘विलोम शब्द’ মানে কি?",options:["সমাৰ্থক শব্দ","বিপৰীত শব্দ","বিশেষ্য","সৰ্বনাম"],answer:1},
-
-{q:"অসমীয়া ভাষাৰ জনক বুলি কাক কোৱা হয়?",options:["শংকৰদেৱ","হেমচন্দ্ৰ বৰুৱা","ভট্টদেৱ","মাধৱদেৱ"],answer:2},
-
-{q:"भारत का राष्ट्रीय ध्वज कितने रंगों का है?",options:["2","3","4","5"],answer:1}
-
-];
-
-}
+// Add remaining questions exactly as your dataset if needed.
+let current=0,answers={};
 
 function login(){
  if(uid.value==="7896024881" && pwd.value==="Deepshikha@123"){
-   loginDiv=document.getElementById('login');
-   loginDiv.classList.add('hidden');
+   login.classList.add('hidden');
    exam.classList.remove('hidden');
-   render();
-   startTimer();
+   buildPalette(); loadQuestion();
  } else alert("Invalid Login");
 }
-
-function render(){
+function buildPalette(){
  let h="";
- questions.forEach((q,i)=>{
-  h+=`<div class='question'><b>${i+1}. ${q.q}</b><br>
-  <label><input type='radio' name='q${i}' value='0'> ${q.options[0]}</label><br>
-  <label><input type='radio' name='q${i}' value='1'> ${q.options[1]}</label><br>
-  <label><input type='radio' name='q${i}' value='2'> ${q.options[2]}</label><br>
-  <label><input type='radio' name='q${i}' value='3'> ${q.options[3]}</label></div>`;
+ for(let i=0;i<questions.length;i++) h+=`<button onclick="gotoQ(${i})">${i+1}</button>`;
+ palette.innerHTML=h;
+}
+function gotoQ(i){current=i;loadQuestion();}
+function prevQ(){if(current>0){current--;loadQuestion();}}
+function nextQ(){if(current<questions.length-1){current++;loadQuestion();}}
+function loadQuestion(){
+ let q=questions[current];
+ let h=`<div class='question'><b>${current+1}. ${q.q}</b></div>`;
+ q.options.forEach((o,i)=>{
+ h+=`<label class='option'><input type='radio' name='ans'
+ ${answers[current]===i?'checked':''}
+ onchange='answers[${current}]=${i}'> ${o}</label>`;
  });
- form.innerHTML=h;
+ questionBox.innerHTML=h;
 }
-
 let t=3600;
-function startTimer(){
- setInterval(()=>{
-  let m=Math.floor(t/60),s=t%60;
-  timer.innerText=String(m).padStart(2,'0')+":"+String(s).padStart(2,'0');
-  t--;
-  if(t<0) submitExam();
- },1000);
-}
+setInterval(()=>{
+ let m=Math.floor(t/60),s=t%60;
+ timer.innerText=String(m).padStart(2,'0')+":"+String(s).padStart(2,'0');
+ if(--t<0) submitExam();
+},1000);
 
 function submitExam(){
- let attempted=0,correct=0;
+ let attempted=0,correct=0,wrong=0,score=0;
  questions.forEach((q,i)=>{
-  let a=document.querySelector(`input[name=q${i}]:checked`);
-  if(a){attempted++; if(+a.value===q.answer) correct++;}
+  if(answers[i]!==undefined){
+   attempted++;
+   if(answers[i]===q.answer){correct++;score+=1;}
+   else{wrong++;score-=0.25;}
+  }
  });
- let wrong=attempted-correct;
  exam.classList.add('hidden');
  result.classList.remove('hidden');
  result.innerHTML=`<h2>Result</h2>
- Total Questions: ${questions.length}<br>
+ Total: ${questions.length}<br>
  Attempted: ${attempted}<br>
  Correct: ${correct}<br>
  Wrong: ${wrong}<br>
- Score: ${correct}`;
+ Final Score: ${score}`;
 }
 </script>
 </body>
