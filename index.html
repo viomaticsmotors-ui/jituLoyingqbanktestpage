@@ -127,9 +127,9 @@
     const CORRECT_PASSWORD = "Deepshikha@123";
     const LOCK_TIME_MS = 2 * 60 * 60 * 1000; // 2 hours
 
-    // --- ২৪ ঘণ্টাৰ মূৰে মূৰে সলনি হ’বলগীয়া প্ৰশ্নৰ ভঁৰাল (3 Sets of Questions) ---
+    // --- ৩টা সম্পূৰ্ণ বেলেগ বেলেগ প্ৰশ্নৰ ভঁৰাল (3 Unique Sets) ---
     const megaQuestionPool = {
-        // SET A (দিন ১ ৰ বাবে)
+        // ==================== SET A ====================
         set_A: {
             maths: [
                 { q_en: "If a+b+c = 0, find the value of (a²+b²+c²) / (a²-bc).", q_as: "যদি a+b+c = 0 হয়, তেন্তে (a²+b²+c²) / (a²-bc) ৰ মান উলিওৱা।", opts_en: ["1", "2", "0", "-1"], opts_as: ["১", "২", "০", "-১"], corr: 1 },
@@ -145,14 +145,14 @@
                 { q_en: "Which layer of the atmosphere contains the Ozone layer?", q_as: "বায়ুমণ্ডলৰ কোনটো স্তৰত অ'জন (Ozone) স্তৰ পোৱা যায়?", opts_en: ["Troposphere", "Stratosphere", "Mesosphere", "Thermosphere"], opts_as: ["ট্ৰপ’স্ফীয়েৰ", "ষ্ট্ৰেট’স্ফীয়েৰ", "মেছ’স্ফীয়েৰ", "থাৰ্ম’স্ফীয়েৰ"], corr: 1 }
             ]
         },
-        // SET B (দিন ২ ৰ বাবে আপোনাআপুনি সলনি হ’ব)
+        // ==================== SET B ====================
         set_B: {
             maths: [
-                { q_en: "A sum of money doubles itself in 8 years at simple interest. Find the rate per annum.", q_as: "সৰল সুতৰ হাৰত এটা ধনৰাশি ৮ বছৰত দুগুণ হয়। বাৰ্ষিক সুতৰ হাৰ কিমান?", opts_en: ["10%", "12.5%", "15%", "8%"], opts_as: ["১০%", "১২.৫%", "১৫%", "৮%"], corr: 1 },
-                { q_en: "A trader marks his goods 20% above CP and allows 10% discount. Find gain %.", q_as: "এজন ব্যৱসায়ীয়ে ক্ৰয় মূল্যতকৈ ২০% বেছি মূল্য লিখে আৰু ১০% ৰেহাই দিয়ে। লাভৰ শতাংশ কিমান?", opts_en: ["8%", "10%", "12%", "6%"], opts_as: ["৮%", "১০%", "১২%", "৬%"], corr: 0 }
+                { q_en: "A sum of money doubles itself in 8 years at simple interest. Find the rate of interest per annum.", q_as: "সৰল সুতৰ হাৰত এটা ধনৰাশি ৮ বছৰত দুগুণ হয়। বাৰ্ষিক সুতৰ হাৰ কিমান?", opts_en: ["10%", "12.5%", "15%", "8%"], opts_as: ["১০%", "১২.৫%", "১৫%", "৮%"], corr: 1 },
+                { q_en: "A trader marks his goods 20% above the cost price and allows a discount of 10%. Find his gain percent.", q_as: "এজন ব্যৱসায়ীয়ে ক্ৰয় মূল্যতকৈ ২০% বেছি মূল্য লিখে আৰু ১০% ৰেহাই দিয়ে। লাভৰ শতাংশ কিমান?", opts_en: ["8%", "10%", "12%", "6%"], opts_as: ["৮%", "১০%", "১২%", "৬%"], corr: 0 }
             ],
             reasoning: [
-                { q_en: "In a certain code, 'CHAIR' is written as 'EGAKT'. How is 'TABLE' written?", q_as: "এটা নিৰ্দিষ্ট কোডত 'CHAIR' ক 'EGAKT' বুলি লিখা হয়। 'TABLE' কেনেকৈ লিখা হ’ব?", opts: ["VCDNG", "VCEJG", "UCDNF", "VBDNG"], corr: 0 }
+                { q_en: "In a certain code, 'CHAIR' is written as 'EGAKT'. How is 'TABLE' written in that code?", q_as: "কোডত 'CHAIR' ক 'EGAKT' বুলি লিখা হয়। 'TABLE' কেনেকৈ লিখা হ’ব?", opts: ["VCDNG", "VCEJG", "UCDNF", "VBDNG"], corr: 0 }
             ],
             english: [
                 { q: "Choose the word opposite in meaning (ANTONYM) to: 'FRAGILE'", opts: ["Weak", "Strong", "Delicate", "Soft"], corr: 1 }
@@ -161,17 +161,17 @@
                 { q_en: "Who was the founder of the Slave Dynasty in India?", q_as: "ভাৰতত দাস বংশৰ প্ৰতিষ্ঠাপক কোন আছিল?", opts_en: ["Iltutmish", "Alauddin Khilji", "Qutb-ud-din Aibak", "Balban"], opts_as: ["ইলতুতমিছ", "আলাউদ্দিন খিলজী", "কুতুবুদ্দিন আইবাক", "বলবন"], corr: 2 }
             ]
         },
-        // SET C (দিন ৩ ৰ বাবে আপোনাআপুনি সলনি হ’ব)
+        // ==================== SET C ====================
         set_C: {
             maths: [
-                { q_en: "A and B can complete a work in 15 days and 10 days respectively. Together in how many days?", q_as: "A আৰু B এ এটা কাম ক্ৰমে ১৫ দিন আৰু ১০ দিনত কৰিব পাৰে। দুয়ো একেলগে কৰিলে কামটো কিমান দিনত শেষ হ’ব?", opts_en: ["5 days", "6 days", "8 days", "12 days"], opts_as: ["৫ দিন", "৬ দিন", "৮ দিন", "১২ দিন"], corr: 1 },
+                { q_en: "Two pipes A and B can fill a tank in 20 minutes and 30 minutes respectively. If both pipes are opened together, how time will it take to fill the tank?", q_as: "দুডাল পাইপ A আৰু B এ এটা টেংক ক্ৰমে ২০ মিনিট আৰু ৩০ মিনিটত পূৰ্ণ কৰিব পাৰে। দুয়ো এডাল পাইপ একেলগে মেলি দিলে টেংকটো পূৰ্ণ হ’বলৈ কিমান সময় লাগিব?", opts_en: ["10 mins", "12 mins", "15 mins", "25 mins"], opts_as: ["১০ মিনিট", "১২ মিনিট", "১৫ মিনিট", "২৫ মিনিট"], corr: 1 },
                 { q_en: "Find the average of first 50 natural numbers.", q_as: "প্ৰথম ৫০ টা স্বাভাৱিক সংখ্যাৰ গড় উলিওৱা।", opts_en: ["25", "25.5", "26", "26.5"], opts_as: ["২৫", "২৫.৫", "২৬", "২৬.৫"], corr: 1 }
             ],
             reasoning: [
                 { q_en: "Complete the series: 3, 5, 9, 17, ?", q_as: "শৃংখলাটো সম্পূৰ্ণ কৰক: ৩, ৫, ৯, ১৭, ?", opts: ["26", "33", "35", "42"], corr: 1 }
             ],
             english: [
-                { q: "Spot the error: 'The collective intelligence of those boys are very high.'", opts: ["The collective intelligence", "of those boys", "are very high", "No error"], corr: 2 }
+                { q: "Spot the error in the sentence: 'The collective intelligence of those boys are very high.'", opts: ["The collective intelligence", "of those boys", "are very high", "No error"], corr: 2 }
             ],
             general: [
                 { q_en: "Which article of the Indian Constitution deals with the 'Right to Equality'?", q_as: "ভাৰতীয় সংবিধানৰ কোনটো অনুচ্ছেদে 'সমতাৰ অধিকাৰ'ৰ বিষয়ে উল্লেখ কৰে?", opts_en: ["Article 14", "Article 19", "Article 21", "Article 32"], opts_as: ["অনুচ্ছেদ ১৪", "অনুচ্ছেদ ১৯", "অনুচ্ছেদ ২১", "অনুচ্ছেদ ৩২"], corr: 0 }
@@ -189,7 +189,7 @@
     window.onload = function() {
         checkLockStatus();
         loadLogs();
-        selectDailyQuestionSet(); // ২৪ ঘণ্টাৰ মটাবক প্ৰশ্ন লোড কৰিব
+        selectDailyQuestionSet(); 
 
         if(localStorage.getItem('chsl_running') === 'true' && localStorage.getItem('chsl_logged_in') === 'true') {
             showDashboard();
@@ -198,12 +198,10 @@
         }
     };
 
-    // --- AUTOMATIC 24-HOUR QUESTION CHANGER LOGIC ---
+    // --- AUTOMATIC 24-HOUR ROTATION LOGIC ---
     function selectDailyQuestionSet() {
-        // বৰ্তমান দিনটোৰ সংখ্যা ল’ব (e.g. ১ ৰ পৰা ৩১ তাৰিখ)
         const currentDay = new Date().getDate(); 
         
-        // দিনটো ৩ দি ভাগ কৰি কোনটো ছেট এক্টিভ কৰিব বাছি ল’ব (Rotation Method)
         let activeSetName = "set_A";
         if (currentDay % 3 === 0) activeSetName = "set_A";
         else if (currentDay % 3 === 1) activeSetName = "set_B";
@@ -212,9 +210,8 @@
         document.getElementById('activeSetDisplay').innerText = `Active Question Pool: ${activeSetName.toUpperCase()} (Auto-rotates every 24 hours)`;
 
         const selectedSet = megaQuestionPool[activeSetName];
-        questionBank = []; // পুৰণি প্ৰশ্ন ডিলিট কৰিব
+        questionBank = []; 
 
-        // নিৰ্বাচিত ছেটটোৰ পৰা ১০০ টা প্ৰশ্ন Loops ব্যৱহাৰ কৰি পূৰণ কৰিব
         // ১. Maths (1 to 25)
         for(let i = 0; i < 25; i++) {
             let raw = selectedSet.maths[i % selectedSet.maths.length];
@@ -408,7 +405,7 @@
         document.getElementById('userId').value = "";
         document.getElementById('password').value = "";
         document.getElementById('loginBox').style.display = 'block';
-        selectDailyQuestionSet(); // ইভালুয়েশ্যনৰ পিছত নতুনকৈ ৰি-ল’ড কৰিব
+        selectDailyQuestionSet(); 
     }
 
     function loadLogs() {
