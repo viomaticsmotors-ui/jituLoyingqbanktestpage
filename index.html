@@ -76,6 +76,7 @@
         <div>
             <h2>SSC CHSL - Live Final Mock Exam Panel</h2>
             <p style="color: #64748b; margin-top:4px;">Candidate Name: <b>Deepshikha Taid</b> | Roll No: <b>789602</b></p>
+            <p style="color: #2563eb; font-size: 13px; font-weight: bold;" id="activeSetDisplay">Active Question Pool: Loading...</p>
         </div>
         <div class="timer-box" id="timerDisplay">60:00</div>
     </div>
@@ -126,80 +127,59 @@
     const CORRECT_PASSWORD = "Deepshikha@123";
     const LOCK_TIME_MS = 2 * 60 * 60 * 1000; // 2 hours
 
-    // System Core Bank
-    const questionBank = [];
+    // --- ২৪ ঘণ্টাৰ মূৰে মূৰে সলনি হ’বলগীয়া প্ৰশ্নৰ ভঁৰাল (3 Sets of Questions) ---
+    const megaQuestionPool = {
+        // SET A (দিন ১ ৰ বাবে)
+        set_A: {
+            maths: [
+                { q_en: "If a+b+c = 0, find the value of (a²+b²+c²) / (a²-bc).", q_as: "যদি a+b+c = 0 হয়, তেন্তে (a²+b²+c²) / (a²-bc) ৰ মান উলিওৱা।", opts_en: ["1", "2", "0", "-1"], opts_as: ["১", "২", "০", "-১"], corr: 1 },
+                { q_en: "The ratio of two numbers is 3:4 and their HCF is 4. Find their LCM.", q_as: "দুটা সংখ্যাৰ অনুপাত ৩:৪ আৰু ইহঁতৰ গ.সা.উ. (HCF) ৪। ইহঁতৰ ল.সা.গু. (LCM) উলিওৱা।", opts_en: ["12", "16", "24", "48"], opts_as: ["১২", "১৬", "২৪", "৪৮"], corr: 3 }
+            ],
+            reasoning: [
+                { q_en: "Select the related number from the given alternatives: 12 : 144 :: 13 : ?", q_as: "তলত দিয়া বিকল্পসমূহৰ পৰা সম্পৰ্কিত সংখ্যাটো বাছক: ১২ : ১৪৪ :: ১৩ : ?", opts: ["156", "169", "196", "144"], corr: 1 }
+            ],
+            english: [
+                { q: "Choose the word closest in meaning (SYNONYM) to: 'BENEVOLENT'", opts: ["Kind", "Cruel", "Miserly", "Arrogant"], corr: 0 }
+            ],
+            general: [
+                { q_en: "Which layer of the atmosphere contains the Ozone layer?", q_as: "বায়ুমণ্ডলৰ কোনটো স্তৰত অ'জন (Ozone) স্তৰ পোৱা যায়?", opts_en: ["Troposphere", "Stratosphere", "Mesosphere", "Thermosphere"], opts_as: ["ট্ৰপ’স্ফীয়েৰ", "ষ্ট্ৰেট’স্ফীয়েৰ", "মেছ’স্ফীয়েৰ", "থাৰ্ম’স্ফীয়েৰ"], corr: 1 }
+            ]
+        },
+        // SET B (দিন ২ ৰ বাবে আপোনাআপুনি সলনি হ’ব)
+        set_B: {
+            maths: [
+                { q_en: "A sum of money doubles itself in 8 years at simple interest. Find the rate per annum.", q_as: "সৰল সুতৰ হাৰত এটা ধনৰাশি ৮ বছৰত দুগুণ হয়। বাৰ্ষিক সুতৰ হাৰ কিমান?", opts_en: ["10%", "12.5%", "15%", "8%"], opts_as: ["১০%", "১২.৫%", "১৫%", "৮%"], corr: 1 },
+                { q_en: "A trader marks his goods 20% above CP and allows 10% discount. Find gain %.", q_as: "এজন ব্যৱসায়ীয়ে ক্ৰয় মূল্যতকৈ ২০% বেছি মূল্য লিখে আৰু ১০% ৰেহাই দিয়ে। লাভৰ শতাংশ কিমান?", opts_en: ["8%", "10%", "12%", "6%"], opts_as: ["৮%", "১০%", "১২%", "৬%"], corr: 0 }
+            ],
+            reasoning: [
+                { q_en: "In a certain code, 'CHAIR' is written as 'EGAKT'. How is 'TABLE' written?", q_as: "এটা নিৰ্দিষ্ট কোডত 'CHAIR' ক 'EGAKT' বুলি লিখা হয়। 'TABLE' কেনেকৈ লিখা হ’ব?", opts: ["VCDNG", "VCEJG", "UCDNF", "VBDNG"], corr: 0 }
+            ],
+            english: [
+                { q: "Choose the word opposite in meaning (ANTONYM) to: 'FRAGILE'", opts: ["Weak", "Strong", "Delicate", "Soft"], corr: 1 }
+            ],
+            general: [
+                { q_en: "Who was the founder of the Slave Dynasty in India?", q_as: "ভাৰতত দাস বংশৰ প্ৰতিষ্ঠাপক কোন আছিল?", opts_en: ["Iltutmish", "Alauddin Khilji", "Qutb-ud-din Aibak", "Balban"], opts_as: ["ইলতুতমিছ", "আলাউদ্দিন খিলজী", "কুতুবুদ্দিন আইবাক", "বলবন"], corr: 2 }
+            ]
+        },
+        // SET C (দিন ৩ ৰ বাবে আপোনাআপুনি সলনি হ’ব)
+        set_C: {
+            maths: [
+                { q_en: "A and B can complete a work in 15 days and 10 days respectively. Together in how many days?", q_as: "A আৰু B এ এটা কাম ক্ৰমে ১৫ দিন আৰু ১০ দিনত কৰিব পাৰে। দুয়ো একেলগে কৰিলে কামটো কিমান দিনত শেষ হ’ব?", opts_en: ["5 days", "6 days", "8 days", "12 days"], opts_as: ["৫ দিন", "৬ দিন", "৮ দিন", "১২ দিন"], corr: 1 },
+                { q_en: "Find the average of first 50 natural numbers.", q_as: "প্ৰথম ৫০ টা স্বাভাৱিক সংখ্যাৰ গড় উলিওৱা।", opts_en: ["25", "25.5", "26", "26.5"], opts_as: ["২৫", "২৫.৫", "২৬", "২৬.৫"], corr: 1 }
+            ],
+            reasoning: [
+                { q_en: "Complete the series: 3, 5, 9, 17, ?", q_as: "শৃংখলাটো সম্পূৰ্ণ কৰক: ৩, ৫, ৯, ১৭, ?", opts: ["26", "33", "35", "42"], corr: 1 }
+            ],
+            english: [
+                { q: "Spot the error: 'The collective intelligence of those boys are very high.'", opts: ["The collective intelligence", "of those boys", "are very high", "No error"], corr: 2 }
+            ],
+            general: [
+                { q_en: "Which article of the Indian Constitution deals with the 'Right to Equality'?", q_as: "ভাৰতীয় সংবিধানৰ কোনটো অনুচ্ছেদে 'সমতাৰ অধিকাৰ'ৰ বিষয়ে উল্লেখ কৰে?", opts_en: ["Article 14", "Article 19", "Article 21", "Article 32"], opts_as: ["অনুচ্ছেদ ১৪", "অনুচ্ছেদ ১৯", "অনুচ্ছেদ ২১", "অনুচ্ছেদ ৩২"], corr: 0 }
+            ]
+        }
+    };
 
-    // --- ১. MATHEMATICS REAL QUESTIONS BANK (1 to 25) ---
-    const mathsRaw = [
-        { q_en: "If a+b+c = 0, find the value of (a²+b²+c²) / (a²-bc).", q_as: "যদি a+b+c = 0 হয়, তেন্তে (a²+b²+c²) / (a²-bc) ৰ মান উলিওৱা।", opts_en: ["1", "2", "0", "-1"], opts_as: ["১", "২", "০", "-১"], corr: 1 },
-        { q_en: "The ratio of two numbers is 3:4 and their HCF is 4. Find their LCM.", q_as: "দুটা সংখ্যাৰ অনুপাত ৩:৪ আৰু ইহঁতৰ গ.সা.উ. (HCF) ৪। ইহঁতৰ ল.সা.গু. (LCM) উলিওৱা।", opts_en: ["12", "16", "24", "48"], opts_as: ["১২", "১৬", "২৪", "৪৮"], corr: 3 },
-        { q_en: "A sum of money doubles itself in 8 years at simple interest. Find the rate of interest per annum.", q_as: "সৰল সুতৰ হাৰত এটা ধনৰাশি ৮ বছৰত দুগুণ হয়। বাৰ্ষিক সুতৰ হাৰ কিমান?", opts_en: ["10%", "12.5%", "15%", "8%"], opts_as: ["১০%", "১২.৫%", "১৫%", "৮%"], corr: 1 },
-        { q_en: "A trader marks his goods 20% above the cost price and allows a discount of 10%. Find his gain percent.", q_as: "এজন ব্যৱসায়ীয়ে তেওঁৰ সামগ্ৰীৰ মূল্য ক্ৰয় মূল্যতকৈ ২০% বেছি কৈ লিখি থয় আৰু ১০% ৰেহাই দিয়ে। তেওঁৰ লাভৰ শতাংশ কিমান?", opts_en: ["8%", "10%", "12%", "6%"], opts_as: ["৮%", "১০%", "১২%", "৬%"], corr: 0 },
-        { q_en: "Two counts A and B can complete a work in 15 days and 10 days respectively. Working together, in how many days can they finish it?", q_as: "A আৰু B এ এটা কাম ক্ৰমে ১৫ দিন আৰু ১০ দিনত কৰিব পাৰে। দুয়ো একেলগে কামটো কৰিলে কিমান দিনত শেষ হ’ব?", opts_en: ["5 days", "6 days", "8 days", "12 days"], opts_as: ["৫ দিন", "৬ দিন", "৮ দিন", "১২ দিন"], corr: 1 }
-    ];
-    for(let i = 0; i < 25; i++) {
-        let raw = mathsRaw[i % mathsRaw.length];
-        questionBank.push({
-            id: i + 1, type: 'maths',
-            q: { en: `${i+1}. ${raw.q_en}`, as: `${i+1}. ${raw.q_as}`, hi: `${i+1}. ${raw.q_en}`, bn: `${i+1}. ${raw.q_as}` },
-            options: { en: raw.opts_en, as: raw.opts_as, hi: raw.opts_en, bn: raw.opts_as }, correct: raw.corr
-        });
-    }
-
-    // --- ২. REASONING REAL QUESTIONS BANK (26 to 50) ---
-    const reasoningRaw = [
-        { q_en: "Select the related number from the given alternatives: 12 : 144 :: 13 : ?", q_as: "তলত দিয়া বিকল্পসমূহৰ পৰা সম্পৰ্কিত সংখ্যাটো বাছক: ১২ : ১৪৪ :: ১৩ : ?", opts: ["156", "169", "196", "144"], corr: 1 },
-        { q_en: "In a certain code, 'CHAIR' is written as 'EGAKT'. How is 'TABLE' written in that code?", q_as: "এটা নিৰ্দিষ্ট কোডত 'CHAIR' ক 'EGAKT' বুলি লিখা হয়। সেই কোডত 'TABLE' কেনেকৈ লিখা হ’ব?", opts: ["VCDNG", "VCEJG", "UCDNF", "VBDNG"], corr: 0 },
-        { q_en: "Point out to a lady, Raj said, 'Her mother is the only daughter of my mother.' How is Raj related to the lady?", q_as: "এগৰাকী মহিলাক দেখুৱাই ৰাজে ক’লে, 'তেওঁৰ মাক মোৰ মাৰ একমাত্ৰ জীয়ৰী।' ৰাজ মহিলাগৰাকীৰ কি হয়?", opts: ["Father", "Uncle", "Brother", "Grandfather"], corr: 0 },
-        { q_en: "Find the odd one out from the given options.", q_as: "তলৰ বিকল্পসমূহৰ পৰা অমিল শব্দটো বাছি উলিওৱা।", opts: ["Auditorium", "Gymnasium", "Track", "Football"], corr: 3 },
-        { q_en: "Complete the series: 3, 5, 9, 17, ?", q_as: "শৃংখলাটো সম্পূৰ্ণ কৰক: ৩, ৫, ৯, ১৭, ?", opts: ["26", "33", "35", "42"], corr: 1 }
-    ];
-    for(let i = 0; i < 25; i++) {
-        let raw = reasoningRaw[i % reasoningRaw.length];
-        let id = 25 + i + 1;
-        questionBank.push({
-            id: id, type: 'reasoning',
-            q: { en: `${id}. ${raw.q_en}`, as: `${id}. ${raw.q_as}`, hi: `${id}. ${raw.q_en}`, bn: `${id}. ${raw.q_as}` },
-            options: { en: raw.opts, as: raw.opts, hi: raw.opts, bn: raw.opts }, correct: raw.corr
-        });
-    }
-
-    // --- ৩. ENGLISH LANGUAGE REAL QUESTIONS BANK (51 to 75) ---
-    const englishRaw = [
-        { q: "Choose the word closest in meaning (SYNONYM) to: 'BENEVOLENT'", opts: ["Kind", "Cruel", "Miserly", "Arrogant"], corr: 0 },
-        { q: "Choose the word opposite in meaning (ANTONYM) to: 'FRAGILE'", opts: ["Weak", "Strong", "Delicate", "Soft"], corr: 1 },
-        { q: "Spot the error in the sentence: 'The collective intelligence of those boys are very high.'", opts: ["The collective intelligence", "of those boys", "are very high", "No error"], corr: 2 },
-        { q: "Fill in the blank: The police _____ investigating the case since last night.", opts: ["is", "have been", "has been", "are"], corr: 1 },
-        { q: "Choose the correct alternative for the idiom: 'To turn a deaf ear'", opts: ["To listen carefully", "To refuse to listen", "To become deaf", "To talk loudly"], corr: 1 }
-    ];
-    for(let i = 0; i < 25; i++) {
-        let raw = englishRaw[i % englishRaw.length];
-        let id = 50 + i + 1;
-        questionBank.push({
-            id: id, type: 'english',
-            q: { en: `${id}. ${raw.q}`, as: `${id}. ${raw.q}`, hi: `${id}. ${raw.q}`, bn: `${id}. ${raw.q}` },
-            options: { en: raw.opts, as: raw.opts, hi: raw.opts, bn: raw.opts }, correct: raw.corr
-        });
-    }
-
-    // --- ৪. GENERAL AWARENESS REAL QUESTIONS BANK (76 to 100) ---
-    const gaRaw = [
-        { q_en: "Which layer of the atmosphere contains the Ozone layer?", q_as: "বায়ুমণ্ডলৰ কোনটো স্তৰত অ'জন (Ozone) স্তৰ পোৱা যায়?", opts_en: ["Troposphere", "Stratosphere", "Mesosphere", "Thermosphere"], opts_as: ["ট্ৰপ’স্ফীয়েৰ", "ষ্ট্ৰেট’স্ফীয়েৰ", "মেছ’স্ফীয়েৰ", "থাৰ্ম’স্ফীয়েৰ"], corr: 1 },
-        { q_en: "Who was the founder of the Slave Dynasty in India?", q_as: "ভাৰতত দাস বংশৰ প্ৰতিষ্ঠাপক কোন আছিল?", opts_en: ["Iltutmish", "Alauddin Khilji", "Qutb-ud-din Aibak", "Balban"], opts_as: ["ইলতুতমিছ", "আলাউদ্দিন খিলজী", "কুতুবুদ্দিন আইবাক", "বলবন"], corr: 2 },
-        { q_en: "Which article of the Indian Constitution deals with the 'Right to Equality'?", q_as: "ভাৰতীয় সংবিধানৰ কোনটো অনুচ্ছেদে 'সমতাৰ অধিকাৰ'ৰ বিষয়ে উল্লেখ কৰে?", opts_en: ["Article 14", "Article 19", "Article 21", "Article 32"], opts_as: ["অনুচ্ছেদ ১৪", "অনুচ্ছেদ ১৯", "অনুচ্ছেদ ২১", "অনুচ্ছেদ ৩২"], corr: 0 },
-        { q_en: "The famous festival 'Bihu' is primarily celebrated in which Indian state?", q_as: "বিখ্যাত উৎসৱ 'বিহু' মূলতঃ ভাৰতৰ কোনখন ৰাজ্যত পালন কৰা হয়?", opts_en: ["Tripura", "Assam", "Meghalaya", "Arunachal Pradesh"], opts_as: ["ত্ৰিপুৰা", "অসম", "মেঘালয়", "অৰুণাচল প্ৰদেশ"], corr: 1 },
-        { q_en: "Which gland in the human body is known as the 'Master Gland'?", q_as: "মানুহৰ শৰীৰৰ কোনটো গ্ৰন্থিক 'মাষ্টৰ গ্ৰন্থি' বুলি জনা যায়?", opts_en: ["Thyroid Gland", "Adrenal Gland", "Pituitary Gland", "Pancreas"], opts_as: ["থাইৰয়ড গ্ৰন্থি", "এড্ৰেনেল গ্ৰন্থি", "পিটুইটাৰী গ্ৰন্থি", "অগ্ন্যাশয়"], corr: 2 }
-    ];
-    for(let i = 0; i < 25; i++) {
-        let raw = gaRaw[i % gaRaw.length];
-        let id = 75 + i + 1;
-        questionBank.push({
-            id: id, type: 'assamese',
-            q: { en: `${id}. ${raw.q_en}`, as: `${id}. ${raw.q_as}`, hi: `${id}. ${raw.q_en}`, bn: `${id}. ${raw.q_as}` },
-            options: { en: raw.opts_en, as: raw.opts_as, hi: raw.opts_en, bn: raw.opts_as }, correct: raw.corr
-        });
-    }
-
+    let questionBank = [];
     let timer;
     let totalSeconds = 3600; 
     let currentLang = "as";
@@ -209,6 +189,8 @@
     window.onload = function() {
         checkLockStatus();
         loadLogs();
+        selectDailyQuestionSet(); // ২৪ ঘণ্টাৰ মটাবক প্ৰশ্ন লোড কৰিব
+
         if(localStorage.getItem('chsl_running') === 'true' && localStorage.getItem('chsl_logged_in') === 'true') {
             showDashboard();
             totalSeconds = parseInt(localStorage.getItem('chsl_time')) || 3600;
@@ -216,18 +198,74 @@
         }
     };
 
+    // --- AUTOMATIC 24-HOUR QUESTION CHANGER LOGIC ---
+    function selectDailyQuestionSet() {
+        // বৰ্তমান দিনটোৰ সংখ্যা ল’ব (e.g. ১ ৰ পৰা ৩১ তাৰিখ)
+        const currentDay = new Date().getDate(); 
+        
+        // দিনটো ৩ দি ভাগ কৰি কোনটো ছেট এক্টিভ কৰিব বাছি ল’ব (Rotation Method)
+        let activeSetName = "set_A";
+        if (currentDay % 3 === 0) activeSetName = "set_A";
+        else if (currentDay % 3 === 1) activeSetName = "set_B";
+        else activeSetName = "set_C";
+
+        document.getElementById('activeSetDisplay').innerText = `Active Question Pool: ${activeSetName.toUpperCase()} (Auto-rotates every 24 hours)`;
+
+        const selectedSet = megaQuestionPool[activeSetName];
+        questionBank = []; // পুৰণি প্ৰশ্ন ডিলিট কৰিব
+
+        // নিৰ্বাচিত ছেটটোৰ পৰা ১০০ টা প্ৰশ্ন Loops ব্যৱহাৰ কৰি পূৰণ কৰিব
+        // ১. Maths (1 to 25)
+        for(let i = 0; i < 25; i++) {
+            let raw = selectedSet.maths[i % selectedSet.maths.length];
+            questionBank.push({
+                id: i + 1, type: 'maths',
+                q: { en: `${i+1}. ${raw.q_en}`, as: `${i+1}. ${raw.q_as}`, hi: `${i+1}. ${raw.q_en}`, bn: `${i+1}. ${raw.q_as}` },
+                options: { en: raw.opts_en, as: raw.opts_as, hi: raw.opts_en, bn: raw.opts_as }, correct: raw.corr
+            });
+        }
+        // ২. Reasoning (26 to 50)
+        for(let i = 0; i < 25; i++) {
+            let raw = selectedSet.reasoning[i % selectedSet.reasoning.length];
+            let id = 25 + i + 1;
+            questionBank.push({
+                id: id, type: 'reasoning',
+                q: { en: `${id}. ${raw.q_en}`, as: `${id}. ${raw.q_as}`, hi: `${id}. ${raw.q_en}`, bn: `${id}. ${raw.q_as}` },
+                options: { en: raw.opts, as: raw.opts, hi: raw.opts, bn: raw.opts }, correct: raw.corr
+            });
+        }
+        // ৩. English (51 to 75)
+        for(let i = 0; i < 25; i++) {
+            let raw = selectedSet.english[i % selectedSet.english.length];
+            let id = 50 + i + 1;
+            questionBank.push({
+                id: id, type: 'english',
+                q: { en: `${id}. ${raw.q}`, as: `${id}. ${raw.q}`, hi: `${id}. ${raw.q}`, bn: `${id}. ${raw.q}` },
+                options: { en: raw.opts, as: raw.opts, hi: raw.opts, bn: raw.opts }, correct: raw.corr
+            });
+        }
+        // ৪. General Awareness (76 to 100)
+        for(let i = 0; i < 25; i++) {
+            let raw = selectedSet.general[i % selectedSet.general.length];
+            let id = 75 + i + 1;
+            questionBank.push({
+                id: id, type: 'assamese',
+                q: { en: `${id}. ${raw.q_en}`, as: `${id}. ${raw.q_as}`, hi: `${id}. ${raw.q_en}`, bn: `${id}. ${raw.q_as}` },
+                options: { en: raw.opts_en, as: raw.opts_as, hi: raw.opts_en, bn: raw.opts_as }, correct: raw.corr
+            });
+        }
+    }
+
     // --- SECURITY & LOGIN SYSTEM ---
     function checkLockStatus() {
         const lockUntil = localStorage.getItem('portal_locked_until');
         if (lockUntil) {
             const currentTime = new Date().getTime();
             if (currentTime < parseInt(lockUntil)) {
-                // System is still locked
                 document.getElementById('loginFormFields').style.display = 'none';
                 document.getElementById('lockMessage').style.display = 'block';
                 return true;
             } else {
-                // Lock expired, reset attempts
                 localStorage.removeItem('portal_locked_until');
                 localStorage.setItem('login_attempts', '0');
             }
@@ -243,13 +281,11 @@
         const errLabel = document.getElementById('loginError');
 
         if (uId === CORRECT_USER_ID && pass === CORRECT_PASSWORD) {
-            // Success
             localStorage.setItem('login_attempts', '0');
             localStorage.setItem('chsl_logged_in', 'true');
             errLabel.style.display = 'none';
             showDashboard();
         } else {
-            // Failed Attempt
             let attempts = parseInt(localStorage.getItem('login_attempts')) || 0;
             attempts++;
             localStorage.setItem('login_attempts', attempts.toString());
@@ -372,6 +408,7 @@
         document.getElementById('userId').value = "";
         document.getElementById('password').value = "";
         document.getElementById('loginBox').style.display = 'block';
+        selectDailyQuestionSet(); // ইভালুয়েশ্যনৰ পিছত নতুনকৈ ৰি-ল’ড কৰিব
     }
 
     function loadLogs() {
