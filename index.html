@@ -122,59 +122,343 @@
 </div>
 
 <script>
-    // Security parameters
     const CORRECT_USER_ID = "7896024881";
     const CORRECT_PASSWORD = "Deepshikha@123";
-    const LOCK_TIME_MS = 2 * 60 * 60 * 1000; // 2 hours
+    const LOCK_TIME_MS = 2 * 60 * 60 * 1000; 
 
-    // --- ৩টা সম্পূৰ্ণ বেলেগ বেলেগ প্ৰশ্নৰ ভঁৰাল (3 Unique Sets) ---
+    // --- MEGA MASTER DATABASE: NO REPETITION ---
     const megaQuestionPool = {
-        // ==================== SET A ====================
+        // ==================== SET A (25+25+25+25 = 100 UNIQUE Qs) ====================
         set_A: {
             maths: [
+                { q_en: "If x + 1/x = 5, then find the value of x² + 1/x².", q_as: "যদি x + 1/x = 5 হয়, তেন্তে x² + 1/x² ৰ মান উলিওৱা।", opts_en: ["23", "25", "27", "21"], opts_as: ["২৩", ["২৫"], "২৭", "২১"], corr: 0 },
+                { q_en: "The ratio of two numbers is 3:4 and their HCF is 4. Find their LCM.", q_as: "দুটা সংখ্যাৰ অনুপাত ৩:৪ আৰু ইহঁতৰ গ.সা.উ. ৪। ইহঁতৰ ল.সা.গু. উলিওৱা।", opts_en: ["12", "16", "24", "48"], opts_as: ["১২", "১৬", "২৪", "৪৮"], corr: 3 },
+                { q_en: "Find the value of sin²30° + cos²60°.", q_as: "sin²30° + cos²60° ৰ মান নিৰূপণ কৰা।", opts_en: ["1/2", "1", "1/4", "3/4"], opts_as: ["১/২", "১", "১/৪", "৩/৪"], corr: 0 },
+                { q_en: "A sum of ₹12000 becomes ₹15000 in 5 years at simple interest. Find the rate of interest.", q_as: "১২০০০ টকাৰ এটা মূলধন ৫ বছৰত সৰল সুতত ১৫০০০ টকা হয়। সুতৰ বাৰ্ষিক হাৰ কিমান?", opts_en: ["5%", "6%", "4%", "8%"], opts_as: ["৫%", "৬%", "৪%", "৮%"], corr: 0 },
                 { q_en: "If a+b+c = 0, find the value of (a²+b²+c²) / (a²-bc).", q_as: "যদি a+b+c = 0 হয়, তেন্তে (a²+b²+c²) / (a²-bc) ৰ মান উলিওৱা।", opts_en: ["1", "2", "0", "-1"], opts_as: ["১", "২", "০", "-১"], corr: 1 },
-                { q_en: "The ratio of two numbers is 3:4 and their HCF is 4. Find their LCM.", q_as: "দুটা সংখ্যাৰ অনুপাত ৩:৪ আৰু ইহঁতৰ গ.সা.উ. (HCF) ৪। ইহঁতৰ ল.সা.গু. (LCM) উলিওৱা।", opts_en: ["12", "16", "24", "48"], opts_as: ["১২", "১৬", "২৪", "৪৮"], corr: 3 }
+                { q_en: "The average age of 5 numbers is 27. If one number is excluded, the average becomes 25. Find the excluded number.", q_as: "৫ টা সংখ্যাৰ গড় ২৭। যদি এটা সংখ্যা বাদ দিয়া হয়, গড় ২৫ হয়। বাদ পৰা সংখ্যাটো কি?", opts_en: ["35", "45", "30", "28"], opts_as: ["৩৫", "৪৫", "৩০", "২৮"], corr: 0 },
+                { q_en: "A train 150m long passes a telegraph post in 12 seconds. Find the speed of the train in km/h.", q_as: "১৫০ মিটাৰ দীঘল ৰেল এখনে এটা টেলিগ্ৰাফ পোষ্ট ১২ ছেকেণ্ডত পাৰ হয়। ৰেলখনৰ বেগ ঘণ্টাত কিমান কিমি?", opts_en: ["45", "50", "36", "60"], opts_as: ["৪৫", "৫০", "৩৬", "৬০"], corr: 0 },
+                { q_en: "A shopkeeper sells an article for ₹450 at a loss of 10%. At what price should he sell it to gain 10%?", q_as: "এজন দোকানদৰে এটা বস্তু ৪৫০ টকাত বিক্ৰী কৰিলে ১০% লোকচান হয়। ১০% লাভ কৰিবলৈ তেওঁ ইয়াক কিমান মূল্যত বিক্ৰী কৰিব লাগিব?", opts_en: ["₹500", "₹550", "₹600", "₹525"], opts_as: ["৫०० টকা", "৫৫৫ টকা", "৬০০ টকা", "৫২৫ টকা"], corr: 1 },
+                { q_en: "Find the compound interest on ₹8000 for 2 years at 5% per annum.", q_as: "৮০০০ টকাৰ ওপৰত বাৰ্ষিক ৫% হাৰত ২ বছৰৰ চক্ৰবৃদ্ধি সুত কিমান হ’ব?", opts_en: ["₹820", "₹800", "₹410", "₹840"], opts_as: ["৮২০ টকা", "৮০০ টকা", "৪১০ টকা", "৮৪০ টকা"], corr: 0 },
+                { q_en: "The perimeter of a rectangle is 40 cm and its length is 12 cm. Find its area.", q_as: "এটা আয়তক্ষেত্ৰৰ পৰিসীমা ৪০ ছেমি আৰু দীঘ ১২ ছেমি। ইয়াৰ কালি উলিওৱা।", opts_en: ["96 cm²", "80 cm²", "120 cm²", "48 cm²"], opts_as: ["৯৬ ছেমি²", "৮০ ছেমি²", "১২০ ছেমি²", "৪৮ ছেমি²"], corr: 0 },
+                { q_en: "If 15 men can complete a work in 20 days, in how many days can 25 men finish it?", q_as: "যদি ১৫ জন মানুহে এটা কাম ২০ দিনত কৰিব পাৰে, তেন্তে ২৫ জন মানুহে কামটো কত দিনত শেষ কৰিব?", opts_en: ["12 days", "10 days", "14 days", "16 days"], opts_as: ["১২ দিন", "১০ দিন", "১৪ দিন", "১৬ দিন"], corr: 0 },
+                { q_en: "Find the single discount equivalent to successive discounts of 20% and 10%.", q_as: "২০% আৰু ১০% ক্ৰমাগত ৰেহাইৰ সমতুল্য একক ৰেহাই কিমান হ’ব?", opts_en: ["30%", "28%", "25%", "22%"], opts_as: ["৩০%", "২৮%", "২৫%", "২২%"], corr: 1 },
+                { q_en: "If the radius of a circle is doubled, its area increases by how many times?", q_as: "যদি এটা বৃত্তৰ ব্যাসাৰ্ধ দুগুণ কৰা হয়, তেন্তে ইয়াৰ কালি কিমান গুণ বৃদ্ধি পাব?", opts_en: ["2 times", "3 times", "4 times", "8 times"], opts_as: ["২ গুণ", "৩ গুণ", "৪ গুণ", "৮ গুণ"], corr: 2 },
+                { q_en: "The salary of a person is increased by 10% and then decreased by 10%. Find net change.", q_as: "এজন ব্যক্তিৰ দৰমহা প্ৰথমতে ১০% বৃদ্ধি কৰা হ’ল আৰু পিছত ১০% হ্ৰাস কৰা হ’ল। মুঠ কিমান সলনি হ’ল?", opts_en: ["No change", "1% increase", "1% decrease", "2% decrease"], opts_as: ["একো সলনি নহয়", "১% বৃদ্ধি", "১% হ্ৰাস", "২% হ্ৰাস"], corr: 2 },
+                { q_en: "Evaluate: √(4096)", q_as: "মান নিৰূপণ কৰা: √(৪০৯৬)", opts_en: ["64", "54", "74", "66"], opts_as: ["৬৪", "৫৪", "৭৪", "৬৬"], corr: 0 },
+                { q_en: "Two numbers are in the ratio 5:7. If 9 is subtracted from each, they become 7:11. Find numbers.", q_as: "দুটা সংখ্যা ৫:৭ অনুপাতত আছে। যদি প্ৰতিটোৰ পৰা ৯ বিয়োগ কৰা হয়, অনুপাত ৭:১১ হয়। সংখ্যা দুটা কি কি?", opts_en: ["30, 42", "35, 49", "45, 63", "25, 35"], opts_as: ["৩০, ৪২", "৩৫, ৪৯", "৪৫, ৬৩", "২৫, ৩৫"], corr: 0 },
+                { q_en: "Find the value of x if 20% of x = 120.", q_as: "যদি x ৰ ২০% = ১২০ হয়, তেন্তে x ৰ মান কিমান?", opts_en: ["600", "400", "500", "300"], opts_as: ["৬০০", "৪০০", "৫০০", "৩০০"], corr: 0 },
+                { q_en: "A sum of money amounts to ₹920 in 3 years at simple interest. If rate increases by 3%, it becomes?", q_as: "এটা মূলধন সৰল সুতত ৩ বছৰত ৯২০ টকা হয়। যদি সুতৰ হাৰ ৩% বঢ়োৱা হয়, তেন্তে ইয়াৰ পৰিমাণ কিমান হ’ব?", opts_en: ["₹950", "₹1000", "₹1056", "₹980"], opts_as: ["৯৫০ টকা", "১০০০ টকা", "১০৫৬ টকা", "৯৮০ টকা"], corr: 2 },
+                { q_en: "Find the HCF of 36, 84 and 120.", q_as: "৩৬, ৮৪ আৰু ১২০ ৰ গ.সা.উ. উলিওৱা।", opts_en: ["6", "12", "18", "24"], opts_as: ["৬", "১২", "১৮", "২৪"], corr: 1 },
+                { q_en: "The cost price of 20 articles is equal to selling price of 15 articles. Find profit %.", q_as: "২০ টা বস্তুৰ ক্ৰয় মূল্য ১৫ টা বস্তুৰ বিক্ৰী মূল্যৰ সমান। লাভৰ শতাংশ উলিওৱা।", opts_en: ["25%", "33.33%", "20%", "50%"], opts_as: ["২৫%", "৩৩.৩৩%", "২০%", "৫০%"], corr: 1 },
+                { q_en: "If a:b = 2:3 and b:c = 4:5, find a:b:c.", q_as: "যদি a:b = ২:৩ আৰু b:c = ৪:৫ হয়, তেন্তে a:b:c উলিওৱা।", opts_en: ["8:12:15", "6:9:15", "8:10:15", "2:4:5"], opts_as: ["৮:১২:১৫", "৬:৯:১৫", "৮:১০:১৫", "২:৪:৫"], corr: 0 },
+                { q_en: "Find the area of an equilateral triangle whose side is 6 cm.", q_as: "৬ ছেমি বাহুযুক্ত এটা সমবাহু ত্ৰিভুজৰ কালি উলিওৱা।", opts_en: ["9√3 cm²", "6√3 cm²", "12√3 cm²", "18 cm²"], opts_as: ["৯√৩ ছেমি²", "৬√৩ ছেমি²", "১২√৩ ছেমি²", "১৮ ছেমি²"], corr: 0 },
+                { q_en: "The diagonal of a cube is 6√3 cm. Find its volume.", q_as: "এটা ঘনকৰ কৰ্ণ ৬√৩ ছেমি। ইয়াৰ আয়তন কিমান হ’ব?", opts_en: ["216 cm³", "144 cm³", "100 cm³", "256 cm³"], opts_as: ["২১৬ ছেমি³", "১৪৪ ছেমি³", "১০০ ছেমি³", "২৫৬ ছেমি³"], corr: 0 },
+                { q_en: "The speed of a boat in still water is 15 km/h and stream speed is 3 km/h. Find upstream speed.", q_as: "স্থিৰ পানীত নাও এখনৰ বেগ ১৫ কিমি/ঘণ্টা আৰু সোঁতৰ বেগ ৩ কিমি/ঘণ্টা। সোঁতৰ বিপৰীতে নাৱৰ বেগ কিমান?", opts_en: ["18 km/h", "12 km/h", "15 km/h", "9 km/h"], opts_as: ["১৮ কিমি/ঘণ্টা", "১২ কিমি/ঘণ্টা", "১৫ কিমি/ঘণ্টা", "৯ কিমি/ঘণ্টা"], corr: 1 },
+                { q_en: "Find the value of (0.5 × 0.5 + 0.5 ÷ 5).", q_as: "মান উলিওৱা: (০.৫ × ০.৫ + ০.৫ ÷ ৫)।", opts_en: ["0.35", "0.25", "0.55", "0.45"], opts_as: ["০.৩৫", "০.২৫", "০.৫৫", "০.৪৫"], corr: 0 }
             ],
             reasoning: [
-                { q_en: "Select the related number from the given alternatives: 12 : 144 :: 13 : ?", q_as: "তলত দিয়া বিকল্পসমূহৰ পৰা সম্পৰ্কিত সংখ্যাটো বাছক: ১২ : ১৪৪ :: ১৩ : ?", opts: ["156", "169", "196", "144"], corr: 1 }
+                { q_en: "Select the related number: 12 : 144 :: 13 : ?", q_as: "সম্পৰ্কিত সংখ্যাটো বাছক: ১২ : ১৪৪ :: ১৩ : ?", opts: ["156", "169", "196", "144"], corr: 1 },
+                { q_en: "Find the odd one out: Tomato, Potato, Carrot, Ginger", q_as: "অমিলটো বাছক: বিলাহী, আলু, গাজৰ, আদা", opts: ["Tomato", "Potato", "Carrot", "Ginger"], corr: 0 },
+                { q_en: "If 'PENCIL' is coded as 'OEOBJK', how is 'PAPER' coded?", q_as: "যদি 'PENCIL' ক 'OEOBJK' লিখা হয়, তেন্তে 'PAPER' ক কি লিখা হ’ব?", opts: ["OBODQ", "OZODQ", "QAQFS", "NZNDP"], corr: 1 },
+                { q_en: "Complete the series: 2, 6, 12, 20, 30, ?", q_as: "শৃংখলাটো সম্পূৰ্ণ কৰক: ২, ৬, ১২, ২০, ৩০, ?", opts: ["40", "42", "44", "48"], corr: 1 },
+                { q_en: "A is B's brother. C is B's mother. How is C related to A?", q_as: "A হ’ল B ৰ ভাই। C হ’ল B ৰ মাক। C, A ৰ কি হয়?", opts: ["Sister", "Aunt", "Mother", "Grandmother"], corr: 2 },
+                { q_en: "If '+' means '×' and '×' means '-', find: 5 + 4 × 3.", q_as: "যদি '+' ৰ অৰ্থ '×' আৰু '×' ৰ অৰ্থ '-' হয়, তেন্তে মান উলিওৱা: 5 + 4 × 3", opts: ["17", "20", "23", "12"], corr: 0 },
+                { q_en: "Arrange in logical order: 1. Rain, 2. Monsoon, 3. Rescue, 4. Flood", q_as: "তৰ্কসংগত ক্ৰমত সজোৱা: ১. বৰষুণ, ২. মৌচুমী, ৩. উদ্ধাৰ, ৪. বানপানী", opts: ["2, 1, 4, 3", "1, 2, 4, 3", "2, 4, 1, 3", "4, 1, 2, 3"], corr: 0 },
+                { q_en: "Find missing character: A, C, F, J, ?, U", q_as: "লুপ্ত বৰ্ণটো উলিওৱা: A, C, F, J, ?, U", opts: ["L", "M", "O", "P"], corr: 2 },
+                { q_en: "If a clock shows 3:00, what will be the mirror image reflection time?", q_as: "যদি ঘড়ীত ৩:০০ বাজিছে, দাপোণত ইয়াৰ প্ৰতিফলিত সময় কিমান দেখাব?", opts: ["9:00", "8:00", "6:00", "12:00"], corr: 0 },
+                { q_en: "In a row of 30 students, Rahul is 12th from right. Find his rank from left.", q_as: "৩০ জন ছাত্ৰৰ শাৰী এটাত ৰাহুল সোঁফালৰ পৰা ১২ নম্বৰত আছে। বাওঁফালৰ পৰা তেওঁৰ স্থান কিমান?", opts: ["18th", "19th", "20th", "17th"], corr: 1 },
+                { q_en: "Choose the odd pair: Book-Page, Car-Engine, House-Roof, Pen-Paper", q_as: "অমিল যোৰাটো বাছি উলিওৱা: কিতাপ-পৃষ্ঠা, গাড়ী-ইঞ্জিন, ঘৰ-ছাল, কলম-কাগজ", opts: ["Book-Page", "Car-Engine", "House-Roof", "Pen-Paper"], corr: 3 },
+                { q_en: "Find the next term: B2D, E3G, H4J, ?", q_as: "পৰৱৰ্তী পদটো উলিওৱা: B2D, E3G, H4J, ?", opts: ["K5M", "K5L", "L5M", "J5M"], corr: 0 },
+                { q_en: "If South-West becomes North, then what will North-East become?", q_as: "যদি দক্ষিণ-পশ্চিম দিশ উত্তৰ হৈ পৰে, তেন্তে উত্তৰ-পূব দিশ কি হৈ পৰিব?", opts: ["South", "West", "East", "South-East"], corr: 0 },
+                { q_en: "Pointing to a man, a woman says, 'His father is my father's only son.' Man is?", q_as: "এজন মানুহলৈ দেখুৱাই মহিলাই ক’লে, 'তেওঁৰ দেউতাক মোৰ দেউতাৰ একমাত্ৰ পুত্ৰ।' মানুহজন মহিলাগৰাকীৰ কি হয়?", opts: ["Brother", "Son", "Nephew", "Uncle"], corr: 1 },
+                { q_en: "How many triangles are there in a square with both diagonals drawn?", q_as: "দুয়োটা কৰ্ণ টানি দিয়া এটা বৰ্গক্ষেত্ৰৰ ভিতৰত মুঠ কেইটা ত্ৰিভুজ থাকে?", opts: ["4", "6", "8", "10"], corr: 2 },
+                { q_en: "Complete the series: 5, 11, 23, 47, ?", q_as: "শৃংখলাটো সম্পূৰ্ণ কৰক: ৫, ১১, ২৩, ৪৭, ?", opts: ["95", "96", "94", "100"], corr: 0 },
+                { q_en: "Find the odd number: 27, 64, 125, 144", q_as: "অমিল সংখ্যাটো বাছি উলিওৱা: ২৭, ৬৪, ১২৫, ১৪৪", opts: ["27", "64", "125", "144"], corr: 3 },
+                { q_en: "If 'GO' = 32, 'SHE' = 49, then 'SOME' = ?", q_as: "যদি 'GO' = ৩২, 'SHE' = ৪৯ হয়, তেন্তে 'SOME' = ?", opts: ["56", "58", "62", "64"], corr: 0 },
+                { q_en: "Which word CANNOT be formed from 'TRANSPORTATION'?", q_as: "‘TRANSPORTATION’ শব্দটোৰ পৰা তলৰ কোনটো শব্দ গঠন কৰিব নোৱাৰি?", opts: ["PORT", "START", "TRAIN", "REPORT"], corr: 3 },
+                { q_en: "Rahul travels 10km North, turns left and goes 4km, then turns right and goes 5km. Distance from start?", q_as: "ৰাহুল উত্তৰলৈ ১০ কিমি গৈ বাওঁফালে ঘূৰি ৪ কিমি যায়, তাৰপিছত সোঁফালে ঘূৰি ৫ কিমি যায়। প্ৰাৰম্ভিক স্থানৰ পৰা দূৰত্ব?", opts: ["15km", "17km", "19km", "21km"], corr: 1 },
+                { q_en: "Identify the missing number: 8, 27, 64, ?, 216", q_as: "লুপ্ত সংখ্যাটো চিনাক্ত কৰা: ৮, ২৭, ৬৪, ?, ২১৬", opts: ["100", "125", "150", "180"], corr: 1 },
+                { q_en: "Find the angle between hour and minute hand at 4:20.", q_as: "৪:২০ বজাত ঘণ্টা আৰু মিনিটৰ কাটাৰ মাজৰ কোণ কিমান হ’ব?", opts: ["10°", "20°", "0°", "15°"], corr: 0 },
+                { q_en: "Select odd letter cluster: HJK, NPR, TVX, BDF", q_as: "অমিল বৰ্ণ গোটটো বাছক: HJK, NPR, TVX, BDF", opts: ["HJK", "NPR", "TVX", "BDF"], corr: 0 },
+                { q_en: "If 1st January 2024 was Monday, what day was 1st January 2025?", q_as: "যদি ১ জানুৱাৰী ২০২৪ সোমবাৰ আছিল, তেন্তে ১ জানুৱাৰী ২০২৫ কি বাৰ হ’ব?", opts: ["Tuesday", "Wednesday", "Thursday", "Monday"], corr: 1 },
+                { q_en: "Complete: Pen : Ink :: Needle : ?", q_as: "সম্পূৰ্ণ কৰক: কলম : চিয়াহী :: বেজী : ?", opts: ["Thread", "Cloth", "Tailor", "Sharp"], corr: 0 }
             ],
             english: [
-                { q: "Choose the word closest in meaning (SYNONYM) to: 'BENEVOLENT'", opts: ["Kind", "Cruel", "Miserly", "Arrogant"], corr: 0 }
+                { q: "Choose the word closest in meaning (SYNONYM) to: 'BENEVOLENT'", opts: ["Kind", "Cruel", "Miserly", "Arrogant"], corr: 0 },
+                { q: "Choose the word opposite in meaning (ANTONYM) to: 'FRAGILE'", opts: ["Weak", "Strong", "Delicate", "Soft"], corr: 1 },
+                { q: "Spot the error: 'The collective intelligence of those boys are very high.'", opts: ["The collective intelligence", "of those boys", "are very high", "No error"], corr: 2 },
+                { q: "Fill in the blank: The police _____ investigating the case since last night.", opts: ["is", "have been", "has been", "are"], corr: 1 },
+                { q: "Antonym of 'AMBIGUOUS' is:", opts: ["Clear", "Vague", "Hidden", "Dark"], corr: 0 },
+                { q: "Synonym of 'CANDID' is:", opts: ["Frank", "Deceptive", "Arrogant", "Polite"], corr: 0 },
+                { q: "One who loves mankind is called a:", opts: ["Philanthropist", "Misanthrope", "Optimist", "Pessimist"], corr: 0 },
+                { q: "Idiom meaning: 'To spill the beans'", opts: ["To reveal a secret", "To drop food", "To work hard", "To praise someone"], corr: 0 },
+                { q: "Find the correctly spelled word.", opts: ["Committee", "Comitee", "Commitie", "Commitee"], corr: 0 },
+                { q: "Change into Passive voice: 'He opens the door.'", opts: ["The door is opened by him.", "The door was opened by him.", "The door is open by him.", "The door has been opened."], corr: 0 },
+                { q: "Fill in: She is junior _____ me in service.", opts: ["than", "to", "from", "with"], corr: 1 },
+                { q: "Idiom meaning: 'A blessing in disguise'", opts: ["A misfortune that has good results", "A hidden enemy", "A false reward", "A great loss"], corr: 0 },
+                { q: "A person who does not believe in God is an:", opts: ["Theist", "Atheist", "Agnostic", "Monk"], corr: 1 },
+                { q: "Synonym of 'ETERNAL' is:", opts: ["Perpetual", "Temporary", "Short-lived", "Modern"], corr: 0 },
+                { q: "Antonym of 'GIANT' is:", opts: ["Dwarf", "Huge", "Monster", "Large"], corr: 0 },
+                { q: "Fill in: The teacher congratulated him _____ his grand success.", opts: ["on", "for", "at", "with"], corr: 0 },
+                { q: "Find the misspelled word:", opts: ["Receive", "Believe", "Foreign", "Seize"], corr: 2 },
+                { q: "One who speaks many languages is a:", opts: ["Polyglot", "Linguist", "Bilingual", "Monolingual"], corr: 0 },
+                { q: "Change into Indirect Speech: Ram said, 'I am ill.'", opts: ["Ram said that he was ill.", "Ram said he is ill.", "Ram told that he was ill.", "Ram says he was ill."], corr: 0 },
+                { q: "Fill in: Bread and butter _____ wholesome food.", opts: ["is", "are", "were", "have been"], corr: 0 },
+                { q: "Synonym of 'ABOLISH' is:", opts: ["Eliminate", "Build", "Create", "Continue"], corr: 0 },
+                { q: "Antonym of 'DESPAIR' is:", opts: ["Hope", "Gloom", "Sadness", "Pain"], corr: 0 },
+                { q: "A place where birds are kept is an:", opts: ["Aviary", "Apiary", "Zoo", "Aquarium"], corr: 0 },
+                { q: "Fill in: Switch off the lights before you _____ to bed.", opts: ["go", "goes", "went", "going"], corr: 0 },
+                { q: "Idiom meaning: 'At the eleventh hour'", opts: ["At the very last moment", "Too early", "At midnight", "In the morning"], corr: 0 }
             ],
             general: [
-                { q_en: "Which layer of the atmosphere contains the Ozone layer?", q_as: "বায়ুমণ্ডলৰ কোনটো স্তৰত অ'জন (Ozone) স্তৰ পোৱা যায়?", opts_en: ["Troposphere", "Stratosphere", "Mesosphere", "Thermosphere"], opts_as: ["ট্ৰপ’স্ফীয়েৰ", "ষ্ট্ৰেট’স্ফীয়েৰ", "মেছ’স্ফীয়েৰ", "থাৰ্ম’স্ফীয়েৰ"], corr: 1 }
+                { q_en: "Which layer of the atmosphere contains the Ozone layer?", q_as: "বায়ুমণ্ডলৰ কোনটো স্তৰত অ'জন স্তৰ পোৱা যায়?", opts_en: ["Troposphere", "Stratosphere", "Mesosphere", "Thermosphere"], opts_as: ["ট্ৰপ’স্ফীয়েৰ", "ষ্ট্ৰেট’স্ফীয়েৰ", "মেছ’স্ফীয়েৰ", "থাৰ্ম’স্ফীয়েৰ"], corr: 1 },
+                { q_en: "Who was the founder of the Slave Dynasty in India?", q_as: "ভাৰতত দাস বংশৰ প্ৰতিষ্ঠাপক কোন আছিল?", opts_en: ["Iltutmish", "Alauddin Khilji", "Qutb-ud-din Aibak", "Balban"], opts_as: ["ইলতুতমিছ", "আলাউদ্দিন খিলজী", "কুতুবুদ্দিন আইবাক", "বলবন"], corr: 2 },
+                { q_en: "Which article of the Indian Constitution deals with the 'Right to Equality'?", q_as: "সংবিধানৰ কোনটো অনুচ্ছেদে 'সমতাৰ অধিকাৰ'ৰ বিষয়ে উল্লেখ কৰে?", opts_en: ["Article 14", "Article 19", "Article 21", "Article 32"], opts_as: ["অনুচ্ছেদ ১৪", "অনুচ্ছেদ ১৯", "অনুচ্ছেদ ২১", "অনুচ্ছেদ ৩২"], corr: 0 },
+                { q_en: "The famous festival 'Bihu' is primarily celebrated in which Indian state?", q_as: "বিখ্যাত উৎসব 'বিহু' মূলতঃ ভাৰতৰ কোনখন ৰাজ্যত পালন কৰা হয়?", opts_en: ["Tripura", "Assam", "Meghalaya", "Arunachal Pradesh"], opts_as: ["ত্ৰিপুৰা", "অসম", "মেঘালয়", "অৰুণাচল প্ৰদেশ"], corr: 1 },
+                { q_en: "Which gland in the human body is known as the 'Master Gland'?", q_as: "মানুহৰ শৰীৰৰ কোনটো গ্ৰন্থিক 'মাষ্টৰ গ্ৰন্থি' বুলি জনা যায়?", opts_en: ["Thyroid", "Adrenal", "Pituitary", "Pancreas"], opts_as: ["থাইৰয়ড", "এড্ৰেনেল", "পিটুইটাৰী", "অগ্ন্যাশয়"], corr: 2 },
+                { q_en: "Who wrote the famous book 'Discovery of India'?", q_as: "'Discovery of India' নামৰ বিখ্যাত কিতাপখন কোনে লিখিছিল?", opts_en: ["Mahatma Gandhi", "Jawaharlal Nehru", "Subhas Chandra Bose", "B.R. Ambedkar"], opts_as: ["মহাত্মা গান্ধী", "জৱাহৰলাল নেহৰু", "সুভাষ চন্দ্ৰ বসু", "বি.আৰ. আম্বেদকাৰ"], corr: 1 },
+                { q_en: "Which planet is known as the 'Red Planet'?", q_as: "কোনটো গ্ৰহক 'ৰঙা গ্ৰহ' বুলি জনা যায়?", opts_en: ["Venus", "Mars", "Jupiter", "Saturn"], opts_as: ["শুক্ৰ", "মঙ্গল", "বৃহস্পতি", "শনি"], corr: 1 },
+                { q_en: "Where is the headquarters of the United Nations Organization (UNO) located?", q_as: "ৰাষ্ট্ৰসংঘৰ (UNO) ৰ মুখ্য কাৰ্যালয় ক’ত অৱস্থিত?", opts_en: ["Geneva", "London", "New York", "Paris"], opts_as: ["জেনেভা", "লণ্ডন", "নিউয়ৰ্ক", "পেৰিছ"], corr: 2 },
+                { q_en: "Who was the first woman Prime Minister of India?", q_as: "ভাৰতৰ প্ৰথম মহিলা প্ৰধানমন্ত্ৰী কোন আছিল?", opts_en: ["Pratibha Patil", "Indira Gandhi", "Sarojini Naidu", "Sushma Swaraj"], opts_as: ["প্ৰতিভা পাটিল", "ইন্দিৰা গান্ধী", "সৰোজিনী নাইডু", "সুষমা স্বৰাজ"], corr: 1 },
+                { q_en: "Which river is known as the 'Sorrow of Bihar'?", q_as: "কোনখন নদীক 'বিহাৰৰ দুখ' বুলি কোৱা হয়?", opts_en: ["Ganga", "Kosi", "Yamuna", "Gandak"], opts_as: ["গংগা", "কোশী", "যমুনা", "গণ্ডক"], corr: 1 },
+                { q_en: "What is the currency of Japan?", q_as: "জাপানৰ মুদ্ৰা বা কাৰেন্সী কি?", opts_en: ["Yuan", "Yen", "Won", "Dollar"], opts_as: ["য়ুয়ান", "য়েন", "ৱন", "ডলাৰ"], corr: 1 },
+                { q_en: "In which year did the First World War begin?", q_as: "কোন চনত প্ৰথম বিশ্বযুদ্ধ আৰম্ভ হৈছিল?", opts_en: ["1912", "1914", "1918", "1939"], opts_as: ["১৯১২", "১৯১৪", "১৯১৮", "১৯৩৯"], corr: 1 },
+                { q_en: "Who invented the telephone?", q_as: "টেলিফোন কোনে আৱিষ্কাৰ কৰিছিল?", opts_en: ["Thomas Edison", "Alexander Graham Bell", "Albert Einstein", "Isaac Newton"], opts_as: ["টমাছ এডিচন", "এলেকজেণ্ডাৰ গ্ৰাহাম বেল", "এলবাৰ্ট আইনষ্টাইন", "আইজাক নিউটন"], corr: 1 },
+                { q_en: "Which is the largest ocean in the world?", q_as: "পৃথিৱীৰ আটাইতকৈ ডাঙৰ মহাসাগৰ কোনখন?", opts_en: ["Atlantic Ocean", "Indian Ocean", "Pacific Ocean", "Arctic Ocean"], opts_as: ["আটলাণ্টিক মহাসাগৰ", "ভাৰত মহাসাগৰ", "প্ৰশান্ত মহাসাগৰ", "উত্তৰ মহাসাগৰ"], corr: 2 },
+                { q_en: "Deficiency of Vitamin A causes which disease?", q_as: "ভিটামিন A ৰ অভাৱত কি ৰোগ হয়?", opts_en: ["Scurvy", "Rickets", "Night Blindness", "Beri-Beri"], opts_as: ["স্কৰ্ভি", "ৰিকেটছ", "কুকুৰীকণা", "বেৰী-বেৰী"], corr: 2 },
+                { q_en: "Kaziranga National Park is famous for which animal?", q_as: "কাজিৰঙা ৰাষ্ট্ৰীয় উদ্যান কোনটো প্ৰাণীৰ বাবে বিখ্যাত?", opts_en: ["Tiger", "Elephant", "One-horned Rhinoceros", "Lion"], opts_as: ["বাঘ", "হাতী", "এশিঙীয়া গঁড়", "সিংহ"], corr: 2 },
+                { q_en: "Who is known as the 'Father of Indian Constitution'?", q_as: "ভাৰতীয় সংবিধানৰ পিতৃ বুলি কাক জনা যায়?", opts_en: ["Mahatma Gandhi", "Dr. B.R. Ambedkar", "Dr. Rajendra Prasad", "Jawaharlal Nehru"], opts_as: ["মহাত্মা গান্ধী", "ড° বি.আৰ. আম্বেদকাৰ", "ড° ৰাজেন্দ্ৰ প্ৰসাদ", "জৱাহৰলাল নেহৰু"], corr: 1 },
+                { q_en: "Which city is known as the 'Pink City' of India?", q_as: "ভাৰতৰ কোনখন চহৰক 'গুলপীয়া চহৰ' (Pink City) বুলি কোৱা হয়?", opts_en: ["Udaipur", "Jaipur", "Jodhpur", "Ahmedabad"], opts_as: ["উদয়পুৰ", "জয়পুৰ", "যোধপুৰ", "আহমেদাবাদ"], corr: 1 },
+                { q_en: "What is the chemical formula of common salt?", q_as: "সাধাৰণ নিমখৰ ৰাসায়নিক সংকেত কি?", opts_en: ["H2O", "NaCl", "CO2", "HCl"], opts_as: ["H2O", "NaCl", "CO2", "HCl"], corr: 1 },
+                { q_en: "Who was the first President of Independent India?", q_as: "স্বাধীন ভাৰতৰ প্ৰথম ৰাষ্ট্ৰপতি কোন আছিল?", opts_en: ["Dr. S. Radhakrishnan", "Dr. Rajendra Prasad", "V.V. Giri", "Zakir Husain"], opts_as: ["ড° এছ. ৰাধাকৃষ্ণণ", "ড° ৰাজেন্দ্ৰ প্ৰসাদ", "ভি.ভি. গিৰি", "জাকিৰ হুছেইন"], corr: 1 },
+                { q_en: "Which gas is used by plants for photosynthesis?", q_as: "উদ্ভিদে সালোক-সংশ্লেষণৰ বাবে কোনটো গেছ ব্যৱহাৰ কৰে?", opts_en: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"], opts_as: ["অক্সিজেন", "কাৰ্বন ডাই অক্সাইড", "নাইট্ৰ’জেন", "হাইড্ৰ’জেন"], corr: 1 },
+                { q_en: "The battle of Plassey was fought in which year?", q_as: "পলাচী যুদ্ধ কোন চনত হৈছিল?", opts_en: ["1757", "1764", "1857", "1526"], opts_as: ["১৭৫৭", "১৭৬৪", "১৮৫৭", "১৫২৬"], corr: 0 },
+                { q_en: "Which is the smallest state of India by area?", q_as: "কালিৰ ফালৰ পৰা ভাৰতৰ আটাইতকৈ সৰু ৰাজ্য কোনখন?", opts_en: ["Sikkim", "Goa", "Tripura", "Mizoram"], opts_as: ["ছিকিম", "গোৱা", "ত্ৰিপুৰা", "মিজোৰাম"], corr: 1 },
+                { q_en: "Who is the writer of the national anthem of India?", q_as: "ভাৰতৰ ৰাষ্ট্ৰীয় সংগীতৰ ৰচক কোন?", opts_en: ["Bankim Chandra Chatterjee", "Rabindranath Tagore", "Sarojini Naidu", "Sri Aurobindo"], opts_as: ["বঙ্কিম চন্দ্ৰ চেটাৰ্জী", "ৰবীন্দ্ৰনাথ ঠাকুৰ", "সৰোজিনী নাইডু", "শ্ৰী অৰবিন্দ"], corr: 1 },
+                { q_en: "Light year is a unit of measurement of what?", q_as: "আলোকবৰ্ষ (Light year) কিহৰ জোখ-মাখৰ একক?", opts_en: ["Time", "Astronomical Distance", "Speed of Light", "Intensity of Light"], opts_as: ["সময়", "জ্যোতিৰ্বিজ্ঞানৰ দূৰত্ব", "পোহৰৰ বেগ", "পোহৰৰ তীব্ৰতা"], corr: 1 }
             ]
         },
-        // ==================== SET B ====================
+        // ==================== SET B (25+25+25+25 = 100 UNIQUE Qs) ====================
         set_B: {
             maths: [
-                { q_en: "A sum of money doubles itself in 8 years at simple interest. Find the rate of interest per annum.", q_as: "সৰল সুতৰ হাৰত এটা ধনৰাশি ৮ বছৰত দুগুণ হয়। বাৰ্ষিক সুতৰ হাৰ কিমান?", opts_en: ["10%", "12.5%", "15%", "8%"], opts_as: ["১০%", "১২.৫%", "১৫%", "৮%"], corr: 1 },
-                { q_en: "A trader marks his goods 20% above the cost price and allows a discount of 10%. Find his gain percent.", q_as: "এজন ব্যৱসায়ীয়ে ক্ৰয় মূল্যতকৈ ২০% বেছি মূল্য লিখে আৰু ১০% ৰেহাই দিয়ে। লাভৰ শতাংশ কিমান?", opts_en: ["8%", "10%", "12%", "6%"], opts_as: ["৮%", "১০%", "১২%", "৬%"], corr: 0 }
+                { q_en: "Find the average of first five prime numbers.", q_as: "প্ৰথম পাঁচটা মৌলিক সংখ্যাৰ গড় উলিওৱা।", opts_en: ["5.6", "5.4", "5", "6"], opts_as: ["৫.৬", "৫.৪", "৫", "৬"], corr: 0 },
+                { q_en: "A man buys a cycle for ₹1400 and sells it at a loss of 15%. What is the selling price?", q_as: "এজন মানুহে ১৪০০ টকাত চাইকেল এখন কিনি ১৫% লোকচানত বিক্ৰী কৰে। চাইকেলখনৰ বিক্ৰী মূল্য কিমান?", opts_en: ["₹1190", "₹1200", "₹1160", "₹1000"], opts_as: ["১১৯০ টকা", "১২০০ টকা", "১১৬০ টকা", "১০০০ টকা"], corr: 0 },
+                { q_en: "If 10% of A is equal to 20% of B, then A:B is equal to?", q_as: "যদি A ৰ ১০% = B ৰ ২০% হয়, তেন্তে A:B ৰ মান কিমান?", opts_en: ["1:2", "2:1", "1:4", "4:1"], opts_as: ["১:২", "২:১", "১:৪", "৪:১"], corr: 1 },
+                { q_en: "Find the value of x if 3x + 7 = 22.", q_as: "যদি 3x + 7 = 22 হয়, তেন্তে x ৰ মান উলিওৱা।", opts_en: ["5", "6", "4", "7"], opts_as: ["৫", "৬", "৪", "৭"], corr: 0 },
+                { q_en: "The total surface area of a cube is 96 cm². Find its side length.", q_as: "এটা ঘনকৰ মুঠ পৃষ্ঠকালি ৯৬ ছেমি²। ইয়াৰ বাহুৰ দৈৰ্ঘ্য উলিওৱা।", opts_en: ["4 cm", "6 cm", "8 cm", "5 cm"], opts_as: ["৪ ছেমি", "৬ ছেমি", "৮ ছেমি", "৫ ছেমি"], corr: 0 },
+                { q_en: "If a fraction's numerator is doubled and denominator is tripled, it becomes 2/5. Find original fraction.", q_as: "যদি এটা ভগ্নাংশৰ লৱ দুগুণ আৰু হৰ তিনিগুণ কৰা হয়, ই ২/৫ হয়। প্ৰকৃত ভগ্নাংশটো কি আছিল?", opts_en: ["3/5", "2/3", "1/5", "4/5"], opts_as: ["৩/৫", "২/৩", "১/৫", "৪/৫"], corr: 0 },
+                { q_en: "Find the median of the data: 3, 5, 7, 9, 12.", q_as: "তথ্যখিনিৰ মধ্যমা (Median) উলিওৱা: ৩, ৫, ৭, ৯, ১২।", opts_en: ["7", "5", "9", "6"], opts_as: ["৭", "৫", "৯", "৬"], corr: 0 },
+                { q_en: "A and B can invest in a business in ratio 3:5. Total profit is ₹8000. Find A's share.", q_as: "A আৰু B এ এটা ব্যৱসায়ত ৩:৫ অনুপাতত ধন বিনিয়োগ কৰে। মুঠ লাভ ৮০০০ টকা হ’লে A ৰ ভাগ কিমান?", opts_en: ["₹3000", "₹5000", "₹4000", "₹2500"], opts_as: ["৩০০০ টকা", "৫০০০ টকা", "৪০০০ টকা", "২৫০০ টকা"], corr: 0 },
+                { q_en: "Find the value of (99² - 1).", q_as: "মান উলিওৱা: (৯৯² - ১)।", opts_en: ["9800", "9900", "9801", "9600"], opts_as: ["৯৮০০", "৯৯০০", "৯৮০১", "৯৬০০"], corr: 0 },
+                { q_en: "The HCF and LCM of two numbers are 12 and 72 respectively. If one number is 24, find the other.", q_as: "দুটা সংখ্যাৰ গ.সা.উ. আৰু ল.সা.গু. ক্ৰমে ১২ আৰু ৭২। যদি এটা সংখ্যা ২৪ হয়, আনটো কি?", opts_en: ["36", "48", "18", "60"], opts_as: ["৩৬", "৪৮", "১৮", "৬০"], corr: 0 },
+                { q_en: "An article is sold at 20% profit. If it was bought for 10% less, what happens? Find Cost Price if SP is ₹240.", q_as: "এটা বস্তু ২০% লাভত বিক্ৰী কৰা হ’ল। যদি বিক্ৰী মূল্য ২৪০ টকা হয়, ক্ৰয় মূল্য কিমান আছিল?", opts_en: ["₹200", "₹180", "₹220", "₹150"], opts_as: ["২০০ টকা", "১৮০ টকা", "২২০ টকা", "১৫০ টকা"], corr: 0 },
+                { q_en: "What will be the area of a circle whose circumference is 44 cm?", q_as: "৪৪ ছেমি পৰিধিযুক্ত বৃত্ত এটাৰ কালি কিমান হ’ব?", opts_en: ["154 cm²", "616 cm²", "77 cm²", "308 cm²"], opts_as: ["১৫৪ ছেমি²", "৬১৬ ছেমি²", "৭৭ ছেমি²", "৩০৮ ছেমি²"], corr: 0 },
+                { q_en: "A tank can be filled by an inlet pipe in 4 hours and emptied by an outlet in 6 hours. If both open, time taken?", q_as: "এট টেংক পাইপেৰে ৪ ঘণ্টাত পূৰ্ণ হয় আৰু খালী কৰা পাইপেৰে ৬ ঘণ্টাত খালী হয়। দুয়ো মেলি দিলে টেংকটো পূৰ্ণ হ’বলৈ কিমান সময় লাগিব?", opts_en: ["12 hours", "10 hours", "8 hours", "24 hours"], opts_as: ["১২ ঘণ্টা", "১০ ঘণ্টা", "৮ ঘণ্টা", "২৪ ঘণ্টা"], corr: 0 },
+                { q_en: "Find the value of x if 2^x = 128.", q_as: "যদি 2^x = 128 হয়, তেন্তে x ৰ মান কিমান?", opts_en: ["7", "6", "8", "9"], opts_as: ["৭", "৬", "৮", "৯"], corr: 0 },
+                { q_en: "Find the simple interest on ₹5000 at 10% per annum for 3 years.", q_as: "৫০০০ টকাৰ বাৰ্ষিক ১০% হাৰত ৩ বছৰৰ সৰল সুত কিমান হ’ব?", opts_en: ["₹1500", "₹1000", "₹500", "₹2000"], opts_as: ["১৫০০ টকা", "১০০০ টকা", "৫০০ টকা", "২০০০ টকা"], corr: 0 },
+                { q_en: "A sum of money doubles itself in 10 years at simple interest. Find the annual rate.", q_as: "সৰল সুতত এটা ধনৰাশি ১০ বছৰত দুগুণ হয়। বাৰ্ষিক সুতৰ হাৰ কিমান?", opts_en: ["10%", "12%", "8%", "15%"], opts_as: ["১০%", "১২%", "৮%", "১৫%"], corr: 0 },
+                { q_en: "If the base of a triangle is 10 cm and height is 12 cm, find its area.", q_as: "যদি এটা ত্ৰিভুজৰ ভূমি ১০ ছেমি আৰু উচ্চতা ১২ ছেমি হয়, ইয়াৰ কালি কিমান?", opts_en: ["60 cm²", "120 cm²", "30 cm²", "90 cm²"], opts_as: ["৬০ ছেমি²", "১২০ ছেমি²", "৩০ ছেমি²", "৯০ ছেমি²"], corr: 0 },
+                { q_en: "The ratio of boys and girls in a school is 4:5. If there are 180 girls, find number of boys.", q_as: "বিদ্যালয় এখনত ল’ৰা আৰু ছোৱালীৰ অনুপাত ৪:৫। ছোৱালী ১৮০ জনী হ’লে ল’ৰাৰ সংখ্যা কিমান?", opts_en: ["144", "160", "120", "150"], opts_as: ["১৪৪", "১৬০", "১২০", "১৫০"], corr: 0 },
+                { q_en: "A person covers 12km at 3km/h and 18km at 6km/h. Find average speed.", q_as: "এজন ব্যক্তিয়ে ১২ কিমি দূৰত্ব ৩ কিমি/ঘণ্টা বেগত আৰু ১৮ কিমি দূৰত্ব ৬ কিমি/ঘণ্টা বেগত অতিক্ৰম কৰে। গড় বেগ কিমান?", opts_en: ["4.28 km/h", "4.5 km/h", "5 km/h", "3.8 km/h"], opts_as: ["৪.২৮ কিমি/ঘণ্টা", "৪.৫ কিমি/ঘণ্টা", "৫ কিমি/ঘণ্টা", "৩.৮ কিমি/ঘণ্টা"], corr: 0 },
+                { q_en: "Solve: 25% of 400 + 50% of 200.", q_as: "সমাধান কৰা: ৪০০ ৰ ২৫% + ২০০ ৰ ৫০%।", opts_en: ["200", "150", "100", "250"], opts_as: ["২০০", "১৫০", "১০০", "২৫০"], corr: 0 },
+                { q_en: "Find the smallest number exactly divisible by 12, 15 and 20.", q_as: "১২, ১৫ আৰু ২০ ৰে সম্পূৰ্ণৰূপে বিভাজ্য হোৱা আটাইতকৈ সৰু সংখ্যাটো কি?", opts_en: ["60", "120", "180", "90"], opts_as: ["৬০", "১২০", "১৮০", "৯০"], corr: 0 },
+                { q_en: "If compound interest on ₹10000 for 2 years is ₹2100, find rate per annum.", q_as: "১০০০০ টকাৰ ২ বছৰৰ চক্ৰবৃদ্ধি সুত যদি ২১০০ টকা হয়, তেন্তে বাৰ্ষিক সুতৰ হাৰ কিমান?", opts_en: ["10%", "5%", "15%", "20%"], opts_as: ["১০%", "৫%", "১৫%", "২০%"], corr: 0 },
+                { q_en: "The side of a square is increased by 20%. Its area increases by?", q_as: "এটা বৰ্গক্ষেত্ৰৰ বাহু ২০% বৃদ্ধি কৰিলে ইয়াৰ কালি কিমান শতাংশ বাঢ়িব?", opts_en: ["44%", "40%", "20%", "36%"], opts_as: ["৪৪%", "৪০%", "২০%", "৩৬%"], corr: 0 },
+                { q_en: "The hypotenuse of a right-angled triangle is 13 cm and one side is 5 cm. Find other side.", q_as: "এটা সমকোণী ত্ৰিভুজৰ অতিভুজ ১৩ ছেমি আৰু এটা বাহু ৫ ছেমি হ’লে আনটো বাহুৰ দৈৰ্ঘ্য উলিওৱা।", opts_en: ["12 cm", "10 cm", "8 cm", "11 cm"], opts_as: ["১২ ছেমি", "১০ ছেমি", "৮ ছেমি", "১১ ছেমি"], corr: 0 },
+                { q_en: "Find the value of x if x:6 :: 5:3.", q_as: "যদি x:৬ :: ৫:৩ হয়, তেন্তে x ৰ মান উলিওৱা।", opts_en: ["10", "12", "8", "15"], opts_as: ["১০", "১২", "৮", "১৫"], corr: 0 }
             ],
             reasoning: [
-                { q_en: "In a certain code, 'CHAIR' is written as 'EGAKT'. How is 'TABLE' written in that code?", q_as: "কোডত 'CHAIR' ক 'EGAKT' বুলি লিখা হয়। 'TABLE' কেনেকৈ লিখা হ’ব?", opts: ["VCDNG", "VCEJG", "UCDNF", "VBDNG"], corr: 0 }
+                { q_en: "Select related word: Newspaper : Press :: Cloth : ?", q_as: "সম্পৰ্কিত শব্দটো বাছক: বাতৰি কাকত : প্ৰেছ :: কাপোৰ : ?", opts: ["Mill", "Tailor", "Shop", "Fiber"], corr: 0 },
+                { q_en: "Choose the odd one out: Car, Bicycle, Motorcycle, Jeep", q_as: "অমিলটো বাছি উলিওৱা: কাৰ, চাইকেল, মটৰচাইকেল, জীপ", opts: ["Car", "Bicycle", "Motorcycle", "Jeep"], corr: 1 },
+                { q_en: "If 'CAT' is coded as 24, what is the code for 'DOG'?", q_as: "যদি 'CAT' ৰ কোড ২৪ হয়, তেন্তে 'DOG' ৰ কোড কিমান হ’ব?", opts: ["26", "22", "27", "30"], corr: 0 },
+                { q_en: "Complete the series: 1, 4, 9, 16, 25, ?", q_as: "শৃংখলাটো সম্পূৰ্ণ কৰক: ১, ৪, ৯, ১৬, ২৫, ?", opts: ["36", "35", "49", "40"], corr: 0 },
+                { q_en: "Pointing to a photograph, Mohan said, 'He is my sister's father's son.' Who is he?", q_as: "এখন ছবি দেখুৱাই মোহনে ক’লে, 'তেওঁ মোৰ ভনীৰ দেউতাৰ পুত্ৰ।' ছবিৰ মানুহজন মোহনৰ কি হয়?", opts: ["Brother", "Father", "Uncle", "Son"], corr: 0 },
+                { q_en: "If A=1, B=2, and C=3, then find the value of FACE.", q_as: "যদি A=১, B=২ আৰু C=৩ হয়, তেন্তে FACE ৰ মান কিমান হ’ব?", opts: ["15", "16", "14", "17"], corr: 2 },
+                { q_en: "Which word comes third in English dictionary? 1. Apple, 2. Application, 3. Apricot, 4. Appeal", q_as: "ইংৰাজী অভিধান অনুসৰি কোনটো শব্দ তৃতীয় স্থানত আহিব?", opts: ["Application", "Apricot", "Appeal", "Apple"], corr: 0 },
+                { q_en: "Find missing sequence: Z, W, T, Q, ?", q_as: "লুপ্ত বৰ্ণটো উলিওৱা: Z, W, T, Q, ?", opts: ["N", "O", "P", "M"], corr: 0 },
+                { q_en: "If mirror reflection shows 9:15, what is the actual time?", q_as: "আইনাত প্ৰতিফলিত সময় যদি ৯:১৫ দেখায়, প্ৰকৃত সময় কিমান?", opts: ["2:45", "3:45", "2:15", "10:45"], corr: 0 },
+                { q_en: "Sita is taller than Geeta, but shorter than Radha. Who is the tallest?", q_as: "সীতা গী তাতকৈ ওখ, কিন্তু ৰাধাতকৈ চাপৰ। আটাইতকৈ ওখ কোন?", opts: ["Radha", "Sita", "Geeta", "None"], corr: 0 },
+                { q_en: "Find the odd letter group: AD, FI, KN, PS", q_as: "অমিল বৰ্ণ গোটটো বাছক: AD, FI, KN, PS", opts: ["AD", "FI", "KN", "PS"], corr: 2 },
+                { q_en: "Next in series: A1, C3, E5, G7, ?", q_as: "শৃংখলাটোৰ পৰৱৰ্তী পদ: A1, C3, E5, G7, ?", opts: ["I9", "J10", "H8", "I10"], corr: 0 },
+                { q_en: "A man walks 5km South, then turns East and walks 3km, then North 5km. Distance from start?", q_as: "এজন মানুহ দক্ষিণে ৫ কিমি যায়, তাৰপিছত পূবলৈ ঘূৰি ৩ কিমি আৰু শেষত উত্তৰলৈ ৫ কিমি যায়। প্ৰাৰম্ভিক স্থানৰ পৰা দূৰত্ব?", opts: ["3km", "5km", "8km", "2km"], corr: 0 },
+                { q_en: "Anil is brother of Sunita. Sunita is wife of Ramesh. Ramesh is Anil's?", q_as: "অনিল সুনীতাৰ ভাতৃ। সুনীতা ৰমেশৰ পত্নী। ৰমেশ অনিলৰ কি হয়?", opts: ["Brother-in-law", "Brother", "Father", "Uncle"], corr: 0 },
+                { q_en: "If tomorrow is Sunday, what day was yesterday?", q_as: "যদি অহাকাইলৈ দেওবাৰ হয়, তেন্তে কালি (যোৱাকালি) কি বাৰ আছিল?", opts: ["Friday", "Thursday", "Saturday", "Monday"], corr: 0 },
+                { q_en: "Complete the pattern: 6, 12, 24, 48, ?", q_as: "শৃংখলাটো সম্পূৰ্ণ কৰক: ৬, ১২, ২৪, ৪৮, ?", opts: ["96", "84", "72", "100"], corr: 0 },
+                { q_en: "Find the odd number: 11, 13, 15, 17", q_as: "অমিল সংখ্যাটো বাছি উলিওৱা: ১১, ১৩, ১৫, ১৭", opts: ["11", "13", "15", "17"], corr: 2 },
+                { q_en: "If 'MAN' = 28, then 'RAN' = ?", q_as: "যদি 'MAN' = ২৮ হয়, তেন্তে 'RAN' = ?", opts: ["33", "30", "32", "35"], corr: 0 },
+                { q_en: "Which word CANNOT be formed from 'CELEBRATION'?", q_as: "‘CELEBRATION’ শব্দটোৰ পৰা কোনটো শব্দ গঠন কৰিব নোৱাৰি?", opts: ["TAILOR", "RATE", "ACTION", "ION"], corr: 0 },
+                { q_en: "A dice has numbers 1 to 6. Opposite of 1 is 6, 2 is 5. What is opposite of 3?", q_as: "লুডু গুটি এটাৰ ১ ৰ বিপৰীতে ৬, ২ ৰ বিপৰীতে ৫ থাকিলে, ৩ ৰ বিপৰীতে কি থাকিব?", opts: ["4", "1", "2", "6"], corr: 0 },
+                { q_en: "Find missing sequence: 4, 9, 16, 25, ?, 49", q_as: "লুপ্ত সংখ্যাটো উলিওৱা: ৪, ৯, ১৬, ২৫, ?, ৪৯", opts: ["36", "35", "40", "45"], corr: 0 },
+                { q_en: "What angle is formed by clock hands at 6:00?", q_as: "৬:০০ বজাত ঘড়ীৰ কাঁটা দুটাই কিমান ডিগ্ৰী কোণ গঠন কৰিব?", opts: ["180°", "90°", "120°", "360°"], corr: 0 },
+                { q_en: "Select odd pair: Sun-Light, Fire-Heat, Teacher-Student, Ice-Cold", q_as: "অমিল যোৰাটো বাছক: সূৰ্য্য-পোহৰ, জুই-উত্তাপ, শিক্ষক-ছাত্ৰ, বৰফ-ঠাণ্ডা", opts: ["Sun-Light", "Fire-Heat", "Teacher-Student", "Ice-Cold"], corr: 2 },
+                { q_en: "If year 2023 started on Sunday, on what day did it end?", q_as: "যদি ২০২৩ চনটো দেওবাৰে আৰম্ভ হৈছিল, তেন্তে শেষ কি বাৰে হৈছিল? (সাধাৰণ বছৰ)", opts: ["Sunday", "Monday", "Saturday", "Tuesday"], corr: 0 },
+                { q_en: "Complete: Doctor : Hospital :: Actor : ?", q_as: "সম্পূৰ্ণ কৰক: চিকিৎসক : চিকিৎসালয় :: অভিনেতা : ?", opts: ["Theatre", "School", "Field", "Office"], corr: 0 }
             ],
             english: [
-                { q: "Choose the word opposite in meaning (ANTONYM) to: 'FRAGILE'", opts: ["Weak", "Strong", "Delicate", "Soft"], corr: 1 }
+                { q: "Choose the word closest in meaning (SYNONYM) to: 'ABUNDANT'", opts: ["Plentiful", "Scarce", "Rare", "Few"], corr: 0 },
+                { q: "Choose the word opposite in meaning (ANTONYM) to: 'ANCIENT'", opts: ["Modern", "Old", "Historic", "Past"], corr: 0 },
+                { q: "Spot the error: 'He do not have a car.'", opts: ["He", "do not", "have a car", "No error"], corr: 1 },
+                { q: "Fill in the blank: The sun _____ in the east.", opts: ["rises", "rise", "rising", "rose"], corr: 0 },
+                { q: "Antonym of 'HARMONY' is:", opts: ["Discord", "Peace", "Agreement", "Symphony"], corr: 0 },
+                { q: "Synonym of 'IMPERATIVE' is:", opts: ["Crucial", "Optional", "Minor", "Unimportant"], corr: 0 },
+                { q: "A person who writes lives of other people is a:", opts: ["Biographer", "Autobiographer", "Historian", "Author"], corr: 0 },
+                { q: "Idiom meaning: 'Barking up the wrong tree'", opts: ["Accusing the wrong person", "Climbing a tree", "Shouting loudly", "Making a mistake in counting"], corr: 0 },
+                { q: "Find the correctly spelled word.", opts: ["Beginning", "Begining", "Begening", "Begginning"], corr: 0 },
+                { q: "Change into Passive voice: 'She sings a song.'", opts: ["A song is sung by her.", "A song was sung by her.", "A song is sing by her.", "A song has sung."], corr: 0 },
+                { q: "Fill in: He is blind _____ one eye.", opts: ["of", "in", "with", "to"], corr: 1 },
+                { q: "Idiom meaning: 'Cry over spilled milk'", opts: ["Regret uselessly about past losses", "Crying for food", "Making a mess", "Praising milk"], corr: 0 },
+                { q: "A government by the people, of the people, for the people is:", opts: ["Democracy", "Monarchy", "Anarchy", "Dictatorship"], corr: 0 },
+                { q: "Synonym of 'MUTUAL' is:", opts: ["Reciprocal", "One-sided", "Separate", "Hidden"], corr: 0 },
+                { q: "Antonym of 'NATIVE' is:", opts: ["Foreign", "Local", "Inborn", "Natural"], corr: 0 },
+                { q: "Fill in: She has been sleeping _____ four hours.", opts: ["for", "since", "from", "during"], corr: 0 },
+                { q: "Find the misspelled word:", opts: ["Tomorrow", "Calendar", "Occured", "Business"], corr: 2 },
+                { q: "A place where experiments are conducted is a:", opts: ["Laboratory", "Library", "Museum", "Observatory"], corr: 0 },
+                { q: "Change into Indirect Speech: He said, 'I can do it.'", opts: ["He said that he could do it.", "He said he can do it.", "He told that he could do it.", "He said to do it."], corr: 0 },
+                { q: "Fill in: Neither Ram nor Shyam _____ present yesterday.", opts: ["was", "were", "are", "have been"], corr: 0 },
+                { q: "Synonym of 'COMPASSION' is:", opts: ["Pity", "Cruelty", "Hatred", "Anger"], corr: 0 },
+                { q: "Antonym of 'PRUDENT' is:", opts: ["Unwise", "Wise", "Careful", "Smart"], corr: 0 },
+                { q: "A sound that cannot be heard is:", opts: ["Inaudible", "Audible", "Loud", "Silent"], corr: 0 },
+                { q: "Fill in: The premium rates are _____ high.", opts: ["too", "two", "to", "tow"], corr: 0 },
+                { q: "Idiom meaning: 'Hit the nail on the head'", opts: ["Do or say something exactly right", "Drive a nail", "To fight", "To hurt oneself"], corr: 0 }
             ],
             general: [
-                { q_en: "Who was the founder of the Slave Dynasty in India?", q_as: "ভাৰতত দাস বংশৰ প্ৰতিষ্ঠাপক কোন আছিল?", opts_en: ["Iltutmish", "Alauddin Khilji", "Qutb-ud-din Aibak", "Balban"], opts_as: ["ইলতুতমিছ", "আলাউদ্দিন খিলজী", "কুতুবুদ্দিন আইবাক", "বলবন"], corr: 2 }
+                { q_en: "Which state is known as the 'Land of Rising Sun' in India?", q_as: "ভাৰতৰ কোনখন ৰাজ্যৰ 'সূৰ্য্য উদয়ৰ দেশ' বুলি জনা যায়?", opts_en: ["Assam", "Arunachal Pradesh", "Nagaland", "Manipur"], opts_as: ["অসম", "অৰুণাচল প্ৰদেশ", "নগালেণ্ড", "মণিপুৰ"], corr: 1 },
+                { q_en: "Who was the first Mughal Emperor of India?", q_as: "ভাৰতৰ প্ৰথম মোগল সম্ৰাট কোন আছিল?", opts_en: ["Akbar", "Babur", "Humayun", "Sher Shah"], opts_as: ["আকবৰ", "বাবৰ", "হুমায়ুন", "শ্বেৰ শ্বাহ"], corr: 1 },
+                { q_en: "Which fundamental right was removed by the 44th Amendment?", q_as: "৪৪ তম সংশোধনীৰ দ্বাৰা কোনটো মৌলিক অধিকাৰ আঁতৰোৱা হৈছিল?", opts_en: ["Right to Freedom", "Right to Property", "Right to Education", "Right to Equality"], opts_as: ["স্বাধীনতাৰ অধিকাৰ", "সম্পত্তিৰ অধিকাৰ", "শিক্ষাৰ অধিকাৰ", "সমতাৰ অধিকাৰ"], corr: 1 },
+                { q_en: "The dance form 'Kathakali' belongs to which state?", q_as: "'কথাকলি' নৃত্যশৈলী কোনখন ৰাজ্যৰ সৈতে জড়িত?", opts_en: ["Tamil Nadu", "Kerala", "Andhra Pradesh", "Karnataka"], opts_as: ["তামিলনাডু", "কেৰালা", "অন্ধ্ৰ প্ৰদেশ", "কৰ্ণাটক"], corr: 1 },
+                { q_en: "Which element is the primary component of CNG?", q_as: "CNG ৰ প্ৰধান উপাদান গেছটো কি?", opts_en: ["Ethane", "Methane", "Propane", "Butane"], opts_as: ["ইথেন", "মিথেন", "প্ৰপেন", "বিউটেন"], corr: 1 },
+                { q_en: "Who wrote 'Arthashastra'?", q_as: "'অৰ্থশাস্ত্ৰ' কোনে লিখিছিল?", opts_en: ["Megasthenes", "Chanakya (Kautilya)", "Kalidasa", "Aryabhata"], opts_as: ["মেগাস্থিনিছ", "চাণক্য (কৌটিল্য)", "কালিদাস", "আৰ্যভট্ৰ"], corr: 1 },
+                { q_en: "Which is the closest star to the Earth after the Sun?", q_as: "সূৰ্য্যৰ পিছত পৃথিৱীৰ আটাইতকৈ ওচৰৰ নক্ষত্ৰ কোনটো?", opts_en: ["Sirius", "Proxima Centauri", "Alpha Centauri", "Vega"], opts_as: ["ছিৰিয়াছ", "প্ৰক্সিমা চেন্টাৰী", "আলফা চেন্টাৰী", "ভেগা"], corr: 1 },
+                { q_en: "Where is the headquarters of ISRO located?", q_as: "ISRO ৰ মুখ্য কাৰ্যালয় ক’ত অৱস্থিত?", opts_en: ["Mumbai", "Bengaluru", "Chennai", "New Delhi"], opts_as: ["মুম্বাই", "বেংগালুৰু", "চেন্নাই", "নতুন দিল্লী"], corr: 1 },
+                { q_en: "Who was the first Indian to win a Nobel Prize?", q_as: "নোবেল বঁটা লাভ কৰা প্ৰথমজন ভাৰতীয় কোন আছিল?", opts_en: ["C.V. Raman", "Rabindranath Tagore", "Mother Teresa", "Amartya Sen"], opts_as: ["চি.ভি. ৰমন", "ৰবীন্দ্ৰনাথ ঠাকুৰ", "মাদাৰ টেৰেছা", "অমৰ্ত্য সেন"], corr: 1 },
+                { q_en: "Which river is the longest river in the world?", q_as: "পৃথিৱীৰ আটাইতকৈ দীঘল নদী কোনখন?", opts_en: ["Amazon", "Nile", "Mississippi", "Yangtze"], opts_as: ["আমাজন", "নীল নদী", "মিছিছিপি", "ইয়াংজে"], corr: 1 },
+                { q_en: "What is the capital of Australia?", q_as: "অষ্ট্ৰেলিয়াৰ ৰাজধানী কি?", opts_en: ["Sydney", "Canberra", "Melbourne", "Brisbane"], opts_as: ["ছিডনী", "ক্যানবেৰা", "মেলবৰ্ণ", "ব্ৰিসবেন"], corr: 1 },
+                { q_en: "In which year did the Quit India Movement start?", q_as: "ভাৰত ত্যাগ আন্দোলন কোন চনত আৰম্ভ হৈছিল?", opts_en: ["1920", "1930", "1942", "1947"], opts_as: ["১৯২০", "১৯৩০", "১৯৪২", "১৯৪৭"], corr: 2 },
+                { q_en: "Who discovered Penicillin?", q_as: "পেনিচিলিন কোনে আৱিষ্কাৰ কৰিছিল?", opts_en: ["Louis Pasteur", "Alexander Fleming", "Edward Jenner", "Robert Koch"], opts_as: ["লুই পাষ্টুৰ", "এলেকজেণ্ডাৰ ফ্লেমিং", "এডৱাৰ্ড জেনাৰ", "ৰবাৰ্ট কচ"], corr: 1 },
+                { q_en: "Which gas is filled in electric bulbs?", q_as: "বৈদ্যুতিক বাল্বত সাধাৰণতে কোনটো গেছ ব্যৱহাৰ কৰা হয়?", opts_en: ["Nitrogen/Argon", "Oxygen", "Hydrogen", "Carbon Dioxide"], opts_as: ["নাইট্ৰ’জেন/আৰ্গন", "অক্সিজেন", "হাইড্ৰ’জেন", "কাৰ্বন ডাই অক্সাইড"], corr: 0 },
+                { q_en: "Which organ filters blood in the human body?", q_as: "মানুহৰ শৰীৰৰ কোনটো অংগই তেজ ফিল্টাৰ বা পৰিস্ৰাৱন কৰে?", opts_en: ["Heart", "Lungs", "Kidney", "Liver"], opts_as: ["হাৰ্ট", "হাওঁফাওঁ", "বৃক্ক (Kidney)", "যকৃৎ"], corr: 2 },
+                { q_en: "Which state in India has the longest coastline?", q_as: "ভাৰতৰ কোনখন ৰাজ্যৰ উপকূলীয় ৰেখা (Coastline) আটাইতকৈ দীঘল?", opts_en: ["Maharashtra", "Tamil Nadu", "Gujarat", "Andhra Pradesh"], opts_as: ["মহাৰাষ্ট্ৰ", "তামিলনাডু", "গুজৰাট", "অন্ধ্ৰ প্ৰদেশ"], corr: 2 },
+                { q_en: "Who gave the slogan 'Jai Hind'?", q_as: "'জয় হিন্দ' শ্লোগান কোনে দিছিল?", opts_en: ["Mahatma Gandhi", "Subhas Chandra Bose", "Bhagat Singh", "Jawaharlal Nehru"], opts_as: ["মহাত্মা গান্ধী", "সুভাষ চন্দ্ৰ বসু", "ভগত সিঙ", "জৱাহৰলাল নেহৰু"], corr: 1 },
+                { q_en: "Which is the highest dam in India?", q_as: "ভাৰতৰ আটাইতকৈ ওখ বান্ধ (Dam) কোনটো?", opts_en: ["Bhakra Dam", "Tehri Dam", "Hirakud Dam", "Sardar Sarovar"], opts_as: ["ভাক্ৰা বান্ধ", "তেহৰী বান্ধ", "হীৰাকুড বান্ধ", "চৰ্দাৰ সৰোবৰ"], corr: 1 },
+                { q_en: "What is the pH value of pure water?", q_as: "বিশুদ্ধ পানীৰ pH মান কিমান?", opts_en: ["6", "7", "8", "5"], opts_as: ["৬", "৭", "৮", "৫"], corr: 1 },
+                { q_en: "Who appoints the Chief Justice of India?", q_as: "ভাৰতৰ মুখ্য ন্যায়াধীশক কোনে নিযুক্তি দিয়ে?", opts_en: ["Prime Minister", "President", "Law Minister", "Parliament"], opts_as: ["প্ৰধানমন্ত্ৰী", "ৰাষ্ট্ৰপতি", "আইন মন্ত্ৰী", "সংসদ"], corr: 1 },
+                { q_en: "Which atmospheric gas shields us from UV rays?", q_as: "বায়ুমণ্ডলৰ কোনটো গেছে আমাক অতিবেঙুনীয়া ৰশ্মিৰ (UV) পৰা ৰক্ষা কৰে?", opts_en: ["Oxygen", "Ozone", "Nitrogen", "Argon"], opts_as: ["অক্সিজেন", "অ’জন", "নাইট্ৰ’জেন", "আৰ্গন"], corr: 1 },
+                { q_en: "The Non-Cooperation Movement was suspended due to which incident?", q_as: "কোনটো ঘটনাৰ বাবে অসহযোগ আন্দোলন স্থগিত কৰা হৈছিল?", opts_en: ["Jallianwala Bagh", "Chauri Chaura incident", "Kakori Train Robbery", "Dandi March"], opts_as: ["জালিয়ানৱালাবাগ", "চৌৰী-চৌৰা ঘটনা", "কাকোৰী ট্ৰেইন ডকাইতি", "দণ্ডী যাত্ৰা"], corr: 1 },
+                { q_en: "Which planet is the largest in the Solar System?", q_as: "সৌৰজগতৰ আটাইতকৈ ডাঙৰ গ্ৰহ কোনটো?", opts_en: ["Saturn", "Jupiter", "Neptune", "Earth"], opts_as: ["শনি", "বৃহস্পতি", "নেপচুন", "পৃথিৱী"], corr: 1 },
+                { q_en: "Who was the founder of Buddhism?", q_as: "বৌদ্ধ ধৰ্মৰ প্ৰতিষ্ঠাপক কোন আছিল?", opts_en: ["Mahavira", "Gautama Buddha", "Guru Nanak", "Ashoka"], opts_as: ["মহাবীৰ", "গৌতম বুদ্ধ", "গুৰু নানক", "অশোক"], corr: 1 },
+                { q_en: "Scurvy is caused by deficiency of which vitamin?", q_as: "কোনটো ভিটামিনৰ অভাৱত স্কৰ্ভি ৰোগ হয়?", opts_en: ["Vitamin B", "Vitamin C", "Vitamin D", "Vitamin K"], opts_as: ["ভিটামিন B", "ভিটামিন C", "ভিটামিন D", "ভিটামিন K"], corr: 1 }
             ]
         },
-        // ==================== SET C ====================
+        // ==================== SET C (25+25+25+25 = 100 UNIQUE Qs) ====================
         set_C: {
             maths: [
-                { q_en: "Two pipes A and B can fill a tank in 20 minutes and 30 minutes respectively. If both pipes are opened together, how time will it take to fill the tank?", q_as: "দুডাল পাইপ A আৰু B এ এটা টেংক ক্ৰমে ২০ মিনিট আৰু ৩০ মিনিটত পূৰ্ণ কৰিব পাৰে। দুয়ো এডাল পাইপ একেলগে মেলি দিলে টেংকটো পূৰ্ণ হ’বলৈ কিমান সময় লাগিব?", opts_en: ["10 mins", "12 mins", "15 mins", "25 mins"], opts_as: ["১০ মিনিট", "১২ মিনিট", "১৫ মিনিট", "২৫ মিনিট"], corr: 1 },
-                { q_en: "Find the average of first 50 natural numbers.", q_as: "প্ৰথম ৫০ টা স্বাভাৱিক সংখ্যাৰ গড় উলিওৱা।", opts_en: ["25", "25.5", "26", "26.5"], opts_as: ["২৫", "২৫.৫", "২৬", "২৬.৫"], corr: 1 }
+                { q_en: "Two pipes A and B can fill a tank in 20 minutes and 30 minutes respectively. If both open together, time taken?", q_as: "পাইপ A আৰু B এ এটা টেংক ২০ আৰু ৩০ মিনিটত পূৰ্ণ কৰে। একেলগে মেলি দিলে কিমান সময় লাগিব?", opts_en: ["10 mins", "12 mins", "15 mins", "25 mins"], opts_as: ["১০ মিনিট", "১২ মিনিট", "১৫ মিনিট", "২৫ মিনিট"], corr: 1 },
+                { q_en: "Find the average of first 50 natural numbers.", q_as: "প্ৰথম ৫০ টা স্বাভাৱিক সংখ্যাৰ গড় উলিওৱা।", opts_en: ["25", "25.5", "26", "26.5"], opts_as: ["২৫", "২৫.৫", "২৬", "২৬.৫"], corr: 1 },
+                { q_en: "The cost price of 15 articles is equal to the selling price of 10 articles. Find profit %.", q_as: "১৫ টা বস্তুৰ ক্ৰয় মূল্য ১০ টা বস্তুৰ বিক্ৰী মূল্যৰ সমান। লাভৰ শতাংশ উলিওৱা।", opts_en: ["30%", "40%", "50%", "60%"], opts_as: ["৩০%", "৪০%", "৫০%", "৬০%"], corr: 2 },
+                { q_en: "If 30% of a number is 120, find the number.", q_as: "যদি এটা সংখ্যাৰ ৩০% = ১২০ হয়, সংখ্যাটো উলিওৱা।", opts_en: ["400", "300", "500", "600"], opts_as: ["৪০০", "৩০০", "৫০০", "৬০০"], corr: 0 },
+                { q_en: "Find the value of (0.2 × 0.2 × 0.2).", q_as: "মান উলিওৱা: (০.২ × ০.২ × ০.২)।", opts_en: ["0.08", "0.008", "0.8", "0.0008"], opts_as: ["০.০৮", "০.০০৮", "০.৮", "০.০০০৮"], corr: 1 },
+                { q_en: "The ratio of length and breadth of a field is 5:3. If perimeter is 160m, find length.", q_as: "পথাৰ এখনৰ দীঘ আৰু পথালিৰ অনুপাত ৫:৩। পৰিসীমা ১৬০ মিটাৰ হ’লে দীঘ উলিওৱা।", opts_en: ["50m", "60m", "40m", "30m"], opts_as: ["৫০ মি", "৬০ মি", "৪০ মি", "৩০ মি"], corr: 0 },
+                { q_en: "Find the LCM of 12, 18, and 24.", q_as: "১২, ১৮ আৰু ২৪ ৰ ল.সা.গু. উলিওৱা।", opts_en: ["72", "36", "48", "144"], opts_as: ["৭২", "৩৬", "৪৮", "১৪৪"], corr: 0 },
+                { q_en: "A sum of ₹6000 compounds to ₹7986 in 3 years. Find the annual interest rate.", q_as: "৬০০০ টকাৰ ৩ বছৰত চক্ৰবৃদ্ধি মূলধন ৭৯৮৬ টকা হয়। বাৰ্ষিক সুতৰ হাৰ উলিওৱা।", opts_en: ["10%", "5%", "8%", "12%"], opts_as: ["১০%", "৫%", "৮%", "১২%"], corr: 0 },
+                { q_en: "A man covers 240 km in 4 hours by car. Find his speed in m/s.", q_as: "এজন মানুহে ৪ ঘণ্টাত ২৪০ কিমি দূৰত্ব গাড়ীৰে অতিক্ৰম কৰে। তেওঁৰ বেগ m/s ত উলিওৱা।", opts_en: ["16.66 m/s", "20 m/s", "15 m/s", "25 m/s"], opts_as: ["১৬.৬৬ m/s", "২০ m/s", "১৫ m/s", "২৫ m/s"], corr: 0 },
+                { q_en: "Find the area of a circle with a diameter of 14 cm.", q_as: "১৪ ছেমি ব্যাসযুক্ত বৃত্ত এটাৰ কালি উলিওৱা।", opts_en: ["154 cm²", "616 cm²", "44 cm²", "308 cm²"], opts_as: ["১৫৪ ছেমি²", "৬১৬ ছেমি²", "৪৪ ছেমি²", "৩০৮ ছেমি²"], corr: 0 },
+                { q_en: "If x:y = 3:4, find the value of (4x + 3y) : (5x - 2y).", q_as: "যদি x:y = ৩:৪ হয়, তেন্তে (4x + 3y) : (5x - 2y) ৰ মান কিমান?", opts_en: ["24:7", "12:7", "24:5", "7:24"], opts_as: ["২৪:৭", "১২:৭", "২৪:৫", "৭:২৪"], corr: 0 },
+                { q_en: "Find the cube root of 1331.", q_as: "১৩৩১ ৰ ঘনমূল (Cube root) উলিওৱা।", opts_en: ["11", "12", "13", "19"], opts_as: ["১১", "১২", "১৩", "১৯"], corr: 0 },
+                { q_en: "By selling an item for ₹720, a shopkeeper gains 20%. Find cost price.", q_as: "৭২০ টকাত এটা বস্তু বিক্ৰী কৰিলে ২০% লাভ হয়। বস্তুটোৰ ক্ৰয় মূল্য উলিওৱা।", opts_en: ["₹600", "₹500", "₹650", "₹550"], opts_as: ["৬০০ টকা", "৫০০ টকা", "৬৫০ টকা", "৫৫offset টকা"], corr: 0 },
+                { q_en: "If x% of 500 = 150, find x.", q_as: "যদি ৫০০ ৰ x% = ১৫০ হয়, x ৰ মান কিমান?", opts_en: ["30", "25", "20", "35"], opts_as: ["৩০", "২৫", "২০", "৩৫"], corr: 0 },
+                { q_en: "The ages of A and B are in 4:5 ratio. After 5 years, it becomes 5:6. Find A's current age.", q_as: "A আৰু B ৰ বয়সৰ অনুপাত ৪:৫। ৫ বছৰ পিছত অনুপাত ৫:৬ হ’ব। A ৰ বৰ্তমান বয়স কিমান?", opts_en: ["20 years", "25 years", "15 years", "30 years"], opts_as: ["২০ বছৰ", "২৫ বছৰ", "১৫ বছৰ", "৩০ বছৰ"], corr: 0 },
+                { q_en: "A train running at 72 km/h crosses a 200m platform in 20 seconds. Find train length.", q_as: "৭২ কিমি/ঘণ্টা বেগত চলা ৰেল এখনে ২০০ মিটাৰ প্লেটফৰ্ম এখন ২০ ছেকেণ্ডত পাৰ কৰে। ৰেলখনৰ দীঘ কিমান?", opts_en: ["200m", "150m", "250m", "300m"], opts_as: ["২০০ মি", "১৫০ মি", "২৫০ মি", "৩০০ মি"], corr: 0 },
+                { q_en: "What will be the perimeter of a semi-circle with a radius of 7 cm?", q_as: "৭ ছেমি ব্যাসাৰ্ধযুক্ত অৰ্ধবৃত্ত এটাৰ পৰিসীমা কিমান হ’ব?", opts_en: ["36 cm", "44 cm", "22 cm", "50 cm"], opts_as: ["৩৬ ছেমি", "৪৪ ছেমি", "২২ ছেমি", "৫০ ছেমি"], corr: 0 },
+                { q_en: "Find simple interest on ₹2500 at 4% for 2 years.", q_as: "২৫০০ টকাৰ বাৰ্ষিক ৪% হাৰত ২ বছৰৰ সৰল সুত উলিওৱা।", opts_en: ["₹200", "₹100", "₹150", "₹250"], opts_as: ["২০০ টকা", "১০০ টকা", "১৫০ টকা", "২৫০ টকা"], corr: 0 },
+                { q_en: "If log 2 = 0.3010, what is the value of log 20?", q_as: "যদি log 2 = ০.৩MDEw হয়, log 20 ৰ মান কিমান হ’ব?", opts_en: ["1.3010", "0.6020", "2.3010", "1.6020"], opts_as: ["১.৩০১০", "০.৬০২০", "২.৩০১০", "১.৬০২০"], corr: 0 },
+                { q_en: "Find average of first 5 multiples of 3.", q_as: "৩ ৰ প্ৰথম ৫ টা গুণিতকৰ গড় উলিওৱা।", opts_en: ["9", "6", "12", "15"], opts_as: ["৯", "৬", "১২", "১৫"], corr: 0 },
+                { q_en: "If a rectangle length increases by 10% and breadth decreases by 10%, area changes by?", q_as: "আয়তক্ষেত্ৰৰ দীঘ ১০% বঢ়ালে আৰু পথালি ১০% কমালে কালিত কি প্ৰভাৱ পৰিব?", opts_en: ["1% decrease", "No change", "1% increase", "2% decrease"], opts_as: ["১% হ্ৰাস", "একো সলনি নহয়", "১% বৃদ্ধি", "২% হ্ৰাস"], corr: 0 },
+                { q_en: "Solve for x: √(x) + 11 = 20.", q_as: "x ৰ মান উলিওৱা: √(x) + 11 = 20।", opts_en: ["81", "9", "64", "100"], opts_as: ["৮১", "৯", "৬৪", "১০০"], corr: 0 },
+                { q_en: "Find the volume of a cylinder whose radius is 7 cm and height is 10 cm.", q_as: "৭ ছেমি ব্যাসাৰ্ধ আৰু ১০ ছেমি উচ্চতাযুক্ত চিলিণ্ডাৰ এটাৰ আয়তন উলিওৱা।", opts_en: ["1540 cm³", "770 cm³", "6160 cm³", "3080 cm³"], opts_as: ["১৫৪০ ছেমি³", "৭৭০ ছেমি³", "৬১৬০ ছেমি³", "৩০৮০ ছেমি³"], corr: 0 },
+                { q_en: "A discount of 15% on an article saves ₹45. Find the marked price.", q_as: "বস্তু এটাৰ ওপৰত ১৫% ৰেহাই দিলে ৪৫ টকা ৰাহি হয়। ধাৰ্য্য মূল্য কিমান?", opts_en: ["₹300", "₹200", "₹400", "₹250"], opts_as: ["৩০০ টকা", "২০০ টকা", "৪০০ টকা", "২৫০ টকা"], corr: 0 },
+                { q_en: "If a:b = 1:2, b:c = 3:4, and c:d = 5:6, find a:b:c:d.", q_as: "যদি a:b = ১:২, b:c = ৩:৪, আৰু c:d = ৫:৬ হয়, তেন্তে a:b:c:d উলিওৱা।", opts_en: ["15:30:40:48", "15:30:40:45", "12:24:36:48", "5:10:15:24"], opts_as: ["১৫:৩০:৪০:৪৮", "১৫:৩০:৪০:৪৫", "১২:২৪:৩৬:৪৮", "৫:১০:১৫:২৪"], corr: 0 }
             ],
             reasoning: [
-                { q_en: "Complete the series: 3, 5, 9, 17, ?", q_as: "শৃংখলাটো সম্পূৰ্ণ কৰক: ৩, ৫, ৯, ১৭, ?", opts: ["26", "33", "35", "42"], corr: 1 }
+                { q_en: "Complete the series: 3, 5, 9, 17, ?", q_as: "শৃংখলাটো সম্পূৰ্ণ কৰক: ৩, ৫, ৯, ১৭, ?", opts: ["26", "33", "35", "42"], corr: 1 },
+                { q_en: "Find the odd one out: Eagle, Crow, Ostrich, Pigeon", q_as: "অমিলটো বাছি উলিওৱা: ঈগল, কাউৰী, উট চৰাই, পাৰ চৰাই", opts: ["Eagle", "Crow", "Ostrich", "Pigeon"], corr: 2 },
+                { q_en: "If 'ROSE' is written as 'TQVI', how is 'LILY' written?", q_as: "যদি 'ROSE' ক 'TQVI' লিখা হয়, তেন্তে 'LILY' ক কেনেকৈ লিখা হ’ব?", opts: ["NKNC", "NKNV", "OKOA", "MKMC"], corr: 0 },
+                { q_en: "Find missing sequence: 2, 3, 5, 7, 11, ?", q_as: "লুপ্ত সংখ্যাটো উলিওৱা: ২, ৩, ৫, ৭, ১১, ?", opts: ["13", "12", "15", "17"], corr: 0 },
+                { q_en: "A man faces North, turns 90° clockwise, then 180° anti-clockwise. Facing now?", q_as: "মানুহ এজনে উত্তৰলৈ মুখ কৰি সোঁফালে ৯০° আৰু তাৰপিছত বাওঁফালে ১৮০° ঘূৰিলে। এতিয়া তেওঁ কোন দিশে আছে?", opts: ["West", "East", "South", "North-West"], corr: 0 },
+                { q_en: "If '+' is '÷' and '-' is '×', find value of 20 + 5 - 2.", q_as: "যদি '+' ৰ অৰ্থ '÷' আৰু '-' ৰ অৰ্থ '×' হয়, তেন্তে ২০ + ৫ - ২ ৰ মান কিমান?", opts: ["8", "10", "4", "6"], corr: 0 },
+                { q_en: "English dictionary logical sequence: 1. Kennel, 2. Keep, 3. Knife, 4. King", q_as: "অভিধান অনুসৰি তৰ্কসংগত ক্ৰম সজোৱা: ১. Kennel, ২. Keep, ৩. Knife, ৪. King", opts: ["2, 1, 4, 3", "1, 2, 4, 3", "2, 4, 1, 3", "4, 2, 1, 3"], corr: 0 },
+                { q_en: "Find missing letter cluster: AZ, CX, EV, ?", q_as: "লুপ্ত বৰ্ণ গোটটো উলিওৱা: AZ, CX, EV, ?", opts: ["GT", "GS", "HS", "FU"], corr: 0 },
+                { q_en: "If clock shows 6:30, what is the mirror reflection reflection time?", q_as: "ঘড়ীত ৬:৩০ বাজিলে আইনাত প্ৰতিফলিত সময় কিমান দেখাব?", opts: ["5:30", "6:30", "12:30", "11:30"], corr: 0 },
+                { q_en: "In a class, Amit ranks 7th from top and 26th from bottom. Total students?", q_as: "শ্ৰেণী এটাত অমিত ওপৰৰ পৰা ৭ আৰু তলৰ পৰা ২৬ নম্বৰত আছে। মুঠ ছাত্ৰ সংখ্যা কিমান?", opts: ["32", "33", "31", "34"], corr: 0 },
+                { q_en: "Choose odd pair: Cow-Calf, Dog-Puppy, Cat-Kitten, Lion-Foal", q_as: "অমিল যোৰাটো বাছক: গৰু-পোৱালী, কুকুৰ-পোৱালী, মেকুৰী-পোৱালী, সিংহ-ঘোঁৰাপোৱালী", opts: ["Cow-Calf", "Dog-Puppy", "Cat-Kitten", "Lion-Foal"], corr: 3 },
+                { q_en: "Next term: A, D, I, P, ?", q_as: "শৃংখলাটোৰ পৰৱৰ্তী পদ: A, D, I, P, ?", opts: ["Y", "X", "W", "Z"], corr: 0 },
+                { q_en: "If North becomes South-East, what will West become?", q_as: "যদি উত্তৰ দিশ দক্ষিণ-পূব হয়, তেন্তে পশ্চিম দিশ কি হ’ব?", opts: ["North-East", "North-West", "South-West", "South"], corr: 0 },
+                { q_en: "Introducing Suresh, Kamla said, 'His father is only son of my father.' Relation?", q_as: "সুৰেশক চিনাকি কৰাই কমলাই ক’লে, 'তেওঁৰ দেউতাক মোৰ দেউতাৰ একমাত্ৰ পুত্ৰ।' সম্পৰ্ক কি?", opts: ["Aunt", "Mother", "Sister", "Daughter"], corr: 0 },
+                { q_en: "How many straight lines are there in a standard triangle with one vertical median?", q_as: "এটা উলম্ব মধ্যমা থকা ত্ৰিভুজত মুঠ সৰলৰেখা কেইডাল থাকে?", opts: ["4", "3", "5", "6"], corr: 0 },
+                { q_en: "Complete sequence: 10, 20, 40, 80, ?", q_as: "শৃংখলাটো সম্পূৰ্ণ কৰক: ১০, ২০, ৪০, ৮০, ?", opts: ["160", "120", "140", "200"], corr: 0 },
+                { q_en: "Find the odd number from the pool: 12, 24, 35, 48", q_as: "তলৰ পৰা অমিল সংখ্যাটো বাছি উলিওৱা: ১২, ২৪, ৩৫, ৪৮", opts: ["35", "12", "24", "48"], corr: 0 },
+                { q_en: "If 'TO' = 35, what is the code for 'DO'?", q_as: "যদি 'TO' = ৩৫ হয়, তেন্তে 'DO' ৰ কোড কিমান?", opts: ["19", "23", "25", "30"], corr: 0 },
+                { q_en: "Which word CANNOT be formed from 'EXAMINATION'?", q_as: "‘EXAMINATION’ শব্দটোৰ পৰা কোনটো শব্দ গঠন কৰিব নোৱাৰি?", opts: ["TEAM", "NATION", "NOTE", "MINE"], corr: 0 },
+                { q_en: "A cube has 6 faces. If top is Red, bottom is Blue, adjacent faces are 4. Total corner vertices?", q_as: "এটা ঘনকৰ মুঠ কেইটা চুক বা কোণ (Vertices) থাকে?", opts: ["8", "6", "12", "4"], corr: 0 },
+                { q_en: "Find missing element: 1, 8, 27, ?, 125", q_as: "লুপ্ত পদটো উলিওৱা: ১, ৮, ২৭, ?, ১২৫", opts: ["64", "36", "49", "81"], corr: 0 },
+                { q_en: "What is the reflection angle at 9 o'clock?", q_as: "৯:০০ বজাত ঘড়ীৰ কাঁটা দুটাৰ মাজৰ ভিতৰৰ কোণটো কিমান ডিগ্ৰী হ’ব?", opts: ["90°", "180°", "270°", "60°"], corr: 0 },
+                { q_en: "Select odd pair: Whale-Mammal, Snake-Reptile, Frog-Amphibian, Ostrich-Mammal", q_as: "অমিল যোৰাটো বাছক: তিমি-স্তন্যপায়ী, সাপ-সৰীসৃপ, ভেকুলী-উভচৰ, উটচৰাই-স্তন্যপায়ী", opts: ["Whale-Mammal", "Snake-Reptile", "Frog-Amphibian", "Ostrich-Mammal"], corr: 3 },
+                { q_en: "If 15th August 2023 was Tuesday, what day was 15th August 2024?", q_as: "যদি ১৫ আগষ্ট ২০২৩ মঙলবাৰ আছিল, ১৫ আগষ্ট ২০২৪ কি বাৰ হ’ব? (Leap Year)", opts: ["Thursday", "Wednesday", "Friday", "Monday"], corr: 0 },
+                { q_en: "Complete: Court : Justice :: School : ?", q_as: "সম্পূৰ্ণ কৰক: আদালত : ন্যায় :: বিদ্যালয় : ?", opts: ["Education", "Teacher", "Student", "Building"], corr: 0 }
             ],
             english: [
-                { q: "Spot the error in the sentence: 'The collective intelligence of those boys are very high.'", opts: ["The collective intelligence", "of those boys", "are very high", "No error"], corr: 2 }
+                { q: "Choose the word closest in meaning (SYNONYM) to: 'GIGANTIC'", opts: ["Huge", "Small", "Tiny", "Weak"], corr: 0 },
+                { q: "Choose the word opposite in meaning (ANTONYM) to: 'BARREN'", opts: ["Fertile", "Dry", "Empty", "Harsh"], corr: 0 },
+                { q: "Spot the error: 'Each of the girls have performed well.'", opts: ["Each of", "the girls", "have performed well", "No error"], corr: 2 },
+                { q: "Fill in the blank: Honesty _____ the best policy.", opts: ["is", "was", "are", "were"], corr: 0 },
+                { q: "Antonym of 'VAGUE' is:", opts: ["Definite", "Unclear", "Dim", "Hidden"], corr: 0 },
+                { q: "Synonym of 'OBSOLETE' is:", opts: ["Outdated", "Modern", "New", "Current"], corr: 0 },
+                { q: "A hand-written book or document is called a:", opts: ["Manuscript", "Edition", "Script", "Biography"], corr: 0 },
+                { q: "Idiom meaning: 'Burn the midnight oil'", opts: ["To study or work late into the night", "To waste oil", "To cook food", "To wake up early"], corr: 0 },
+                { q: "Find the correctly spelled word.", opts: ["Accommodation", "Acommodation", "Accomodation", "Acomodation"], corr: 0 },
+                { q: "Change into Passive voice: 'The cat killed the mouse.'", opts: ["The mouse was killed by the cat.", "The mouse is killed by the cat.", "The mouse killed by cat.", "The mouse has been killed."], corr: 0 },
+                { q: "Fill in: He has a strong taste _____ classical music.", opts: ["for", "in", "with", "to"], corr: 0 },
+                { q: "Idiom meaning: 'Piece of cake'", opts: ["A very easy task", "A sweet dish", "A tough challenge", "To share something"], corr: 0 },
+                { q: "A collection of beautiful poems is an:", opts: ["Anthology", "Biography", "Dictionary", "Novel"], corr: 0 },
+                { q: "Synonym of 'DILIGENT' is:", opts: ["Hardworking", "Lazy", "Intelligent", "Careless"], corr: 0 },
+                { q: "Antonym of 'OPTIMIST' is:", opts: ["Pessimist", "Theist", "Atheist", "Activist"], corr: 0 },
+                { q: "Fill in: Death is preferable _____ dishonor.", opts: ["to", "than", "from", "with"], corr: 0 },
+                { q: "Find the misspelled word:", opts: ["Separate", "Until", "Maintenance", "Grammer"], corr: 3 },
+                { q: "A specialist doctor who treats heart diseases is a:", opts: ["Cardiologist", "Dermatologist", "Neurologist", "Pediatrician"], corr: 0 },
+                { q: "Change into Indirect Speech: She said, 'I am writing a letter.'", opts: ["She said that she was writing a letter.", "She said she is writing a letter.", "She told she writes a letter.", "She says she was writing."], corr: 0 },
+                { q: "Fill in: Mathematics _____ an interesting subject.", opts: ["is", "are", "were", "have been"], corr: 0 },
+                { q: "Synonym of 'EVALUATE' is:", opts: ["Assess", "Ignore", "Neglect", "Forget"], corr: 0 },
+                { q: "Antonym of 'BOON' is:", opts: ["Curse", "Blessing", "Gift", "Reward"], corr: 0 },
+                { q: "The dead body of an animal is called a:", opts: ["Carcass", "Corpse", "Skeleton", "Debris"], corr: 0 },
+                { q: "Fill in: Keep your dog _____ the flower beds.", opts: ["off", "of", "from", "with"], corr: 0 },
+                { q: "Idiom meaning: 'Best of both worlds'", opts: ["Enjoying two different opportunities at once", "Travelling the world", "To be rich", "To be highly successful"], corr: 0 }
             ],
             general: [
-                { q_en: "Which article of the Indian Constitution deals with the 'Right to Equality'?", q_as: "ভাৰতীয় সংবিধানৰ কোনটো অনুচ্ছেদে 'সমতাৰ অধিকাৰ'ৰ বিষয়ে উল্লেখ কৰে?", opts_en: ["Article 14", "Article 19", "Article 21", "Article 32"], opts_as: ["অনুচ্ছেদ ১৪", "অনুচ্ছেদ ১৯", "অনুচ্ছেদ ২১", "অনুচ্ছেদ ৩২"], corr: 0 }
+                { q_en: "Which article of Indian Constitution is known as 'Heart and Soul'?", q_as: "সংবিধানৰ কোনটো অনুচ্ছদক 'হৃদয় আৰু আত্মা' বুলি কোৱা হয়?", opts_en: ["Article 21", "Article 32", "Article 14", "Article 19"], opts_as: ["অনুচ্ছেদ ২১", "অনুচ্ছেদ ৩২", "অনুচ্ছেদ ১৪", "অনুচ্ছেদ ১৯"], corr: 1 },
+                { q_en: "Who was the first Governor-General of Independent India?", q_as: "স্বাধীন ভাৰতৰ প্ৰথম গভৰ্ণৰ জেনেৰেল কোন আছিল?", opts_en: ["Lord Mountbatten", "C. Rajagopalachari", "Dr. Rajendra Prasad", "Jawaharlal Nehru"], opts_as: ["লৰ্ড মাউন্টবেটেন", "চি. ৰাজাগোপালাচাৰী", "ড° ৰাজেন্দ্ৰ প্ৰসাদ", "জৱাহৰলাল নেহৰু"], corr: 0 },
+                { q_en: "Which classical dance originates from Tamil Nadu?", q_as: "কোনটো শাস্ত্ৰীয় নৃত্যৰ উৎপত্তি তামিলনাডুত হৈছিল?", opts_en: ["Kathak", "Bharatanatyam", "Kuchipudi", "Kathakali"], opts_as: ["কত্থক", "ভাৰতনাট্যম", "কুচিপুড়ী", "কথাকলি"], corr: 1 },
+                { q_en: "Which planet is the densest in our solar system?", q_as: "সৌৰজগতৰ আটাইতকৈ বেছি ঘনত্ব থকা গ্ৰহ কোনটো?", opts_en: ["Earth", "Jupiter", "Mercury", "Saturn"], opts_as: ["পৃথিৱী", "বৃহস্পতি", "বুধ", "শনি"], corr: 0 },
+                { q_en: "What is the capital of France?", q_as: "ফ্ৰান্সৰ ৰাজধানী কি?", opts_en: ["Berlin", "London", "Paris", "Rome"], opts_as: ["বাৰ্লিন", "লণ্ডন", "पेरिছ", "ৰোম"], corr: 2 },
+                { q_en: "Who was the second President of India?", q_as: "ভাৰতৰ দ্বিতীয় ৰাষ্ট্ৰপতি কোন আছিল?", opts_en: ["Dr. Zakir Husain", "Dr. S. Radhakrishnan", "V.V. Giri", "Pratibha Patil"], opts_as: ["ড° জাকিৰ হুছেইন", "ড° এছ. ৰাধাকৃষ্ণণ", "ভি.ভি. গিৰি", "প্ৰতিভা পাটিল"], corr: 1 },
+                { q_en: "Which gland disappears or shrinks in adults?", q_as: "কোনটো গ্ৰন্থি মানুহ ডাঙৰ হ’লে লাহে লাহে সৰু বা লোপ পাই যায়?", opts_en: ["Thyroid", "Thymus Gland", "Pituitary", "Adrenal"], opts_as: ["থাইৰয়ড", "থাইমাছ গ্ৰন্থি", "পিটুইটাৰী", "এড্ৰেনেল"], corr: 1 },
+                { q_en: "In which year did the Battle of Buxar take place?", q_as: "বক্সাৰৰ যুদ্ধ কোন চনত সংঘটিত হৈছিল?", opts_en: ["1757", "1764", "1526", "1857"], opts_as: ["১৭৫৭", "১৭৬৪", "১৫২৬", "১৮৫৭"], corr: 1 },
+                { q_en: "Which lake is the largest freshwater lake in India?", q_as: "ভাৰতৰ আটাইতকৈ ডাঙৰ অলুণীয়া পানীৰ হ্ৰদ কোনটো?", opts_en: ["Chilika Lake", "Wular Lake", "Dal Lake", "Sambhar Lake"], opts_as: ["চিল্কা হ্ৰদ", "উলাৰ হ্ৰদ", "ডাল হ্ৰদ", "সাম্ভৰ হ্ৰদ"], corr: 1 },
+                { q_en: "What is the capital of Germany?", q_as: "জাৰ্মানীৰ ৰাজধানী কি?", opts_en: ["Munich", "Berlin", "Frankfurt", "Hamburg"], opts_as: ["মিউনিখ", "বাৰ্লিন", "ফ্ৰাংকফুৰ্ট", "হামবুৰ্গ"], corr: 1 },
+                { q_en: "Who is known as the 'Iron Man of India'?", q_as: "কাক ভাৰতৰ 'লোহ পুৰুষ' (Iron Man) বুলি জনা যায়?", opts_en: ["Bhagat Singh", "Sardar Vallabhbhai Patel", "Subhas Chandra Bose", "Mahatma Gandhi"], opts_as: ["ভগত সিঙ", "চৰ্দাৰ বল্লভভাই পেটেল", "সুভাষ চন্দ্ৰ বসু", "মহাত্মা গান্ধী"], corr: 1 },
+                { q_en: "Which gas is known as 'Laughing Gas'?", q_as: "কোনটো গেছক 'লাফিং গেছ' (Laughing Gas) বুলি কোৱা হয়?", opts_en: ["Nitric Oxide", "Nitrous Oxide", "Nitrogen Dioxide", "Carbon Monoxide"], opts_as: ["নাইট্ৰিক অক্সাইড", "নাইট্ৰাছ অক্সাইড", "নাইট্ৰ’জেন ডাই অক্সাইড", "কাৰ্বন মনোক্সাইড"], corr: 1 },
+                { q_en: "Deficiency of Iodine causes which disease?", q_as: "আইডিনৰ অভাৱত মানুহৰ কি ৰোগ হয়?", opts_en: ["Goitre", "Scurvy", "Rickets", "Anemia"], opts_as: ["গালগণ্ড (Goitre)", "স্কৰ্ভি", "ৰিকেটছ", "ৰক্তহীনতা"], corr: 0 },
+                { q_en: "Which continent is known as the 'Dark Continent'?", q_as: "কোনটো মহাদেশক 'আন্ধাৰ মহাদেশ' বুলি কোৱা হয়?", opts_en: ["Asia", "Africa", "Australia", "Europe"], opts_as: ["এচিয়া", "আফ্ৰিকা", "অষ্ট্ৰেলিয়া", "ইউৰোপ"], corr: 1 },
+                { q_en: "Who built the famous Taj Mahal?", q_as: "বিখ্যাত তাজমহল কোনে নিৰ্মাণ কৰিছিল?", opts_en: ["Akbar", "Shah Jahan", "Jahangir", "Aurangzeb"], opts_as: ["আকবৰ", "শ্বাহজাহান", "জাহাংগীৰ", "ঔৰংজেৱ"], corr: 1 },
+                { q_en: "Which acid is present in lemon?", q_as: "নেমুত কোনটো এচিড পোৱা যায়?", opts_en: ["Citric Acid", "Lactic Acid", "Acetic Acid", "Tartaric Acid"], opts_as: ["চাইট্ৰিক এচিড", "লেক্টিক এচিড", "এচেটিক এচিড", "টাৰটাৰিক এচিড"], corr: 0 },
+                { q_en: "Where is the famous Sun Temple located?", q_as: "বিখ্যাত সূৰ্য্য মন্দিৰ (Sun Temple) ক’ত অৱস্থিত?", opts_en: ["Madurai", "Konark", "Khajuraho", "Hampi"], opts_as: ["মাদুৰাই", "কোণাৰ্ক", "খাজুৰাহো", "হাম্পি"], corr: 1 },
+                { q_en: "Which sector contributes maximum to India's GDP?", q_as: "ভাৰতৰ GDP লৈ আটাইতকৈ বেছি অৱদান আগবঢ়োৱা খণ্ড কোনটো?", opts_en: ["Agriculture", "Manufacturing", "Services Sector", "Mining"], opts_as: ["কৃষি খণ্ড", "উদ্যোগ খণ্ড", "সেৱা খণ্ড (Services)", "খনন খণ্ড"], corr: 2 },
+                { q_en: "Who was the first woman IPS officer of India?", q_as: "ভাৰতৰ প্ৰথম মহিলা IPS বিষয়া কোন আছিল?", opts_en: ["Kiran Bedi", "Anna George", "Sarojini Naidu", "Sucheta Kriplani"], opts_as: ["কিৰণ বেদী", "আন্না জৰ্জ", "সৰোজিনী নাইডু", "সুচেতা কৃপলানী"], corr: 0 },
+                { q_en: "What is the main function of Red Blood Cells (RBC)?", q_as: "লোহিত ৰক্ত কণিকাৰ (RBC) প্ৰধান কাম কি?", opts_en: ["Fight infection", "Transport Oxygen", "Clot blood", "Provide energy"], opts_as: ["ৰোগ প্ৰতিৰোধ কৰা", "অক্সিজেন কঢ়িওৱা", "তেজ গোট মৰোৱা", "শক্তি প্ৰদান কৰা"], corr: 1 },
+                { q_en: "Which pass connects Srinagar to Leh?", q_as: "কোনটো গিৰিপথে (Pass) শ্ৰীনগৰক লেহৰ সৈতে সংযোগ কৰে?", opts_en: ["Nathula Pass", "Zojila Pass", "Baniha Pass", "Rohtang Pass"], opts_as: ["নাথুলা গিৰিপথ", "জজিলা গিৰিপথ (Zojila)", "বানিহাল গিৰিপথ", "ৰোহটাং গিৰিপথ"], corr: 1 },
+                { q_en: "Who was the author of 'Gitanjali'?", q_as: "'গীতাঞ্জলি' কাব্যগ্ৰন্থ কাৰ ৰচনা আছিল?", opts_en: ["Bankim Chandra", "Rabindranath Tagore", "Sarojini Naidu", "Kalidasa"], opts_as: ["বঙ্কিম চন্দ্ৰ", "ৰবীন্দ্ৰনাথ ঠাকুৰ", "সৰোজিনী নাইডু", "কালিদাস"], corr: 1 },
+                { q_en: "Which imaginary line divides India into almost two equal parts?", q_as: "কোনডাল কাল্পনিক ৰেখাই ভাৰতক প্ৰায় দুটা সমান ভাগত বিভক্ত কৰিছে?", opts_en: ["Equator", "Tropic of Cancer", "Tropic of Capricorn", "Prime Meridian"], opts_as: ["বিষুৱ ৰেখা", "কৰ্কটক্ৰান্তি ৰেখা", "মকৰক্ৰান্তি ৰেখা", "মুখ্য দ্ৰাঘিমা ৰেখা"], corr: 1 },
+                { q_en: "What is the standard unit of frequency?", q_as: "কম্পনাংক বা ফ্ৰিকুৱেন্সিৰ মানক একক কি?", opts_en: ["Watt", "Hertz", "Volt", "Joules"], opts_as: ["ৱাট", "হাৰ্টজ (Hertz)", "ভল্ট", "জুল"], corr: 1 },
+                { q_en: "Who was the founder of Arya Samaj?", q_as: "আৰ্য সমাজৰ প্ৰতিষ্ঠাপক কোন আছিল?", opts_en: ["Raja Ram Mohan Roy", "Swami Dayanand Saraswati", "Swami Vivekananda", "Ramakrishna Paramahansa"], opts_as: ["ৰাজা ৰামমোহন ৰায়", "স্বামী দয়ানন্দ সৰস্বতী", "স্বামী বিবেকানন্দ", "ৰামকৃষ্ণ পৰমহংস"], corr: 1 }
             ]
         }
     };
@@ -198,7 +482,7 @@
         }
     };
 
-    // --- AUTOMATIC 24-HOUR ROTATION LOGIC ---
+    // --- SECURE SYSTEM AUTOMATIC DISTRIBUTOR ---
     function selectDailyQuestionSet() {
         const currentDay = new Date().getDate(); 
         
@@ -212,18 +496,18 @@
         const selectedSet = megaQuestionPool[activeSetName];
         questionBank = []; 
 
-        // ১. Maths (1 to 25)
+        // ১. Maths (1 to 25 Unique)
         for(let i = 0; i < 25; i++) {
-            let raw = selectedSet.maths[i % selectedSet.maths.length];
+            let raw = selectedSet.maths[i];
             questionBank.push({
                 id: i + 1, type: 'maths',
                 q: { en: `${i+1}. ${raw.q_en}`, as: `${i+1}. ${raw.q_as}`, hi: `${i+1}. ${raw.q_en}`, bn: `${i+1}. ${raw.q_as}` },
                 options: { en: raw.opts_en, as: raw.opts_as, hi: raw.opts_en, bn: raw.opts_as }, correct: raw.corr
             });
         }
-        // ২. Reasoning (26 to 50)
+        // ২. Reasoning (26 to 50 Unique)
         for(let i = 0; i < 25; i++) {
-            let raw = selectedSet.reasoning[i % selectedSet.reasoning.length];
+            let raw = selectedSet.reasoning[i];
             let id = 25 + i + 1;
             questionBank.push({
                 id: id, type: 'reasoning',
@@ -231,9 +515,9 @@
                 options: { en: raw.opts, as: raw.opts, hi: raw.opts, bn: raw.opts }, correct: raw.corr
             });
         }
-        // ৩. English (51 to 75)
+        // ৩. English (51 to 75 Unique)
         for(let i = 0; i < 25; i++) {
-            let raw = selectedSet.english[i % selectedSet.english.length];
+            let raw = selectedSet.english[i];
             let id = 50 + i + 1;
             questionBank.push({
                 id: id, type: 'english',
@@ -241,9 +525,9 @@
                 options: { en: raw.opts, as: raw.opts, hi: raw.opts, bn: raw.opts }, correct: raw.corr
             });
         }
-        // ৪. General Awareness (76 to 100)
+        // ৪. General Awareness (76 to 100 Unique)
         for(let i = 0; i < 25; i++) {
-            let raw = selectedSet.general[i % selectedSet.general.length];
+            let raw = selectedSet.general[i];
             let id = 75 + i + 1;
             questionBank.push({
                 id: id, type: 'assamese',
@@ -253,7 +537,7 @@
         }
     }
 
-    // --- SECURITY & LOGIN SYSTEM ---
+    // --- BRUTE FORCE LOCK SYSTEM ---
     function checkLockStatus() {
         const lockUntil = localStorage.getItem('portal_locked_until');
         if (lockUntil) {
@@ -304,7 +588,7 @@
         document.getElementById('mainDashboard').style.display = 'block';
     }
 
-    // --- EXAM ENGINE SYSTEM ---
+    // --- CORE ENGINE ---
     function startExam() {
         loginTime = new Date().toLocaleString();
         document.getElementById('startBtn').style.display = 'none';
@@ -381,11 +665,9 @@
 
         const resultStatus = score >= 45 ? "PASSED" : "FAILED";
 
-        // Dispatch Email
         const emailParams = { candidate_name: "Deepshikha Taid", roll_no: "789602", login_time: loginTime, logout_time: logoutTime, attempted, score, result: resultStatus, to_email: "jituloying1947@gmail.com" };
         emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", emailParams);
 
-        // Store secure audit trail
         let logs = JSON.parse(localStorage.getItem('chsl_real_final_logs')) || [];
         logs.push({ loginTime, logoutTime, attempted, score, resultStatus });
         localStorage.setItem('chsl_real_final_logs', JSON.stringify(logs));
@@ -397,7 +679,6 @@
         loadLogs();
         alert(`Examination Submitted Successfully! Results Saved in Secure Audit Log.`);
         
-        // Return to login screen
         document.getElementById('examForm').style.display = 'none';
         document.getElementById('sectionNav').style.display = 'none';
         document.getElementById('mainDashboard').style.display = 'none';
