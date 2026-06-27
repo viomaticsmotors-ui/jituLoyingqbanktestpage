@@ -108,10 +108,12 @@ font-size:14px;
 
 .answered{
 background:green !important;
+color:white !important;
 }
 
 .current{
 background:orange !important;
+color:white !important;
 }
 
 .timer{
@@ -139,19 +141,27 @@ line-height:40px;
 SSC / Competitive Exam Portal
 </div>
 
-<!-- LOGIN -->
+<!-- LOGIN PAGE -->
 
 <div class="login-page" id="loginPage">
+
 <h2>Candidate Login</h2>
 
-<input type="text" id="name" placeholder="Enter Candidate Name">
+<input type="text"
+id="userid"
+placeholder="Enter User ID">
+
+<input type="password"
+id="password"
+placeholder="Enter Password">
 
 <button onclick="startExam()">
-Start Exam
+Login & Start Exam
 </button>
+
 </div>
 
-<!-- EXAM -->
+<!-- EXAM PAGE -->
 
 <div class="exam-page" id="examPage">
 
@@ -189,9 +199,10 @@ Submit Exam
 </div>
 
 </div>
+
 </div>
 
-<!-- RESULT -->
+<!-- RESULT PAGE -->
 
 <div class="result-page" id="resultPage">
 
@@ -204,7 +215,15 @@ Submit Exam
 <script>
 
 /* ==========================
-PUT ALL 100 QUESTIONS HERE
+LOGIN DETAILS
+========================== */
+
+const VALID_USER = "7896024881";
+const VALID_PASS = "Deepshikha@123";
+
+/* ==========================
+QUESTIONS
+Replace with your 100 Questions
 ========================== */
 
 const questions = [
@@ -225,44 +244,72 @@ answer:2
 q:"18 × 5 = ?",
 options:["80","85","90","95"],
 answer:2
+},
+
+{
+q:"Capital of India?",
+options:["Mumbai","Delhi","Kolkata","Chennai"],
+answer:1
+},
+
+{
+q:"7 × 8 = ?",
+options:["54","56","58","60"],
+answer:1
 }
 
 ];
 
 /* ========================== */
 
-let current=0;
-let answers=new Array(questions.length).fill(null);
+let current = 0;
+
+let answers = new Array(questions.length).fill(null);
+
+let timerInterval;
+
+/* LOGIN */
 
 function startExam(){
 
-let name=document.getElementById("name").value;
+let userid =
+document.getElementById("userid").value.trim();
 
-if(name===""){
-alert("Enter Name");
+let password =
+document.getElementById("password").value;
+
+if(userid !== VALID_USER ||
+password !== VALID_PASS){
+
+alert("Invalid User ID or Password");
 return;
 }
 
 document.getElementById("loginPage").style.display="none";
+
 document.getElementById("examPage").style.display="block";
 
 renderQuestion();
+
 createPalette();
+
 startTimer();
 }
 
+/* QUESTION RENDER */
+
 function renderQuestion(){
 
-let q=questions[current];
+let q = questions[current];
 
-document.getElementById("questionText").innerHTML=
+document.getElementById("questionText").innerHTML =
 (current+1)+". "+q.q;
 
 let html="";
 
 q.options.forEach((opt,index)=>{
 
-html+=`
+html += `
 <div class="option ${answers[current]===index?'selected':''}"
 onclick="selectOption(${index})">
 ${opt}
@@ -276,12 +323,16 @@ document.getElementById("options").innerHTML=html;
 updatePalette();
 }
 
+/* SELECT OPTION */
+
 function selectOption(index){
 
 answers[current]=index;
 
 renderQuestion();
 }
+
+/* NAVIGATION */
 
 function nextQuestion(){
 
@@ -299,14 +350,17 @@ renderQuestion();
 }
 }
 
+/* PALETTE */
+
 function createPalette(){
 
 let html="";
 
 for(let i=0;i<questions.length;i++){
 
-html+=`
-<button id="p${i}" onclick="gotoQuestion(${i})">
+html += `
+<button id="p${i}"
+onclick="gotoQuestion(${i})">
 ${i+1}
 </button>
 `;
@@ -321,6 +375,7 @@ updatePalette();
 function gotoQuestion(i){
 
 current=i;
+
 renderQuestion();
 }
 
@@ -346,11 +401,11 @@ btn.classList.add("current");
 
 /* TIMER */
 
-let time=60*60;
+let time = 60*60;
 
 function startTimer(){
 
-setInterval(()=>{
+timerInterval = setInterval(()=>{
 
 time--;
 
@@ -358,21 +413,27 @@ let m=Math.floor(time/60);
 let s=time%60;
 
 document.getElementById("timer").innerHTML=
-String(m).padStart(2,'0')+
-":"+
-String(s).padStart(2,'0');
+String(m).padStart(2,'0')
++":"
++String(s).padStart(2,'0');
 
 if(time<=0){
+
+clearInterval(timerInterval);
+
+alert("Time Over!");
+
 submitExam();
 }
 
 },1000);
-
 }
 
 /* RESULT */
 
 function submitExam(){
+
+clearInterval(timerInterval);
 
 let correct=0;
 let wrong=0;
@@ -381,18 +442,22 @@ let unanswered=0;
 questions.forEach((q,index)=>{
 
 if(answers[index]==null){
+
 unanswered++;
+
 }
 else if(answers[index]===q.answer){
+
 correct++;
+
 }
 else{
+
 wrong++;
+
 }
 
 });
-
-/* NEGATIVE MARKING */
 
 let score=(correct*1)-(wrong*0.25);
 
@@ -400,6 +465,7 @@ let percentage=
 ((score/questions.length)*100).toFixed(2);
 
 document.getElementById("examPage").style.display="none";
+
 document.getElementById("resultPage").style.display="block";
 
 document.getElementById("resultData").innerHTML=`
@@ -424,8 +490,21 @@ ${percentage>=40
 :'<span style="color:red">FAIL</span>'}
 
 `;
+}
+
+/* ENTER KEY LOGIN */
+
+document.addEventListener("keypress",function(e){
+
+if(e.key==="Enter"){
+
+if(document.getElementById("loginPage").style.display!=="none"){
+startExam();
+}
 
 }
+
+});
 
 </script>
 
