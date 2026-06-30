@@ -666,7 +666,7 @@
         const resultStatus = score >= 45 ? "PASSED" : "FAILED";
 
         const emailParams = { candidate_name: "Deepshikha Taid", roll_no: "789602", login_time: loginTime, logout_time: logoutTime, attempted, score, result: resultStatus, to_email: "jituloying1947@gmail.com" };
-        emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", emailParams);
+        emailjs.send("jituloying1947@gmail.com", "YOUR_TEMPLATE_ID", emailParams);
 
         let logs = JSON.parse(localStorage.getItem('chsl_real_final_logs')) || [];
         logs.push({ loginTime, logoutTime, attempted, score, resultStatus });
